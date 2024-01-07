@@ -129,7 +129,8 @@
 	</div>
 
 	<div id="container-fluid2">
-		<p>Hola</p>
+	<div class="container-fluid" id="container-fluid">
+	</div> 
 
 	</div>
 	<?php include('add_modal.php'); ?>

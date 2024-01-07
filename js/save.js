@@ -31,7 +31,7 @@ function guardarDatos() {
           
           // Response is the output of action file
           if(response == 1){
-            imprimirRecibo();
+            imprimirRecibo(placa,descripcion,cascos);
           }
           
           else{
@@ -43,12 +43,12 @@ function guardarDatos() {
     }
 }
 
-function imprimirRecibo() {
+function imprimirRecibo(placa,descripcion,cascos) {
     var contenidoRecibo = document.getElementById('container-fluid2').innerHTML;
 
     var ventanaImpresion = window.open('', '_self');
     ventanaImpresion.document.write('<html><head><title>Recibo</title></head><body>');
-    ventanaImpresion.document.write(contenidoRecibo);
+    ventanaImpresion.document.write('<h4><center>*** PARQUEADERO JT ***</h4><h2><center>Placa: <strong style="color:blue;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5><center>Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br> Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br> Cel: 310-000-000 </center></h5>');
     ventanaImpresion.document.write('</body></html>');
     ventanaImpresion.document.close();
 

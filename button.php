@@ -96,11 +96,16 @@
 
 							}
 
-							if($minutos > 0 && $minutos <= 10){								
+							if( $horas > 0 && $minutos > 0 && $minutos <= 10 ){								
 								$valoracobrar  += $valorcero;
 							}
+
+							if( $horas > 0 && $minutos > 0 && $minutos > 10 ){								
+								$valoracobrar  += $valorHora;
+							}
+											
 							
-							if($minutos > 10 ){								
+							if($horas == 0 && $minutos > 2 ){								
 								$valoracobrar  += $valorHora;
 							}
 					// Formatear el número con un punto como separador de miles
