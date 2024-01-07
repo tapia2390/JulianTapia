@@ -13,6 +13,6 @@
 
 		mysqli_query($conn,$sql2);
 	
-	//header('location:index.php');
+	header('location:index.php');
 
 ?>

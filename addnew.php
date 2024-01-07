@@ -1,6 +1,9 @@
 <?php
 	include('conn.php');
 	
+	
+
+
 	$placa=$_POST['placa'];
 	$descripcion=$_POST['descripcion'];
 	$cascos =$_POST['cascos'];
@@ -12,6 +15,6 @@
 	$fecha_ingreso = date('Y-m-d H:i:s');
 	
 	mysqli_query($conn,"insert into moto (placa, descripcion, fecha_ingreso,valor_cobrado,fecha_salida,estado,cascos) values ('$placa', '$descripcion', '$fecha_ingreso',0,'',1,$cascos)");
-	header('location:index.php');
+	echo 1;
 
 ?>

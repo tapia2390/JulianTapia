@@ -5,6 +5,7 @@
 	<script src="libs/jquery.min.js"></script>
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />
 	<script src="libs/bootstrap.min.js"></script>
+	<script src="js/save.js"></script>
 </head>
 <body>
 <div class="container">
@@ -13,7 +14,7 @@
 	<span style="font-size:25px; color:blue"><center><strong>Parqueadero</strong></center></span>	
 		<div style="height:50px;"></div>
 		<div class="container-fluid">
-			<form method="POST" action="addnew.php">
+			
 				<table class="table table-striped table-bordered table-hover">
 
 					<td>
@@ -22,7 +23,7 @@
 								<label class="control-label" style="position:relative; top:7px;">Placa:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" name="placa" require>
+								<input type="text" class="form-control" id="placa" name="placa" require>
 							</div>
 						</div>
 					</td>
@@ -33,7 +34,7 @@
 								<label class="control-label" style="position:relative; top:7px;" >Cascos:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" name="cascos" require>
+								<input type="text" class="form-control" id="cascos" name="cascos" require>
 							</div>
 						</div>					
 					</td>
@@ -44,19 +45,18 @@
 								<label class="control-label" style="position:relative; top:7px;" >Descripción:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" name="descripcion" require>
+								<input type="text" class="form-control" id="descripcion" name="descripcion" require>
 							</div>
 						</div>					
 					</td>
 
 					<td>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+							<button type="button" class="btn btn-primary" onclick="guardarDatos()"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
 						</div>					
 					</td>
 		
 				</table>
-			</form>
 		</div>
 		
 
@@ -126,6 +126,11 @@
 			?>
 			</tbody>
 		</table>
+	</div>
+
+	<div id="container-fluid2">
+		<p>Hola</p>
+
 	</div>
 	<?php include('add_modal.php'); ?>
 </div>

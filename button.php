@@ -107,17 +107,17 @@
 						$numeroFormateado = number_format($valoracobrar, 0, ',', '.');
 
 
-					echo "$".$numeroFormateado;
+					echo "<h2 style='color:red;'> $".$numeroFormateado."</h2>";
 				
 					$fechasalida2 = $fecha_salida->format('Y-m-d H:i:s');
 					
 					?></strong></center></h5> 
-					<h5><center>Hora de salida: <strong><?php echo $fechasalida2?></strong></center></h5> 
-					<h5><center>
+					<!--h5><center>Hora de salida: <strong><?php echo $fechasalida2?></strong></center></h5--!> 
+					<!--h5><center>
 						Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br>
 						Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br>
 						Cel: 310-000-0000
-					</center></h5>	
+					</center></h5-->	
 
 					<input type="hidden"  id="id" name="id" class="form-control" value="<?php echo $id; ?>">
 					<input type="hidden"  id="valor_cobrado" name="valor_cobrado" class="form-control" value="<?php echo $valoracobrar; ?>">
@@ -139,7 +139,7 @@
 
 					?>
 				
-				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>">Ir a la página destino</a>
+				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>">Generar pago</a>
                 </div>
 				
             </div>
