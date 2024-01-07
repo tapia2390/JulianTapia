@@ -31,10 +31,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <center><h4 class="modal-title" id="myModalLabel">Imprimir</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Salida de moto</h4></center>
                 </div>
                 <div class="modal-body">
 				<?php
+
+					$id = $row['id'];
 
 					// Configura la zona horaria a la de tu ubicación (opcional)
 					date_default_timezone_set('America/Bogota');
@@ -45,8 +47,13 @@
 					$drow=mysqli_fetch_array($del);
 				?>
 				<div class="container-fluid" id="container-fluid">
+				
 					<h4><center>*** PARQUEADERO JT ***</h4>
-					<h4><center>Placa: <strong><?php echo ucwords($drow['placa']); ?></strong></center></h4>
+					<h2><center>Placa: <strong style="color:blue;"><?php echo ucwords($drow['placa']); ?></strong></center></h2>
+					<h3><center>Cascos: <strong><?php echo ucwords($drow['cascos']); ?></strong></center></h3>
+					
+					<h3><center>Descripción: <strong><?php echo ucwords($drow['descripcion']); ?></strong></center></h3>
+					
 					
 					<h5><center>Fecha Ingreso: <strong><?php echo ucwords($drow['fecha_ingreso']); ?></strong></center></h5>
 					
@@ -79,10 +86,8 @@
 
 
 					<h5><center>Valor cobrado: <strong><?php
-						$valorHora = 800;
-						$valor5min=100;
-						$valor10min=200;
-						$valor15min=800;
+						$valorHora = 900;
+						$valorcero=0;
 
 						$valoracobrar = 0;
 							if($horas > 0){
@@ -91,14 +96,12 @@
 
 							}
 
-							if($minutos > 0 && $minutos <= 5){								
-								$valoracobrar  += $valor5min;
+							if($minutos > 0 && $minutos <= 10){								
+								$valoracobrar  += $valorcero;
 							}
-							if($minutos > 6 && $minutos <= 15){								
-								$valoracobrar  += $valor10min;
-							}
-							if($minutos > 15 ){								
-								$valoracobrar  += $valor15min;
+							
+							if($minutos > 10 ){								
+								$valoracobrar  += $valorHora;
 							}
 					// Formatear el número con un punto como separador de miles
 						$numeroFormateado = number_format($valoracobrar, 0, ',', '.');
@@ -106,40 +109,38 @@
 
 					echo "$".$numeroFormateado;
 				
+					$fechasalida2 = $fecha_salida->format('Y-m-d H:i:s');
 					
 					?></strong></center></h5> 
-					<h5><center>Hora de salida: <strong><?php echo $fecha_salida->format('Y-m-d H:i:s');?></strong></center></h5> 
+					<h5><center>Hora de salida: <strong><?php echo $fechasalida2?></strong></center></h5> 
 					<h5><center>
 						Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br>
 						Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br>
 						Cel: 310-000-0000
 					</center></h5>	
+
+					<input type="hidden"  id="id" name="id" class="form-control" value="<?php echo $id; ?>">
+					<input type="hidden"  id="valor_cobrado" name="valor_cobrado" class="form-control" value="<?php echo $valoracobrar; ?>">
+					<input type="hidden"  id="fecha_salida" name="fecha_salida" class="form-control" value="<?php echo $fecha_salida->format('Y-m-d H:i:s'); ?>">
+
+
+
 				</div> 
 				</div>
 
 				<div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
-                    <button type="button" class="btn btn-warning" onclick="imprimirRecibo()"><span class="glyphicon glyphicon-check"></span> Imprimir</button>
-                </div>
+                   
+					<?php 
+					
+						$_id = "id=".$id;
+						$_valor_cobrado = "valor_cobrado=".$valoracobrar;
+						$_fecha_salida = "fecha_salida=".$fechasalida2;
+
+					?>
 				
-				<script>
-					function imprimirRecibo() {
-						var contenidoRecibo = document.getElementById('container-fluid').innerHTML;
-
-						var ventanaImpresion = window.open('', '_self');
-						ventanaImpresion.document.write('<html><head><title>Recibo</title></head><body>');
-						ventanaImpresion.document.write(contenidoRecibo);
-						ventanaImpresion.document.write('</body></html>');
-						ventanaImpresion.document.close();
-
-						ventanaImpresion.onafterprint = function() {
-							window.location.reload(); // Recargar la página después de imprimir
-						};
-						ventanaImpresion.print();
-
-						
-					}
-    			</script>
+				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>">Ir a la página destino</a>
+                </div>
 				
             </div>
         </div>
@@ -167,6 +168,16 @@
 						</div>
 						<div class="col-lg-10">
 							<input type="text" name="placa" class="form-control" value="<?php echo $erow['placa']; ?>">
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+
+					<div class="row">
+						<div class="col-lg-2">
+							<label style="position:relative; top:7px;">Cascos:</label>
+						</div>
+						<div class="col-lg-10">
+							<input type="text" name="cascos" class="form-control" value="<?php echo $erow['cascos']; ?>">
 						</div>
 					</div>
 					<div style="height:10px;"></div>

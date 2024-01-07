@@ -30,6 +30,17 @@
 					<td>
 						<div class="row">
 							<div class="col-lg-12">
+								<label class="control-label" style="position:relative; top:7px;" >Cascos:</label>
+							</div>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" name="cascos" require>
+							</div>
+						</div>					
+					</td>
+
+					<td>
+						<div class="row">
+							<div class="col-lg-12">
 								<label class="control-label" style="position:relative; top:7px;" >Descripción:</label>
 							</div>
 							<div class="col-lg-10">
@@ -40,7 +51,7 @@
 
 					<td>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</a>
+							<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
 						</div>					
 					</td>
 		
@@ -50,26 +61,57 @@
 		
 
 		<div style="height:50px;"></div>
+
+
+	
+		<div class="row">
+			
+			<form method="POST"  action="#">
+			<div class="col-lg-6">
+				<input type="text" class="form-control" name="placa2" require placeholder="Placa">
+					</div>
+			<div class="col-lg-6">
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Consultar</button>
+		
+			</div>
+			</form>
+			
+			<?php 
+
+				include('conn.php');
+				$contaor =0;
+				if (isset($_POST['placa2'])) {
+				$placa=$_POST['placa2'];	
+				
+					$query=mysqli_query($conn,"select * from `moto` where estado=1 and placa LIKE '%$placa%' ");
+				}else{
+					$query=mysqli_query($conn,"select * from `moto` where estado=1");
+					
+				}
+
+			?>
+
+				
+		</div>
+		<div style="height:10px;"></div>
 		
 		<table class="table table-striped table-bordered table-hover">
 			<thead>
 				<th>#</th>
 				<th>Placa</th>
+				<th>Cascos</th>
 				<th>Descripcion</th>
 				<th>Fecha y Hora</th>
 				<th>Accion</th>
 			</thead>
 			<tbody>
 			<?php
-				include('conn.php');
-				
-				$contaor =0;
-				$query=mysqli_query($conn,"select * from `moto` where estado=1");
 				while($row=mysqli_fetch_array($query)){
 					?>
 					<tr>
 						<td><?php echo $contaor += 1 ?></td>
 						<td><?php echo ucwords($row['placa']); ?></td>
+						<td><?php echo ucwords($row['cascos']); ?></td>
 						<td><?php echo ucwords($row['descripcion']); ?></td>
 						<td><?php echo $row['fecha_ingreso']; ?></td>
 						<td>
