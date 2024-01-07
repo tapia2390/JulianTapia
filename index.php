@@ -116,7 +116,9 @@
 						<td><?php echo $row['fecha_ingreso']; ?></td>
 						<td>
 							<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a> || 
-							<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-check"></span> salida</a>
+							<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-danger"><span class="glyphicon glyphicon-check"></span> salida</a> || 
+							<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Imprimir</a> 
+							
 							<?php include('button.php'); ?>
 						</td>
 					</tr>

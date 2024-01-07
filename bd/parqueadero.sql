@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-01-2024 a las 21:43:30
+-- Tiempo de generación: 07-01-2024 a las 08:41:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -24,6 +24,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `egresos`
+--
+
+CREATE TABLE `egresos` (
+  `id` int(11) NOT NULL,
+  `descripcion` text NOT NULL,
+  `fecha` datetime NOT NULL,
+  `valor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ingresos`
+--
+
+CREATE TABLE `ingresos` (
+  `id` int(11) NOT NULL,
+  `descripcion` text NOT NULL,
+  `fecha` datetime NOT NULL,
+  `valor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `moto`
 --
 
@@ -34,17 +60,19 @@ CREATE TABLE `moto` (
   `fecha_ingreso` datetime NOT NULL,
   `valor_cobrado` int(11) NOT NULL,
   `fecha_salida` datetime NOT NULL,
-  `estado` int(11) NOT NULL
+  `estado` int(11) NOT NULL,
+  `cascos` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `moto`
 --
 
-INSERT INTO `moto` (`id`, `placa`, `descripcion`, `fecha_ingreso`, `valor_cobrado`, `fecha_salida`, `estado`) VALUES
-(1, 'hjq 313', '2 cascos', '2024-01-06 08:19:18', 0, '0000-00-00 00:00:00', 1),
-(2, 'cpn 67e', 'hola', '2024-01-06 07:19:18', 0, '0000-00-00 00:00:00', 1),
-(3, '', '', '2024-01-06 15:38:23', 0, '0000-00-00 00:00:00', 1);
+INSERT INTO `moto` (`id`, `placa`, `descripcion`, `fecha_ingreso`, `valor_cobrado`, `fecha_salida`, `estado`, `cascos`) VALUES
+(1, 'cpn67e', 'sin placa', '2024-01-07 01:09:10', 1800, '2024-01-07 02:28:37', 0, '1'),
+(2, 'hjq31e', '', '2024-01-07 02:26:53', 0, '0000-00-00 00:00:00', 1, '4'),
+(3, 'ncp 67e', 'fff', '2024-01-07 02:35:20', 0, '0000-00-00 00:00:00', 1, '2'),
+(4, 'ooo', '222', '2024-01-07 02:36:14', 0, '0000-00-00 00:00:00', 1, '111');
 
 -- --------------------------------------------------------
 
@@ -67,6 +95,18 @@ CREATE TABLE `registros_parqueadero` (
 --
 
 --
+-- Indices de la tabla `egresos`
+--
+ALTER TABLE `egresos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ingresos`
+--
+ALTER TABLE `ingresos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `moto`
 --
 ALTER TABLE `moto`
@@ -83,10 +123,22 @@ ALTER TABLE `registros_parqueadero`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `egresos`
+--
+ALTER TABLE `egresos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ingresos`
+--
+ALTER TABLE `ingresos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `moto`
 --
 ALTER TABLE `moto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `registros_parqueadero`
