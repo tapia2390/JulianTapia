@@ -14,7 +14,7 @@
 	// Obtiene la fecha actual
 	$fecha_ingreso = date('Y-m-d H:i:s');
 	
-	mysqli_query($conn,"insert into moto (placa, descripcion, fecha_ingreso,valor_cobrado,fecha_salida,estado,cascos) values ('$placa', '$descripcion', '$fecha_ingreso',0,'',1,$cascos)");
-	echo 1;
+	$result =mysqli_query($conn,"insert into moto (placa, descripcion, fecha_ingreso,valor_cobrado,fecha_salida,estado,cascos) values ('$placa', '$descripcion', '$fecha_ingreso',0,'',1,$cascos)");
+	echo $result;
 
 ?>

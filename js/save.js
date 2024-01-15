@@ -44,11 +44,14 @@ function guardarDatos() {
 }
 
 function imprimirRecibo(placa,descripcion,cascos) {
+  var ancho = 100; // Ancho de la ventana de impresión en píxeles
+    var alto = 150; // Alto de la ventana de impresión en píxeles
+
     var contenidoRecibo = document.getElementById('container-fluid2').innerHTML;
 
-    var ventanaImpresion = window.open('', '_self');
-    ventanaImpresion.document.write('<html><head><title>Recibo</title></head><body>');
-    ventanaImpresion.document.write('<h4><center>*** PARQUEADERO JT ***</h4><h2><center>Placa: <strong style="color:blue;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5><center>Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br> Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br> Cel: 310-000-000 </center></h5>');
+    var ventanaImpresion = window.open('', '_self', 'width=' + ancho + ',height=' + alto);
+    ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title></head><body>');
+    ventanaImpresion.document.write('<h4><center>*** Parqueadero liborio lopera ***</h4><h2><center>Placa: <strong style="color:blue;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5><center>Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br> Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br> Cel: 310-000-000 </center></h5>');
     ventanaImpresion.document.write('</body></html>');
     ventanaImpresion.document.close();
 
@@ -60,5 +63,135 @@ function imprimirRecibo(placa,descripcion,cascos) {
 
 }
 
+
+
+function saveingresos(){
+  
+  var valor = document.getElementById('valor').value.trim();
+  var descripcion = document.getElementById('descripcion').value.trim();
+
+  if (valor === "" || descripcion === "") {
+      alert("la descripcion o el valor no estan digitados");
+  } else {
+
+    var valorSinPunto = valor.replace(/\./g, "");
+      // Crear objeto con datos a enviar
+      var datos = {
+        valor: valor,
+          descripcion: descripcion
+      };
+
+      
+    $.ajax({
+      // Action
+      url: 'php/addIngresos.php',
+      // Method
+      type: 'POST',
+      data: {
+        // Get value
+        valor: valorSinPunto,
+        descripcion: $("input[name=descripcion]").val()
+      },
+      success:function(response){
+        
+        // Response is the output of action file
+        if(response == 1){
+          location.reload();
+        }
+        
+        else{
+          alert("error");
+        }
+      }
+    });
+
+  }
+}
+
+
+function saveegresos(){
+  
+  var valor = document.getElementById('valor').value.trim();
+  var descripcion = document.getElementById('descripcion').value.trim();
+
+  
+  if (valor === "" || descripcion === "") {
+      alert("la descripcion o el valor no estan digitados");
+  } else {
+    var valorSinPunto = valor.replace(/\./g, "");
+
+      // Crear objeto con datos a enviar
+      var datos = {
+        valor: valor,
+          descripcion: descripcion
+      };
+
+      
+    $.ajax({
+      // Action
+      url: 'php/addEgresos.php',
+      // Method
+      type: 'POST',
+      data: {
+        // Get value
+        valor: valorSinPunto,
+        descripcion: $("input[name=descripcion]").val()
+      },
+      success:function(response){
+        
+        // Response is the output of action file
+        if(response == 1){
+          location.reload();
+        }
+        
+        else{
+          alert("error");
+        }
+      }
+    });
+
+  }
+}
+
+
+
+
+//funcion formato de miles
+function integerFormatIndistinto(e) {
+   
+  // Obtener el valor del input
+  var numeroInput = document.getElementById('valor').value;
+
+  // Remover cualquier caracter que no sea un dígito
+  var numero = parseFloat(numeroInput.replace(/[^\d]/g, ''));
+
+  // Verificar si es un número válido
+  if (!isNaN(numero)) {
+      // Formatear el número con separador de miles a partir del cuarto dígito
+      var numeroFormateado = numero.toLocaleString(undefined, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 20,
+          useGrouping: true
+      });
+
+      document.getElementById('valor').textContent = numeroFormateado;
+
+      // Actualizar el valor del input con el formato
+      document.getElementById('valor').value = numeroFormateado;
+  } else {
+      // Si no es un número válido, mostrar un mensaje de error
+      document.getElementById('valor').textContent = 'Ingrese un número válido';
+  }
+
+  
+}
+
+
+
+window.onload = function() {
+  //SE EJECUTA DESPUES CARGAR EL CODIGO CSS y HTML
+  // Creamos el evento keyup
+  document.querySelectorAll(".valor").forEach(el => el.addEventListener("keyup", integerFormatIndistinto));
+  };
 
 

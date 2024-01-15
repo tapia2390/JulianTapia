@@ -14,7 +14,7 @@
 		<div style="height:50px;"></div>
 		<div class="well" style="margin:auto; padding:auto; width:80%;">
 			<span style="font-size:25px; color:blue">
-				<center><strong>Parqueadero</strong></center>
+				<center><strong>Gastos</strong></center>
 			</span>
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
@@ -22,15 +22,16 @@
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>
-							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-edit"></span>
+							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span
+									class="glyphicon glyphicon-edit"></span>
 								Parqueadero</a>
 						</td>
 						<td>
-							<a href="ingresos.php"  class="btn btn-danger" style="width: 100%;"><span
-									class="glyphicon glyphicon-check"></span> Ingresos</a> 
+							<a href="ingresos.php" class="btn btn-danger" style="width: 100%;"><span
+									class="glyphicon glyphicon-check"></span> Ingresos</a>
 						</td>
 						<td>
-							<a href="gastos.php"  class="btn btn-warning" style="width: 100%;"><span
+							<a href="gastos.php" class="btn btn-warning" style="width: 100%;"><span
 									class="glyphicon glyphicon-edit"></span> Gastos</a>
 
 						</td>
@@ -42,21 +43,10 @@
 					<td>
 						<div class="row">
 							<div class="col-lg-12">
-								<label class="control-label" style="position:relative; top:7px;">Placa:</label>
+								<label class="control-label" style="position:relative; top:7px;">Valor:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="placa" name="placa" require>
-							</div>
-						</div>
-					</td>
-
-					<td>
-						<div class="row">
-							<div class="col-lg-12">
-								<label class="control-label" style="position:relative; top:7px;">Cascos:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="cascos" name="cascos" require>
+								<input type="number" class="form-control valor" id="valor" name="valor" require>
 							</div>
 						</div>
 					</td>
@@ -72,10 +62,11 @@
 						</div>
 					</td>
 
+
 					<td>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" onclick="guardarDatos()"><span
-									class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
+							<button type="button" class="btn btn-primary" onclick="saveegresos()">
+								<span class="glyphicon glyphicon-floppy-disk">Guardar</span> </button>
 						</div>
 					</td>
 					</tr>
@@ -91,7 +82,8 @@
 
 				<form method="POST" action="#">
 					<div class="col-lg-6">
-						<input type="text" class="form-control" name="placa2" require placeholder="Placa">
+						<input type="text" class="form-control" id="descripcion" name="descripcion" require
+							placeholder="Descripción ingreso">
 					</div>
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
@@ -104,14 +96,15 @@
 
 				include('conn.php');
 				$contaor = 0;
-				if (isset($_POST['placa2'])) {
-					$placa = $_POST['placa2'];
-
-					$query = mysqli_query($conn, "select * from `moto` where estado=1 and placa LIKE '%$placa%' ");
+				if (isset($_POST['descripcion'])) {
+					$descripcion = $_POST['descripcion'];
+					$query = mysqli_query($conn, "select * from egresos where  descripcion LIKE '%$descripcion%' ");
 				} else {
-					$query = mysqli_query($conn, "select * from `moto` where estado=1");
+					$query = mysqli_query($conn, "select * from egresos ");
+
 
 				}
+
 
 				?>
 
@@ -122,42 +115,32 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<th>#</th>
-					<th>Placa</th>
-					<th>Cascos</th>
 					<th>Descripcion</th>
+					<th>Valor</th>
 					<th>Fecha y Hora</th>
-					<th>Accion</th>
 				</thead>
 				<tbody>
 					<?php
+					$valor = 0;
 					while ($row = mysqli_fetch_array($query)) {
+						$valor +=$row['valor'];
 						?>
 						<tr>
 							<td>
 								<?php echo $contaor += 1 ?>
 							</td>
 							<td>
-								<?php echo ucwords($row['placa']); ?>
-							</td>
-							<td>
-								<?php echo ucwords($row['cascos']); ?>
-							</td>
-							<td>
 								<?php echo ucwords($row['descripcion']); ?>
 							</td>
 							<td>
-								<?php echo $row['fecha_ingreso']; ?>
+								<?php echo ucwords($row['fecha']); ?>
 							</td>
 							<td>
-								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span
-										class="glyphicon glyphicon-edit"></span> Editar</a> ||
-								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
-									class="btn btn-danger"><span class="glyphicon glyphicon-check"></span> salida</a> ||
-								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span
-										class="glyphicon glyphicon-edit"></span> Imprimir</a>
-
-								<?php include('button.php'); ?>
+								<?php echo "$".ucwords( number_format((int)$row['valor'],0,',','.')); ?>
 							</td>
+							
+
+
 						</tr>
 						<?php
 					}
@@ -165,14 +148,16 @@
 					?>
 				</tbody>
 			</table>
+			<table class="table table-striped table-bordered table-hover" border="0" >
+			<tr>
+			
+							<td>
+								<?php echo "<b style='float: right;padding: 10px;padding-right: 8%;'> Total Gastos :  $".  number_format((int)$valor,0,',','.')."</b>" ?>
+							</td>
+			</table>
 		</div>
 
-		<div id="container-fluid2">
-			<div class="container-fluid" id="container-fluid">
-			</div>
 
-		</div>
-		<?php include('add_modal.php'); ?>
 	</div>
 </body>
 
