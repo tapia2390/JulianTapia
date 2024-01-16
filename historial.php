@@ -49,12 +49,12 @@
 
 			<form method="POST" action="#">
 					<div class="col-lg-4">
-						<input type="text" class="form-control" id="fechai" name="fechai" require
-							placeholder="Fecha incio">
+						<input type="date" class="form-control" id="fechai" name="fechai"  require 
+							placeholder="Fecha incio" >
 					</div>
 					<div class="col-lg-4">
-						<input type="text" class="form-control" id="fechaf" name="fechaf" require
-							placeholder="Fecha fin">
+						<input type="date"   class="form-control" id="fechaf" name="fechaf"  require
+							placeholder="Fecha fin" >
 					</div>
 					<div class="col-lg-4">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
@@ -68,26 +68,35 @@
 			<?php 
 			include('conn.php');
 				$contaor = 0;
-				if (isset($_POST['fechai']) && isset($_POST['fechaf']) ) {
-					$fechai = $_POST['fechai'];
-					$fechaf = $_POST['fechaf'];
-
-
-					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor) AS total FROM moto WHERE DATE(fecha_ingreso) BETWEEN '".$fechai."' AND DATE(fecha_salida) '".$fechaf."';");
-					$filapar = mysqli_fetch_assoc($totalEgresos);
-					$totalParqueadero2 = $filapar['total'];
-
+				if (isset($_POST['fechai'])   && isset($_POST['fechaf'])) {
 					
-					$totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) BETWEEN '".$fechai."' AND '".$fechaf."';");
-					$filain = mysqli_fetch_assoc($totalEgresos);
+
+					$fi = $_POST['fechai'];
+					$ff = $_POST['fechaf'];
+					
+					$formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
+					 $fechai = preg_match($formatoValido, $fi);
+
+					 $fechaf = preg_match($formatoValido,$ff);
+			
+					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE  DATE(fecha_salida) BETWEEN DATE(".$fi.") AND DATE(".$ff.");");
+					$filapar = mysqli_fetch_assoc($totalParqueadero);
+					$totalParqueadero2 = $filapar['total'];
+					
+					$totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) BETWEEN '".$fi."' AND '".$ff."';");
+					$filain = mysqli_fetch_assoc($totalIngresos);
 					$totalIngresos2 = $filain['total'];
 
 
-					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE DATE(fecha) BETWEEN '".$fechai."' AND '".$fechaf."';");
+					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE DATE(fecha) BETWEEN ".$fi." AND ".$ff.";");
 					 $filae = mysqli_fetch_assoc($totalEgresos);
 					 $totalEgresos2 = $filae['total'];
 
 					} else {
+
+					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE DATE(fecha_salida)= CURDATE();");
+					$filapar = mysqli_fetch_assoc($totalParqueadero);
+					$totalParqueadero2 = $filapar['total'];
 
 					 $totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) = CURDATE();");
 					 $filain = mysqli_fetch_assoc($totalIngresos);
@@ -114,10 +123,15 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td></td>
-						<td> <?php echo "$".$totalIngresos2;?> </td>
-						<td> <?php echo "$".$totalEgresos2;?> </td>
-						<td></td>
+					<td> <?php echo "$".number_format((int)$totalParqueadero2,0,',','.');?> </td>
+						<td> <?php echo "$".number_format((int)$totalIngresos2,0,',','.'); ?> </td>
+						<td> <?php echo "$".number_format((int)$totalEgresos2,0,',','.'); ?> </td>
+						<td>
+						<?php 
+							$totaldia = ($totalParqueadero2+$totalIngresos2)-$totalEgresos2;
+							echo "$".number_format((int)$totaldia,0,',','.'); 
+						?> 
+						</td>
 					</tr>
 				</tbody>
 			</table>

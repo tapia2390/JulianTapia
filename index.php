@@ -107,9 +107,9 @@
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
 
-					$query = mysqli_query($conn, "select * from `moto` where estado=1 and placa LIKE '%$placa%' ");
+					$query = mysqli_query($conn, "select * from `moto` where estado=1 and placa LIKE '%$placa%'  ");
 				} else {
-					$query = mysqli_query($conn, "select * from `moto` where estado=1");
+					$query = mysqli_query($conn, "select * from `moto` where estado=1 ");
 
 				}
 

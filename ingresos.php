@@ -99,9 +99,9 @@
 				$contaor = 0;
 				if (isset($_POST['descripcion'])) {
 					$descripcion = $_POST['descripcion'];
-					$query = mysqli_query($conn, "select * from ingresos where  descripcion LIKE '%$descripcion%' ");
+					$query = mysqli_query($conn, "select * from ingresos where  descripcion LIKE '%$descripcion%'  and DATE(fecha) = CURDATE()");
 				} else {
-					$query = mysqli_query($conn, "select * from ingresos ");
+					$query = mysqli_query($conn, "select * from ingresos  where  DATE(fecha) = CURDATE()");
 
 
 				}

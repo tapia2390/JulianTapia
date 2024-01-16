@@ -98,9 +98,9 @@
 				$contaor = 0;
 				if (isset($_POST['descripcion'])) {
 					$descripcion = $_POST['descripcion'];
-					$query = mysqli_query($conn, "select * from egresos where  descripcion LIKE '%$descripcion%' ");
+					$query = mysqli_query($conn, "select * from egresos where  descripcion LIKE '%$descripcion%' and  DATE(fecha) = CURDATE() ");
 				} else {
-					$query = mysqli_query($conn, "select * from egresos ");
+					$query = mysqli_query($conn, "select * from egresos where DATE(fecha) = CURDATE() ");
 
 
 				}

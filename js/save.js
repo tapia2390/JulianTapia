@@ -1,5 +1,7 @@
 
 function guardarDatos() {
+
+  alert("response");
     var placa = document.getElementById('placa').value.trim();
     var descripcion = document.getElementById('descripcion').value.trim();
     var cascos = document.getElementById('cascos').value.trim();
@@ -29,6 +31,7 @@ function guardarDatos() {
         },
         success:function(response){
           
+          alert("response"+response);
           // Response is the output of action file
           if(response == 1){
             imprimirRecibo(placa,descripcion,cascos);
@@ -44,12 +47,11 @@ function guardarDatos() {
 }
 
 function imprimirRecibo(placa,descripcion,cascos) {
-  var ancho = 100; // Ancho de la ventana de impresión en píxeles
-    var alto = 150; // Alto de la ventana de impresión en píxeles
+ 
 
     var contenidoRecibo = document.getElementById('container-fluid2').innerHTML;
 
-    var ventanaImpresion = window.open('', '_self', 'width=' + ancho + ',height=' + alto);
+    var ventanaImpresion = window.open('', '_self');
     ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title></head><body>');
     ventanaImpresion.document.write('<h4><center>*** Parqueadero liborio lopera ***</h4><h2><center>Placa: <strong style="color:blue;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5><center>Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br> Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br> Cel: 310-000-000 </center></h5>');
     ventanaImpresion.document.write('</body></html>');
@@ -182,8 +184,6 @@ function integerFormatIndistinto(e) {
       // Si no es un número válido, mostrar un mensaje de error
       document.getElementById('valor').textContent = 'Ingrese un número válido';
   }
-
-  
 }
 
 
@@ -193,5 +193,9 @@ window.onload = function() {
   // Creamos el evento keyup
   document.querySelectorAll(".valor").forEach(el => el.addEventListener("keyup", integerFormatIndistinto));
   };
+
+
+
+
 
 

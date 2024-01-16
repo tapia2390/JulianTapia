@@ -48,7 +48,7 @@
 				?>
 				<div class="container-fluid" id="container-fluid">
 				
-					<h4><center>*** PARQUEADERO JT ***</h4>
+					<h4><center>*** PARQUEADERO LIBORIO LOPERA ***</h4>
 					<h2><center>Placa: <strong style="color:blue;"><?php echo ucwords($drow['placa']); ?></strong></center></h2>
 					<h3><center>Cascos: <strong><?php echo ucwords($drow['cascos']); ?></strong></center></h3>
 					
