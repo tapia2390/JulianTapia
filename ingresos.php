@@ -117,8 +117,9 @@
 				<thead>
 					<th>#</th>
 					<th>Descripcion</th>
-					<th>Valor</th>
 					<th>Fecha y Hora</th>
+					<th>Valor</th>
+					
 				</thead>
 				<tbody>
 					<?php
