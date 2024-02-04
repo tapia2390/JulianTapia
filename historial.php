@@ -37,6 +37,11 @@
 									class="glyphicon glyphicon-edit"></span> Gastos</a>
 
 						</td>
+						<td>
+							<a href="historial.php" class="btn btn-danger" style="width: 100%;"><span
+									class="glyphicon glyphicon-edit"></span> Historial</a>
+
+						</td>
 					</tr>
 				</table>
 
