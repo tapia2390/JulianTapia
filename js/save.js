@@ -46,8 +46,9 @@ function guardarDatos() {
     }
 }
 
-function btnimprimirRecibo(placa){
- alert(placa)
+function btnimprimirRecibo(placa,descripcion,cascos,fecha_ingreso){
+ //alert(placa+"-"+descripcion+"-"+cascos+"-"+fecha_ingreso);
+ imprimirRecibo(placa,descripcion,cascos);
 }
 
 function imprimirRecibo(placa,descripcion,cascos) {
@@ -56,9 +57,9 @@ function imprimirRecibo(placa,descripcion,cascos) {
    
 var ventanaImpresion = window.open('', '_self');
 ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
-ventanaImpresion.document.write('<style>@page { size: 48mm 95m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
+ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
 ventanaImpresion.document.write('</head><body>');
-ventanaImpresion.document.write('<h4><center>************ <br/>Parqueadero <br/> liborio lopera <br/>  ************</h4><h2><center>Placa: <strong style="color:blue;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5><center> <b> NOTA: </b> No se responde por objetosdejados en las motos, ni se responde por cascos que estén sin marcar. <br/> Si se pierde este recibo solo con la tarjeta de propiedad del vehículo podrá reclamar. <br/> Horario: de Lunes a Sabado de 7:00 AM a 9:00 PM <br/> Cel: 310-000-000 </center></h5>');
+ventanaImpresion.document.write('<br/><br/><h4><center>************ <br/>Parqueadero <br/><br/> liborio lopera <br/>  ************<br/><br/>  </h4><h2><center>Placa: <strong style="color:blue;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5> <center><b> NOTA: </b> No se responde por objetosdejados en las motos, ni se responde por cascos que estén sin marcar. <br/> Si se pierde este recibo solo con la tarjeta de propiedad del vehículo podrá reclamar. <br/> Horario: de Lunes a Sabado de 7:00 AM a 9:00 PM <br/> Cel: 310-000-000 </center></h5>');
 ventanaImpresion.document.write('</body></html>');
 ventanaImpresion.document.close();
 

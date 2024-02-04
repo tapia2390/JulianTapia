@@ -159,7 +159,7 @@
 										class="glyphicon glyphicon-edit"></span> Editar</a> ||
 								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
 									class="btn btn-danger"><span class="glyphicon glyphicon-check"></span> salida</a> ||
-								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>')"  class="btn btn-warning"><span
+								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>')"  class="btn btn-warning"><span
 										class="glyphicon glyphicon-edit"></span> Imprimir</a>
 
 								<?php include('button.php'); ?>
