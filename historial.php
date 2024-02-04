@@ -84,16 +84,18 @@
 
 					 $fechaf = preg_match($formatoValido,$ff);
 			
-					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE  DATE(fecha_salida) BETWEEN DATE(".$fi.") AND DATE(".$ff.");");
+					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'");
 					$filapar = mysqli_fetch_assoc($totalParqueadero);
 					$totalParqueadero2 = $filapar['total'];
+
 					
-					$totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) BETWEEN '".$fi."' AND '".$ff."';");
+					
+					$totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= "."'$fi'"."  AND  fecha <=  "."'$ff'");
 					$filain = mysqli_fetch_assoc($totalIngresos);
 					$totalIngresos2 = $filain['total'];
 
 
-					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE DATE(fecha) BETWEEN ".$fi." AND ".$ff.";");
+					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE fecha >= "."'$fi'"."  AND  fecha <=  "."'$ff'");
 					 $filae = mysqli_fetch_assoc($totalEgresos);
 					 $totalEgresos2 = $filae['total'];
 
