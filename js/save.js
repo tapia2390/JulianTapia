@@ -46,6 +46,10 @@ function guardarDatos() {
     }
 }
 
+function btnimprimirRecibo(placa){
+ alert(placa)
+}
+
 function imprimirRecibo(placa,descripcion,cascos) {
  
 
