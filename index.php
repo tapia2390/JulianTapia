@@ -70,6 +70,17 @@
 					<td>
 						<div class="row">
 							<div class="col-lg-12">
+								<label class="control-label" style="position:relative; top:7px;">Ubicación:</label>
+							</div>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="ubicacion" name="ubicacion" require>
+							</div>
+						</div>
+					</td>
+
+					<td>
+						<div class="row">
+							<div class="col-lg-12">
 								<label class="control-label" style="position:relative; top:7px;">Descripción:</label>
 							</div>
 							<div class="col-lg-10">
@@ -130,6 +141,7 @@
 					<th>#</th>
 					<th>Placa</th>
 					<th>Cascos</th>
+					<th>Ubicación</th>
 					<th>Descripcion</th>
 					<th>Fecha y Hora</th>
 					<th>Accion</th>
@@ -147,6 +159,9 @@
 							</td>
 							<td>
 								<?php echo ucwords($row['cascos']); ?>
+							</td>
+							<td>
+								<?php echo ucwords($row['ubicacion']); ?>
 							</td>
 							<td>
 								<?php echo ucwords($row['descripcion']); ?>

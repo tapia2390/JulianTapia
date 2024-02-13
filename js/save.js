@@ -5,6 +5,7 @@ function guardarDatos() {
     var placa = document.getElementById('placa').value.trim();
     var descripcion = document.getElementById('descripcion').value.trim();
     var cascos = document.getElementById('cascos').value.trim();
+    var ubicacion =  document.getElementById('ubicacion').value.trim();
 
     if (placa === "" || cascos === "") {
         alert("la placa o los cascos no estan registrados...");
@@ -14,7 +15,8 @@ function guardarDatos() {
         var datos = {
             placa: placa,
             descripcion: descripcion,
-            cascos: cascos
+            cascos: cascos,
+            ubicacion:ubicacion
         };
 
         
@@ -27,7 +29,8 @@ function guardarDatos() {
           // Get value
           placa: $("input[name=placa]").val(),
           descripcion: $("input[name=descripcion]").val(),
-          cascos: $("input[name=cascos]").val()
+          cascos: $("input[name=cascos]").val(),
+          ubicacion: $("input[name=ubicacion]").val(),
         },
         success:function(response){
           
