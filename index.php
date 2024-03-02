@@ -3,6 +3,7 @@
 
 <head>
 	<title>Parqueadero JT</title>
+	<meta charset="UTF-8">
 	<script src="libs/jquery.min.js"></script>
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />
 	<script src="libs/bootstrap.min.js"></script>
