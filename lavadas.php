@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>Parqueadero JT</title>
+	<title>Parqueadero Liborio Lopera</title>
 	<meta charset="UTF-8">
 	<script src="libs/jquery.min.js"></script>
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />
@@ -15,7 +15,7 @@
 		<div style="height:50px;"></div>
 		<div class="well" style="margin:auto; padding:auto; width:100%;">
 			<span style="font-size:25px; color:blue">
-				<center><strong>Ingreso Parqueadero</strong></center>
+				<center><strong>LAVADA DE MOTOS</strong></center>
 			</span>
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
