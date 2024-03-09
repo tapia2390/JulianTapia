@@ -9,11 +9,11 @@
 	$ubicacion=$_POST['ubicacion'];
 	
 	
-		$sql1= "update moto	 set placa='$placa', descripcion='$descripcion', cascos='$cascos', ubicacion= '$ubicacion' where id='$id'";
+		$sql1= "update lavadas	 set placa='$placa', descripcion='$descripcion', cascos='$cascos', ubicacion= '$ubicacion' where id='$id'";
 		mysqli_query($conn,$sql1);
 	
 	
 
-	header('location:index.php');
+	header('location:lavadas.php');
 
 ?>

@@ -132,9 +132,9 @@
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
 
-					$query = mysqli_query($conn, "select * from `moto` where estado=1 and placa LIKE '%$placa%'  ");
+					$query = mysqli_query($conn, "select * from `lavadas` where estado=1 and placa LIKE '%$placa%'  ");
 				} else {
-					$query = mysqli_query($conn, "select * from `moto` where estado=1 ");
+					$query = mysqli_query($conn, "select * from `lavadas` where estado=1 ");
 
 				}
 
@@ -184,10 +184,10 @@
 									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
 								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-print"></span> </a> 
-								<a  onclick="btnlavadas('<?php echo $row['id'];?>')"  class="btn btn-primary" style="margin:5px;"><span
+								<a  onclick="cambiarTabla('<?php echo $row['id'];?>','lavadas')"  class="btn btn-primary" style="margin:5px;"><span
 										class="glyphicon glyphicon-road"></span> </a> 
 
-								<?php include('button.php'); ?>
+								<?php include('buttonlvadas.php'); ?>
 							</td>
 						</tr>
 						<?php

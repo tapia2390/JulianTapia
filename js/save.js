@@ -157,6 +157,7 @@ function saveegresos(){
         
         else{
           alert("error");
+          location.reload();
         }
       }
     });
@@ -208,7 +209,6 @@ window.onload = function() {
 
 
 function cambiarTabla(id,tabla) {
-      alert(tabla);
     $.ajax({
       // Action
       url: 'model/typoServicio.php',
@@ -224,11 +224,14 @@ function cambiarTabla(id,tabla) {
         //alert("response"+response);
         // Response is the output of action file
         if(response == 1){
-         alert(response)
+         alert(response);
+         location.reload();
+         
         }
         
         else{
           alert(response);
+          location.reload();
         }
       }
     });

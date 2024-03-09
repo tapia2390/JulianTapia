@@ -178,7 +178,7 @@
 								<?php echo $row['fecha_ingreso']; ?>
 							</td>
 							<td>
-								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning" style="margin:5px;"><span
+								<a href="#edit<?php echo $row['id'];  ?>" data-toggle="modal" class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-pencil"></span></a> 
 								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
 									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 

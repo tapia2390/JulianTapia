@@ -38,7 +38,7 @@
         }
 			
         $sqlInsert= "insert into $tblType (placa, descripcion, fecha_ingreso,valor_cobrado,fecha_salida,estado,cascos,ubicacion) values ('$placa', '$descripcion', '$fecha_ingreso',$valor_cobrado,'$fecha_salida',$estado,'$cascos','$ubicacion')";
-       echo $sqlInsert;
+
         $result =mysqli_query($conn,$sqlInsert);
 
         if($result =="1"){
