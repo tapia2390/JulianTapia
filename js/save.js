@@ -49,6 +49,58 @@ function guardarDatos() {
     }
 }
 
+
+function guardarDatosLavadas() {
+
+  
+  var placa = document.getElementById('placa').value.trim();
+  var descripcion = document.getElementById('descripcion').value.trim();
+  var cascos = document.getElementById('cascos').value.trim();
+  var ubicacion =  document.getElementById('ubicacion').value.trim();
+
+  if (placa === "" || cascos === "") {
+      alert("la placa o los cascos no estan registrados...");
+  } else {
+
+      // Crear objeto con datos a enviar
+      var datos = {
+          placa: placa,
+          descripcion: descripcion,
+          cascos: cascos,
+          ubicacion:ubicacion
+      };
+
+      
+    $.ajax({
+      // Action
+      url: 'addnewlavadas.php',
+      // Method
+      type: 'POST',
+      data: {
+        // Get value
+        placa: $("input[name=placa]").val(),
+        descripcion: $("input[name=descripcion]").val(),
+        cascos: $("input[name=cascos]").val(),
+        ubicacion: $("input[name=ubicacion]").val(),
+      },
+      success:function(response){
+        
+        //alert("response"+response);
+        // Response is the output of action file
+        if(response == 1){
+          imprimirRecibo(placa,descripcion,cascos);
+        }
+        
+        else{
+          alert(response);
+        }
+      }
+    });
+
+  }
+}
+
+
 function btnimprimirRecibo(placa,descripcion,cascos,fecha_ingreso){
  //alert(placa+"-"+descripcion+"-"+cascos+"-"+fecha_ingreso);
  imprimirRecibo(placa,descripcion,cascos);

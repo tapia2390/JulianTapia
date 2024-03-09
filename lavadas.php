@@ -96,7 +96,7 @@
 
 					<td>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" onclick="guardarDatos()"><span
+							<button type="button" class="btn btn-primary" onclick="guardarDatosLavadas()"><span
 									class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
 						</div>
 					</td>

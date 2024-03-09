@@ -85,48 +85,18 @@
 					
 
 
-					<h5><center>Valor cobrado: <strong><?php
-						$valorHora = 900;
-						$valorcero=0;
-
-						$valoracobrar = 0;
-							if($horas > 0){
-								$sumahoras = $horas * $valorHora;
-								$valoracobrar  += $sumahoras;
-
-							}
-
-							if( $horas > 0 && $minutos > 0 && $minutos <= 10 ){								
-								$valoracobrar  += $valorcero;
-							}
-
-							if( $horas > 0 && $minutos > 0 && $minutos > 10 ){								
-								$valoracobrar  += $valorHora;
-							}
-											
-							
-							if($horas == 0 && $minutos > 2 ){								
-								$valoracobrar  += $valorHora;
-							}
-					// Formatear el número con un punto como separador de miles
-						$numeroFormateado = number_format($valoracobrar, 0, ',', '.');
-
-
-					echo "<h2 style='color:red;'> $".$numeroFormateado."</h2>";
+					<h5><center>Ingreso valor cobrado: <strong>
+					<input type="number"  id="_valorlavada" name="_valorlavada"  maxlength="7" class="form-control" placeholder="INGRESE EL VALOR A COBRAR" style="width: 50%; margin: 2%;">
+				
+					<?php
 				
 					$fechasalida2 = $fecha_salida->format('Y-m-d H:i:s');
 					
 					?></strong></center></h5> 
-					<!--h5><center>Hora de salida: <strong><?php echo $fechasalida2?></strong></center></h5--!> 
-					<!--h5><center>
-						Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br>
-						Horario de Lunes a Sabado de 7:00 AM a 9:00 PM <br>
-						Cel: 310-000-0000
-					</center></h5-->	
+					
 
-					<input type="hidden"  id="id" name="id" class="form-control" value="<?php echo $id; ?>">
-					<input type="hidden"  id="valor_cobrado" name="valor_cobrado" class="form-control" value="<?php echo $valoracobrar; ?>">
-					<input type="hidden"  id="fecha_salida" name="fecha_salida" class="form-control" value="<?php echo $fecha_salida->format('Y-m-d H:i:s'); ?>">
+					<input type="hidden"  id="_id" name="_id" class="form-control" value="<?php echo $id; ?>">
+					<input type="hidden"  id="_fecha_salida" name="_fecha_salida" class="form-control" value="<?php echo $fecha_salida->format('Y-m-d H:i:s'); ?>">
 
 
 
@@ -136,16 +106,61 @@
 				<div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
                    
-					<?php 
-					
-						$_id = "id=".$id;
-						$_valor_cobrado = "valor_cobrado=".$valoracobrar;
-						$_fecha_salida = "fecha_salida=".$fechasalida2;
-
-					?>
 				
-				<a href="edit2lavadas.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>">Generar pago</a>
-                </div>
+				
+				
+				<a id="generarPago" onclick="generarPago()">Generar pago</a>
+			
+			
+			
+	<script>
+    function generarPago(){
+		var id = $("input[name=_id]").val();
+		var valorlavada = $("input[name=_valorlavada]").val();
+		var fecha_salida = $("input[name=_fecha_salida]").val();
+		
+		if (valorlavada === null || valorlavada === "") {
+			alert("Valor no ingresado");
+			return;
+		}
+
+
+
+		$.ajax({
+        // Action
+        url: 'edit2lavadas.php',
+        // Method
+        type: 'POST',
+        data: {
+          // Get value
+          _id: id,
+          _valorlavada: valorlavada,
+          _fecha_salida:fecha_salida,
+        },
+        success:function(response){
+          
+          //alert("response"+response);
+          // Response is the output of action file
+          if(response == 1){
+            window.location.href = 'lavadas.php';
+          }
+          
+          else{
+			alert(response)
+                // Maneja la respuesta del script PHP aquí
+                window.location.href = 'lavadas.php';
+          }
+        }
+      });
+
+
+		  
+	}
+	
+    </script>
+			
+			
+			</div>
 				
             </div>
         </div>
