@@ -89,7 +89,7 @@
 								<label class="control-label" style="position:relative; top:7px;">Descripción:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion" require>
+								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion" require placeholder="INGRESO DE MOTOS	">
 							</div>
 						</div>
 					</td>

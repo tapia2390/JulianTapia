@@ -89,7 +89,7 @@
 								<label class="control-label" style="position:relative; top:7px;">Descripción:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion" require>
+								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion" require placeholder="LAVADA DE MOTOS	">
 							</div>
 						</div>
 					</td>
@@ -178,12 +178,14 @@
 								<?php echo $row['fecha_ingreso']; ?>
 							</td>
 							<td>
-								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"><span
-										class="glyphicon glyphicon-edit"></span> Editar</a> ||
+								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning" style="margin:5px;"><span
+										class="glyphicon glyphicon-pencil"></span></a> 
 								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
-									class="btn btn-danger"><span class="glyphicon glyphicon-check"></span> salida</a> ||
-								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>')"  class="btn btn-warning"><span
-										class="glyphicon glyphicon-edit"></span> Imprimir</a>
+									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
+								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
+										class="glyphicon glyphicon-print"></span> </a> 
+								<a  onclick="btnlavadas('<?php echo $row['id'];?>')"  class="btn btn-primary" style="margin:5px;"><span
+										class="glyphicon glyphicon-road"></span> </a> 
 
 								<?php include('button.php'); ?>
 							</td>
