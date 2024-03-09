@@ -13,32 +13,36 @@
 <body>
 	<div class="container">
 		<div style="height:50px;"></div>
-		<div class="well" style="margin:auto; padding:auto; width:80%;">
+		<div class="well" style="margin:auto; padding:auto; width:100%;">
 			<span style="font-size:25px; color:blue">
 				<center><strong>Gastos</strong></center>
 			</span>
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
 
-				<table class="table table-striped table-bordered table-hover">
+			<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>
-							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span
-									class="glyphicon glyphicon-edit"></span>
+							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-road"></span>
 								Parqueadero</a>
 						</td>
 						<td>
-							<a href="ingresos.php" class="btn btn-danger" style="width: 100%;"><span
-									class="glyphicon glyphicon-check"></span> Ingresos</a>
+							<a href="lavadas.php"  class="btn btn-primary" style="width: 100%;"><span
+									class="	glyphicon glyphicon-tint"></span> Lavadas</a> 
 						</td>
 						<td>
-							<a href="gastos.php" class="btn btn-warning" style="width: 100%;"><span
-									class="glyphicon glyphicon-edit"></span> Gastos</a>
+							<a href="ingresos.php"  class="btn btn-warning" style="width: 100%;"><span
+									class="	glyphicon glyphicon-usd"></span> Ingresos</a> 
+						</td>
+						<td>
+							<a href="gastos.php"  class="btn btn-primary" style="width: 100%;"><span
+									class="	glyphicon glyphicon-tags"></span> Gastos</a>
 
 						</td>
+
 						<td>
 							<a href="historial.php" class="btn btn-danger" style="width: 100%;"><span
-									class="glyphicon glyphicon-edit"></span> Historial</a>
+									class="glyphicon glyphicon-repeat"></span> Historial</a>
 
 						</td>
 					</tr>

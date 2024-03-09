@@ -20,7 +20,7 @@
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
 
-				<table class="table table-striped table-bordered table-hover">
+			<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>
 							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-road"></span>
