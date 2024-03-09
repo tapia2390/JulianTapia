@@ -184,7 +184,7 @@
 									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
 								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-print"></span> </a> 
-								<a  onclick="btnlavadas('<?php echo $row['id'];?>')"  class="btn btn-primary" style="margin:5px;"><span
+								<a  onclick="cambiarTabla('<?php echo $row['id'];?>','moto')"  class="btn btn-primary" style="margin:5px;"><span
 										class="glyphicon glyphicon-tint"></span> </a> 
 
 								<?php include('button.php'); ?>

@@ -2,18 +2,18 @@
 	include('../conn.php');
 
     if (isset($_POST['id'])) {
-        $tabala = $_POST['tabla'];
+        $tabla = $_POST['tabla'];
         $tblType="";
-        if( $tabala =="moto"){
+        if( $tabla =="moto"){
 
             $tblType="lavadas";
         }else{
             $tblType="moto";
         }
 
-
+        $response ="";
         $id= $_POST['id'];
-        $sqlSelect= "SELECT * FROM moto WHERE id = $id;";
+        $sqlSelect= "SELECT * FROM $tabla WHERE id = $id;";
         $querySQL = mysqli_query($conn, $sqlSelect);
 
         $placa="";
@@ -37,12 +37,25 @@
 
         }
 			
-        $sqlInsert= "insert into $tblType (placa, descripcion, fecha_ingreso,valor_cobrado,fecha_salida,estado,cascos,ubicacion) values ('$placa', '$descripcion', '$fecha_ingreso',$valor_cobrado,$fecha_salida,$estado,'$cascos','$ubicacion')";
+        $sqlInsert= "insert into $tblType (placa, descripcion, fecha_ingreso,valor_cobrado,fecha_salida,estado,cascos,ubicacion) values ('$placa', '$descripcion', '$fecha_ingreso',$valor_cobrado,'$fecha_salida',$estado,'$cascos','$ubicacion')";
+       echo $sqlInsert;
         $result =mysqli_query($conn,$sqlInsert);
 
         if($result =="1"){
-            $sqlDelete= "DELETE FROM  $tabala WHERE id = $id;";
+            $sqlDelete= "DELETE FROM  $tabla WHERE id = $id;";
+            $resultDelete =mysqli_query($conn,$sqlDelete);
+            if($resultDelete =="1"){
+                $response ="Cambio generado correctamente";
+            }else{
+                $response ="Error al procesar los daros intentalo de nuevo...";
+            }
+      
+          
+        }else{
+            $response ="error al procesar los daros intentalo de nuevo...";
         }
+
+        echo  $response;
     }
 
 ?>

@@ -207,4 +207,30 @@ window.onload = function() {
 
 
 
+function cambiarTabla(id,tabla) {
+      alert(tabla);
+    $.ajax({
+      // Action
+      url: 'model/typoServicio.php',
+      // Method
+      type: 'POST',
+      data: {
+        // Get value
+        id: id,
+        tabla: tabla,
+      },
+      success:function(response){
+        
+        //alert("response"+response);
+        // Response is the output of action file
+        if(response == 1){
+         alert(response)
+        }
+        
+        else{
+          alert(response);
+        }
+      }
+    });
 
+  }
