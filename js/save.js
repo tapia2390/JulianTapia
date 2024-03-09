@@ -1,7 +1,7 @@
 
 function guardarDatos() {
 
-  alert("response");
+  
     var placa = document.getElementById('placa').value.trim();
     var descripcion = document.getElementById('descripcion').value.trim();
     var cascos = document.getElementById('cascos').value.trim();
@@ -34,14 +34,14 @@ function guardarDatos() {
         },
         success:function(response){
           
-          alert("response"+response);
+          //alert("response"+response);
           // Response is the output of action file
           if(response == 1){
             imprimirRecibo(placa,descripcion,cascos);
           }
           
           else{
-            alert("error");
+            alert(response);
           }
         }
       });
