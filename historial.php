@@ -93,6 +93,11 @@
 					$filapar = mysqli_fetch_assoc($totalParqueadero);
 					$totalParqueadero2 = $filapar['total'];
 
+
+					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS  totallavadas FROM lavadas WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'");
+					$filalav= mysqli_fetch_assoc($totalLavadas);
+					$totalLavadas = $filalav['totallavadas'];
+
 					
 					
 					$totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= "."'$fi'"."  AND  fecha <=  "."'$ff'");
@@ -109,6 +114,12 @@
 					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE DATE(fecha_salida)= CURDATE();");
 					$filapar = mysqli_fetch_assoc($totalParqueadero);
 					$totalParqueadero2 = $filapar['total'];
+
+
+					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS totallavadas FROM lavadas WHERE DATE(fecha_salida)= CURDATE();");
+					$filalav = mysqli_fetch_assoc($totalLavadas);
+					$totalLavadas = $filalav['totallavadas'];
+
 
 					 $totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) = CURDATE();");
 					 $filain = mysqli_fetch_assoc($totalIngresos);
@@ -128,6 +139,7 @@
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
 					<th>Parqueadero</th>
+					<th>Lavadas</th>
 					<th>Ingresos</th>
 					<th>Gastos</th>
 					<th>Total</th>
@@ -135,16 +147,19 @@
 				</thead>
 				<tbody>
 					<tr>
-					<td> <?php echo "$".number_format((int)$totalParqueadero2,0,',','.');?> </td>
+						<td> <?php echo "$".number_format((int)$totalParqueadero2,0,',','.');?> </td>
+						<td> <?php echo "$".number_format((int)$totalLavadas,0,',','.');?> </td>
 						<td> <?php echo "$".number_format((int)$totalIngresos2,0,',','.'); ?> </td>
 						<td> <?php echo "$".number_format((int)$totalEgresos2,0,',','.'); ?> </td>
+						
 						<td>
-						<?php 
-							$totaldia = ($totalParqueadero2+$totalIngresos2)-$totalEgresos2;
-							echo "$".number_format((int)$totaldia,0,',','.'); 
-						?> 
+							<?php 
+								$totaldia = (($totalParqueadero2+$totalLavadas+$totalIngresos2)-$totalEgresos2);
+							
+								echo "$".number_format((int)$totaldia,0,',','.'); 
+							?> 
 						</td>
-					</tr>
+						</tr>
 				</tbody>
 			</table>
 			
