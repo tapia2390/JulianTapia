@@ -6,6 +6,12 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 
+
+$conn = mysqli_connect("localhost","u337928779__mt","LJF|V7=p","u337928779_mt");
+if (!$conn) {
+	die("Connection failed: " . mysqli_connect_error());
+}
+
 /**
 $servername = "localhost";
 $username = "u337928779_wit_networ";

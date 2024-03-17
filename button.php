@@ -172,7 +172,7 @@
 							<label style="position:relative; top:7px;">Placa:</label>
 						</div>
 						<div class="col-lg-10">
-							<input type="text" name="placa" class="form-control" value="<?php echo $erow['placa']; ?>">
+							<input type="text" style="text-transform:uppercase" name="placa" class="form-control" value="<?php echo $erow['placa']; ?>">
 						</div>
 					</div>
 					<div style="height:10px;"></div>
@@ -182,16 +182,28 @@
 							<label style="position:relative; top:7px;">Cascos:</label>
 						</div>
 						<div class="col-lg-10">
-							<input type="text" name="cascos" class="form-control" value="<?php echo $erow['cascos']; ?>">
+							<input type="text" style="text-transform:uppercase" name="cascos" class="form-control" value="<?php echo $erow['cascos']; ?>">
 						</div>
 					</div>
 					<div style="height:10px;"></div>
+
+
+					<div class="row">
+						<div class="col-lg-2">
+							<label style="position:relative; top:7px;">Ubicación:</label>
+						</div>
+						<div class="col-lg-10">
+							<input type="text" style="text-transform:uppercase" name="ubicacion" class="form-control" value="<?php echo $erow['ubicacion']; ?>">
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+
 					<div class="row">
 						<div class="col-lg-2">
 							<label style="position:relative; top:7px;">Descripcion:</label>
 						</div>
 						<div class="col-lg-10">
-							<input type="text" name="descripcion" class="form-control" value="<?php echo $erow['descripcion']; ?>">
+							<input type="text" style="text-transform:uppercase" name="descripcion" class="form-control" value="<?php echo $erow['descripcion']; ?>">
 						</div>
 					</div>
 					
