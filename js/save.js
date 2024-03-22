@@ -101,20 +101,39 @@ function guardarDatosLavadas() {
 }
 
 
-function btnimprimirRecibo(placa,descripcion,cascos,fecha_ingreso){
+function btnimprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion){
  //alert(placa+"-"+descripcion+"-"+cascos+"-"+fecha_ingreso);
- imprimirRecibo(placa,descripcion,cascos);
+ imprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion);
 }
 
-function imprimirRecibo(placa,descripcion,cascos) {
- 
+function imprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion) {
 
+
+  var politicas ="NOTA: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
+  var horario ="HORARIO: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
+  var direccion ="Cra 20 # 17-35 Centro";
+  var nit ="75104251";
+  var celular ="3172519808";
+ 
+ 
    
 var ventanaImpresion = window.open('', '_self');
 ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
 ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
 ventanaImpresion.document.write('</head><body>');
-ventanaImpresion.document.write('<br/><br/><h4><center>************ <br/>Parqueadero <br/><br/> liborio lopera <br/>  ************<br/><br/>  </h4><h2><center>Placa: <strong style="color:blue;text-transform:uppercase;">'+placa+'</strong></center></h2><h3><center>Cascos: <strong>'+cascos+'</strong></center></h3><h3><center>Descripción: <strong>'+descripcion+'</strong></center></h3><h5> <center><b> NOTA: </b> No se responde por objetosdejados en las motos, ni se responde por cascos que estén sin marcar. <br/> Si se pierde este recibo solo con la tarjeta de propiedad del vehículo podrá reclamar. <br/> Horario: de Lunes a Sabado de 7:00 AM a 9:00 PM <br/> Cel: 310-000-000 </center></h5>');
+
+ventanaImpresion.document.write('<center><p>Parqueadero <br/> Liborio Lopera</p><center>');
+ventanaImpresion.document.write('<center><p>'+direccion+'</p><center>');
+ventanaImpresion.document.write('<center><p> NIT: '+nit+'</p><center>');
+ventanaImpresion.document.write('<center><p> CELULAR: '+celular+'</p><center>');
+ventanaImpresion.document.write('<center><p> *************** <br/> PLACA:  '+placa+'<br/>        ***************<p><center>');
+ventanaImpresion.document.write('<center><p>'+fecha_ingreso+'</p><center>');
+ventanaImpresion.document.write('<center><p> CASCOS: '+cascos+'</p><center>');
+ventanaImpresion.document.write('<center><p> UBICACIÓN: <br/>'+ubicacion+'</p><center>');
+ventanaImpresion.document.write('<center><p> DESCRIPCIÓN: <br/> '+descripcion+'</p><center>');
+ventanaImpresion.document.write('<center><p>'+horario+'</p><center>');
+ventanaImpresion.document.write('<center><p>'+politicas+'</p><center>');
+
 ventanaImpresion.document.write('</body></html>');
 ventanaImpresion.document.close();
 
