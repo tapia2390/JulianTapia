@@ -162,7 +162,7 @@
 							<td>
 								<?php echo $contaor += 1 ?>
 							</td>
-							<td>
+							<td style="text-transform:uppercase">
 								<?php echo ucwords($row['placa']); ?>
 							</td>
 							<td>

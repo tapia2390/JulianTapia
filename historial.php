@@ -77,6 +77,18 @@
 			<div style="height:30px;"></div>
 			<?php 
 			include('conn.php');
+			
+			
+			// Establecer la zona horaria a Colombia
+                date_default_timezone_set('America/Bogota');
+
+				$dia = date('d'); // Día actual (en formato de dos dígitos, con ceros iniciales si es necesario)
+                $mes = date('m'); // Mes actual (en formato de dos dígitos, con ceros iniciales si es necesario)
+                $ano = date('Y'); // Año actual (en formato de cuatro dígitos)
+                
+                $fecha =  $ano."-".$mes."-". $dia;
+                //echo $fecha;
+                
 				$contaor = 0;
 				if (isset($_POST['fechai'])   && isset($_POST['fechaf'])) {
 					
@@ -89,43 +101,47 @@
 
 					 $fechaf = preg_match($formatoValido,$ff);
 			
-					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'");
+			       // $sql =  "SELECT SUM(valor_cobrado) AS total FROM moto WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'";
+			        $sql ="SELECT SUM(valor_cobrado) AS total FROM moto WHERE fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);";
+			        //echo $sql;
+					$totalParqueadero = mysqli_query($conn,	$sql);
 					$filapar = mysqli_fetch_assoc($totalParqueadero);
 					$totalParqueadero2 = $filapar['total'];
 
 
-					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS  totallavadas FROM lavadas WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'");
+					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS  totallavadas FROM lavadas WHERE  fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
 					$filalav= mysqli_fetch_assoc($totalLavadas);
 					$totalLavadas = $filalav['totallavadas'];
 
 					
-					
-					$totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= "."'$fi'"."  AND  fecha <=  "."'$ff'");
+					$sqlingresos = "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= '$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);";
+					//echo $sqlingresos;
+					$totalIngresos = mysqli_query($conn,$sqlingresos );
 					$filain = mysqli_fetch_assoc($totalIngresos);
 					$totalIngresos2 = $filain['total'];
 
 
-					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE fecha >= "."'$fi'"."  AND  fecha <=  "."'$ff'");
+					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE fecha >='$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
 					 $filae = mysqli_fetch_assoc($totalEgresos);
 					 $totalEgresos2 = $filae['total'];
 
 					} else {
 
-					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE DATE(fecha_salida)= CURDATE();");
+					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE DATE(fecha_salida)= '$fecha';");
 					$filapar = mysqli_fetch_assoc($totalParqueadero);
 					$totalParqueadero2 = $filapar['total'];
 
 
-					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS totallavadas FROM lavadas WHERE DATE(fecha_salida)= CURDATE();");
+					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS totallavadas FROM lavadas WHERE DATE(fecha_salida)=  '$fecha';");
 					$filalav = mysqli_fetch_assoc($totalLavadas);
 					$totalLavadas = $filalav['totallavadas'];
 
 
-					 $totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) = CURDATE();");
+					 $totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) =  '$fecha';");
 					 $filain = mysqli_fetch_assoc($totalIngresos);
 					 $totalIngresos2 = $filain['total'];
 
-					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE DATE(fecha) = CURDATE();");
+					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE DATE(fecha) =  '$fecha';");
 					 $filae = mysqli_fetch_assoc($totalEgresos);
 					 $totalEgresos2 = $filae['total'];
 

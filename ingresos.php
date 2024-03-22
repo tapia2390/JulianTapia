@@ -105,12 +105,23 @@
 				<?php
 
 				include('conn.php');
+				
+				// Establecer la zona horaria a Colombia
+                date_default_timezone_set('America/Bogota');
+
+				$dia = date('d'); // Día actual (en formato de dos dígitos, con ceros iniciales si es necesario)
+                $mes = date('m'); // Mes actual (en formato de dos dígitos, con ceros iniciales si es necesario)
+                $ano = date('Y'); // Año actual (en formato de cuatro dígitos)
+                
+                $fecha =  $ano."-".$mes."-". $dia;
+                //echo $fecha;
+                
 				$contaor = 0;
 				if (isset($_POST['descripcion'])) {
 					$descripcion = $_POST['descripcion'];
-					$query = mysqli_query($conn, "select * from ingresos where  descripcion LIKE '%$descripcion%'  and DATE(fecha) = CURDATE()");
+					$query = mysqli_query($conn, "select * from ingresos where  descripcion LIKE '%$descripcion%'  and DATE(fecha) = '$fecha'");
 				} else {
-					$query = mysqli_query($conn, "select * from ingresos  where  DATE(fecha) = CURDATE()");
+					$query = mysqli_query($conn, "select * from ingresos  where  DATE(fecha) = '$fecha'");
 
 
 				}
