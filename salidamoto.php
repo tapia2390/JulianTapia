@@ -48,6 +48,7 @@
 					</tr>
 				</table>
 
+				
 			</div>
 
 
@@ -57,30 +58,52 @@
 
 			<div class="row">
 
-				<form method="POST" action="#">
-					<div class="col-lg-3">
-						<input type="text"  maxlength="7"  style="text-transform:uppercase" class="form-control" name="placa2" require placeholder="Placa">
+			<form method="POST" action="#">
+					<div class="col-lg-4">
+						<input type="date" class="form-control" id="fechai" name="fechai"  require 
+							placeholder="Fecha incio" >
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-4">
+						<input type="date"   class="form-control" id="fechaf" name="fechaf"  require
+							placeholder="Fecha fin" >
+					</div>
+					<div class="col-lg-4">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
 
 					</div>
 				</form>
+				<br>
 
 				<?php
 
 				include('conn.php');
 
+				date_default_timezone_set('America/Bogota');
+
+				$dia = date('d'); // Día actual (en formato de dos dígitos, con ceros iniciales si es necesario)
+                $mes = date('m'); // Mes actual (en formato de dos dígitos, con ceros iniciales si es necesario)
+                $ano = date('Y'); // Año actual (en formato de cuatro dígitos)
+                
+                $fecha =  $ano."-".$mes."-". $dia;
+             
 
 				
 				$contaor = 0;
-				if (isset($_POST['placa2'])) {
-					$placa = $_POST['placa2'];
+				if (isset($_POST['fechai'])   && isset($_POST['fechaf'])) {
+					
 
-					$query = mysqli_query($conn, "select * from `moto` where estado=0 and placa LIKE '%$placa%'  ");
+					$fi = $_POST['fechai'];
+					$ff = $_POST['fechaf'];
+					
+					$formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
+					 $fechai = preg_match($formatoValido, $fi);
+
+					 $fechaf = preg_match($formatoValido,$ff);
+
+					$query = mysqli_query($conn, "select * from `moto` where estado=0 and fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
 				} else {
-					$query = mysqli_query($conn, "select * from `moto` where estado=0 ");
+					$query = mysqli_query($conn, "select * from `moto` where estado=0 and  DATE(fecha_salida)= '$fecha';" );
 
 				}
 

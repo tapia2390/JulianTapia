@@ -118,6 +118,9 @@
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
+							<a href="salidamoto.php">
+							<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
+							Salida de motos</button></a>
 
 					</div>
 				</form>
