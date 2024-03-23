@@ -86,7 +86,7 @@
 
 
 					<h5><center>Ingreso valor cobrado: <strong>
-					<input type="number"  id="_valorlavada" name="_valorlavada"  maxlength="7" class="form-control" placeholder="INGRESE EL VALOR A COBRAR" style="width: 50%; margin: 2%;">
+					<input type="number"  id="valor" name="valor"  maxlength="7" class="form-control valor" placeholder="INGRESE EL VALOR A COBRAR" style="width: 50%; margin: 2%;">
 				
 					<?php
 				
@@ -116,8 +116,11 @@
 	<script>
     function generarPago(){
 		var id = $("input[name=_id]").val();
-		var valorlavada = $("input[name=_valorlavada]").val();
+		var valorlavada = $("input[name=valor]").val();
 		var fecha_salida = $("input[name=_fecha_salida]").val();
+
+		
+		var valorSinPunto = valorlavada.replace(/\./g, "");
 		
 		if (valorlavada === null || valorlavada === "") {
 			alert("Valor no ingresado");
@@ -134,7 +137,7 @@
         data: {
           // Get value
           _id: id,
-          _valorlavada: valorlavada,
+          _valorlavada: valorSinPunto,
           _fecha_salida:fecha_salida,
         },
         success:function(response){
