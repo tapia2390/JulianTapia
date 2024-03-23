@@ -51,6 +51,7 @@
 					<h4><center>*** PARQUEADERO LIBORIO LOPERA ***</h4>
 					<h2><center>Placa: <strong style="color:blue;text-transform:uppercase;"><?php echo ucwords($drow['placa']); ?></strong></center></h2>
 					<h3><center>Cascos: <strong><?php echo ucwords($drow['cascos']); ?></strong></center></h3>
+					<h3><center>Ubicación: <strong><?php echo ucwords($drow['ubicacion']); ?></strong></center></h3>
 					
 					<h3><center>Descripción: <strong><?php echo ucwords($drow['descripcion']); ?></strong></center></h3>
 					
@@ -144,7 +145,7 @@
 
 					?>
 				
-				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>">Generar pago</a>
+				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>" style="cursor: pointer;">Generar pago</a>
                 </div>
 				
             </div>
