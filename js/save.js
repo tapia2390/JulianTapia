@@ -316,3 +316,45 @@ function cambiarTabla(id,tabla) {
     });
 
   }
+
+
+  function imprimirRecibo2(placa,descripcion,cascos,fecha_ingreso,ubicacion,fechasalida,valor) {
+
+    alert(placa+descripcion+cascos+fecha_ingreso+ubicacion+fechasalida+valor)
+   
+     var politicas ="NOTA: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
+     var horario ="HORARIO: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
+     var direccion ="Cra 20 # 17-35 Centro";
+     var nit ="75104251";
+     var celular ="3172519808";
+     
+      
+   var ventanaImpresion = window.open('', '_self');
+   ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
+   ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
+   ventanaImpresion.document.write('</head><body>');
+   
+   ventanaImpresion.document.write('<center><p>Parqueadero <br/> Liborio Lopera</p><center>');
+   ventanaImpresion.document.write('<center><p>'+direccion+'</p><center>');
+   ventanaImpresion.document.write('<center><p> NIT: '+nit+'</p><center>');
+   ventanaImpresion.document.write('<center><p> CELULAR: '+celular+'</p><center>');
+   ventanaImpresion.document.write('<center><p style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<p><center>');
+   ventanaImpresion.document.write('<center><p> FECHA INGRESO <br/>'+fecha_ingreso+'</p><center>');   
+   ventanaImpresion.document.write('<center><p> VALOR COBRADO <br/>'+valor+'</p><center>');
+   ventanaImpresion.document.write('<center><p> FECHA SALIDA <br/>'+fechasalida+'</p><center>');
+   ventanaImpresion.document.write('<center><p> CASCOS: '+cascos+'</p><center>');
+   ventanaImpresion.document.write('<center><p> UBICACIÓN: <br/>'+ubicacion+'</p><center>');
+   ventanaImpresion.document.write('<center><p> DESCRIPCIÓN: <br/> '+descripcion+'</p><center>');
+   ventanaImpresion.document.write('<center><p>'+horario+'</p><center>');
+   ventanaImpresion.document.write('<center><p>'+politicas+'</p><center>');
+   
+   ventanaImpresion.document.write('</body></html>');
+   ventanaImpresion.document.close();
+   
+   ventanaImpresion.onafterprint = function () {
+       window.location.reload(); // Recargar la página después de imprimir
+   };
+   ventanaImpresion.print();
+   
+   
+   }

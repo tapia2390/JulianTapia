@@ -120,8 +120,9 @@
 					<th>Cascos</th>
 					<th>Ubicación</th>
 					<th>Descripcion</th>
+					<th>Fecha y Hora Ingreso</th>
+					<th>Valor Cobrado</th>
 					<th>Fecha y Hora Salida</th>
-					<th>Valor cobrado</th>
 					<th>Accion</th>
 				</thead>
 				<tbody>
@@ -145,14 +146,18 @@
 								<?php echo ucwords($row['descripcion']); ?>
 							</td>
 							<td>
+							<?php  $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_ingreso']));  echo $fechaHoraFormateada ; ?>
+						
+							</td>
+							<td>
+								<?php echo ucwords($row['valor_cobrado']); ?>
+							</td>
+							<td>
 							<?php  $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_salida']));  echo $fechaHoraFormateada ; ?>
 						
 							</td>
 							<td>
-								<?php echo $row['valor_cobrado']; ?>
-							</td>
-							<td>
-								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
+								<a  onclick="imprimirRecibo2('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>','<?php echo $row['fecha_salida']; ?>','<?php echo $row['valor_cobrado']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-print"></span> </a> 
 								
 							</td>
