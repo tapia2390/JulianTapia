@@ -320,7 +320,7 @@ function cambiarTabla(id,tabla) {
 
   function imprimirRecibo2(placa,descripcion,cascos,fecha_ingreso,ubicacion,fechasalida,valor) {
 
-    alert(placa+descripcion+cascos+fecha_ingreso+ubicacion+fechasalida+valor)
+   // alert(placa+descripcion+cascos+fecha_ingreso+ubicacion+fechasalida+valor)
    
      var politicas ="NOTA: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
      var horario ="HORARIO: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
