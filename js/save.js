@@ -37,7 +37,9 @@ function guardarDatos() {
           //alert("response"+response);
           // Response is the output of action file
           if(response == 1){
-            imprimirRecibo(placa,descripcion,cascos);
+            
+           var horaActual = obtenerHoraConFormato();
+            imprimirRecibo(placa,descripcion,cascos,horaActual, ubicacion);
           }
           
           else{
@@ -57,49 +59,11 @@ function guardarDatosLavadas() {
   var descripcion = document.getElementById('descripcion').value.trim();
   var cascos = document.getElementById('cascos').value.trim();
   var ubicacion =  document.getElementById('ubicacion').value.trim();
+  alert(ubicacion);
 
   if (placa === "" || cascos === "") {
       alert("la placa o los cascos no estan registrados...");
-  } else {
-
-      // Crear objeto con datos a enviar
-      var datos = {
-          placa: placa,
-          descripcion: descripcion,
-          cascos: cascos,
-          ubicacion:ubicacion
-      };
-
-      
-    $.ajax({
-      // Action
-      url: 'addnewlavadas.php',
-      // Method
-      type: 'POST',
-      data: {
-        // Get value
-        placa: $("input[name=placa]").val(),
-        descripcion: $("input[name=descripcion]").val(),
-        cascos: $("input[name=cascos]").val(),
-        ubicacion: $("input[name=ubicacion]").val(),
-      },
-      success:function(response){
-        
-        //alert("response"+response);
-        // Response is the output of action file
-        if(response == 1){
-          
-        var horaActual = obtenerHoraConFormato();
-          imprimirRecibo(placa,descripcion,cascos,horaActual,ubicacion);
-        }
-        
-        else{
-          alert(response);
-        }
-      }
-    });
-
-  }
+  } 
 }
 
 
@@ -156,35 +120,38 @@ ventanaImpresion.print();
 }
 
 function obtenerHoraConFormato() {
-    // Obtener la fecha y hora actual en el huso horario de Colombia (GMT-5)
-    var fechaHoraActual = new Date().toLocaleString("en-US", {timeZone: "America/Bogota"});
-    fechaHoraActual = new Date(fechaHoraActual);
+  // Obtener la fecha y hora actual en el huso horario de Colombia (GMT-5)
+  var fechaHoraActual = new Date().toLocaleString("en-US", {timeZone: "America/Bogota"});
+  fechaHoraActual = new Date(fechaHoraActual);
 
-    // Obtener las partes de la fecha y hora
-    var ano = fechaHoraActual.getFullYear();
-    var mes = fechaHoraActual.getMonth() + 1; // Se suma 1 porque en JavaScript los meses van de 0 a 11
-    var dia = fechaHoraActual.getDate();
-    var hora = fechaHoraActual.getHours();
-    var minutos = fechaHoraActual.getMinutes();
-    var segundos = fechaHoraActual.getSeconds();
-    var ampm = hora >= 12 ? 'PM' : 'AM';
+  // Obtener las partes de la fecha y hora
+  var ano = fechaHoraActual.getFullYear();
+  var mes = fechaHoraActual.getMonth() + 1; // Se suma 1 porque en JavaScript los meses van de 0 a 11
+  var dia = fechaHoraActual.getDate();
+  var hora = fechaHoraActual.getHours();
+  var minutos = fechaHoraActual.getMinutes();
+  var segundos = fechaHoraActual.getSeconds();
+  var ampm = hora >= 12 ? 'PM' : 'AM';
 
-    // Convertir la hora al formato de 12 horas
-    hora = hora % 12;
-    hora = hora ? hora : 12; // '0' debería mostrarse como '12'
+  // Convertir la hora al formato de 12 horas
+  hora = hora % 12;
+  hora = hora ? hora : 12; // '0' debería mostrarse como '12'
 
-    // Agregar un cero delante de la hora si es menor que 10
-    hora = hora < 10 ? '0' + hora : hora;
+  // Agregar un cero delante de la hora si es menor que 10
+  hora = hora < 10 ? '0' + hora : hora;
 
-    // Agregar un cero delante de los minutos si son menores que 10
-    minutos = minutos < 10 ? '0' + minutos : minutos;
-    // Agregar un cero delante de los segundos si son menores que 10
-    segundos = segundos < 10 ? '0' + segundos : segundos;
+  // Agregar un cero delante del mes si es menor que 10
+  mes = mes < 10 ? '0' + mes : mes;
 
-    // Construir la cadena de fecha y hora con el formato deseado
-    var fechaHoraConFormato = ano + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos + ' ' + ampm;
+  // Agregar un cero delante de los minutos si son menores que 10
+  minutos = minutos < 10 ? '0' + minutos : minutos;
+  // Agregar un cero delante de los segundos si son menores que 10
+  segundos = segundos < 10 ? '0' + segundos : segundos;
 
-    return fechaHoraConFormato;
+  // Construir la cadena de fecha y hora con el formato deseado
+  var fechaHoraConFormato = ano + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos + ' ' + ampm;
+
+  return fechaHoraConFormato;
 }
 
 
