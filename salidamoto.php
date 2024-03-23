@@ -127,7 +127,9 @@
 				</thead>
 				<tbody>
 					<?php
+					$valor =0;
 					while ($row = mysqli_fetch_array($query)) {
+						$valor +=$row['valor_cobrado'];
 						?>
 						<tr>
 							<td>
@@ -167,6 +169,13 @@
 
 					?>
 				</tbody>
+			</table>
+			<table class="table table-striped table-bordered table-hover" border="0" >
+			<tr>
+			
+							<td>
+								<?php echo "<b style='float: right;padding: 10px;padding-right: 8%;'> Total ingresos :  $".  number_format((int)$valor,0,',','.')."</b>" ?>
+							</td>
 			</table>
 		</div>
 
