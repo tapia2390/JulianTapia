@@ -122,8 +122,8 @@ function imprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion) {
   }
 
 
-  var politicas ="NOTA: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
-  var horario ="HORARIO: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
+  var politicas ="Nota: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
+  var horario ="Horario: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
   var direccion ="Cra 20 # 17-35 Centro";
   var nit ="75104251";
   var celular ="3172519808";
@@ -136,21 +136,14 @@ ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</s
 ventanaImpresion.document.write('</head><body>');
 
 ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
-ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
-ventanaImpresion.document.write('<center><label> NIT: '+nit+'</label><center>');
-ventanaImpresion.document.write('<center><label> CELULAR: '+celular+'</label><center>');
-ventanaImpresion.document.write('<br/>');
+ventanaImpresion.document.write('<center><label> Nit: '+nit+'</label><center>');
+ventanaImpresion.document.write('<center><label> Celular: '+celular+'</label><center>');
 ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************</label><center>');
-ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label>'+fecha+'</label><center>');
-ventanaImpresion.document.write('<br/>');
-ventanaImpresion.document.write('<center><label> CASCOS: '+cascos+'</label><center>');
-ventanaImpresion.document.write('<br/>');
-ventanaImpresion.document.write('<center><label> UBICACIÓN: <br/>'+ubicacion+'</label><center>');
-ventanaImpresion.document.write('<br/>');
-ventanaImpresion.document.write('<center><label> DESCRIPCIÓN: <br/> '+descripcion+'</label><center>');
-ventanaImpresion.document.write('<br/>');
+ventanaImpresion.document.write('<center><label> Cascos: '+cascos+'</label><center>');
+ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
+ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
 ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
 ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
 
@@ -369,8 +362,8 @@ function cambiarTabla(id,tabla) {
 
    // alert(placa+descripcion+cascos+fecha_ingreso+ubicacion+fechasalida+valor)
    
-     var politicas ="NOTA: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
-     var horario ="HORARIO: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
+     var politicas ="Nota: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
+     var horario ="Horario: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
      var direccion ="Cra 20 # 17-35 Centro";
      var nit ="75104251";
      var celular ="3172519808";
@@ -382,25 +375,16 @@ function cambiarTabla(id,tabla) {
    ventanaImpresion.document.write('</head><body>');
    
    ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
-   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
-   ventanaImpresion.document.write('<center><label> NIT: '+nit+'</label><center>');
-   ventanaImpresion.document.write('<center><label> CELULAR: '+celular+'</label><center>');
-   ventanaImpresion.document.write('<br/>');
+   ventanaImpresion.document.write('<center><label> Nit: '+nit+'</label><center>');
+   ventanaImpresion.document.write('<center><label> Celular: '+celular+'</label><center>');
    ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<label><center>');
-   ventanaImpresion.document.write('<br/>');
-   ventanaImpresion.document.write('<center><label> FECHA INGRESO <br/>'+fecha_ingreso+'</label><center>'); 
-   ventanaImpresion.document.write('<br/>'); 
-   ventanaImpresion.document.write('<center><label> VALOR COBRADO <br/>'+valor+'</label><center>');
-   ventanaImpresion.document.write('<br/>');
-   ventanaImpresion.document.write('<center><label> FECHA SALIDA <br/>'+fechasalida+'</label><center>');
-   ventanaImpresion.document.write('<br/>');
-   ventanaImpresion.document.write('<center><label> CASCOS: '+cascos+'</label><center>');
-   ventanaImpresion.document.write('<br/>');
-   ventanaImpresion.document.write('<center><label> UBICACIÓN: <br/>'+ubicacion+'</label><center>');
-   ventanaImpresion.document.write('<br/>');
-   ventanaImpresion.document.write('<center><label> DESCRIPCIÓN: <br/> '+descripcion+'</label><center>');
-   ventanaImpresion.document.write('<br/>');
+   ventanaImpresion.document.write('<center><label> Fecha Ingreso <br/>'+fecha_ingreso+'</label><center>');
+   ventanaImpresion.document.write('<center><label> Valor Cobrado <br/>'+valor+'</label><center>');
+   ventanaImpresion.document.write('<center><label> Fecha Salida <br/>'+fechasalida+'</label><center>');
+   ventanaImpresion.document.write('<center><label> Cascos: '+cascos+'</label><center>');
+   ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
+   ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
    ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
    ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
    
