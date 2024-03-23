@@ -179,8 +179,10 @@
 							<td>
 								<?php echo ucwords($row['descripcion']); ?>
 							</td>
+							
 							<td>
-								<?php echo $row['fecha_ingreso']; ?>
+							<?php  $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_ingreso']));  echo $fechaHoraFormateada ; ?>
+							
 							</td>
 							<td>
 								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning" style="margin:5px;"><span

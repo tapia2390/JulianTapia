@@ -155,7 +155,8 @@
 								<?php echo ucwords($row['descripcion']); ?>
 							</td>
 							<td>
-								<?php echo ucwords($row['fecha']); ?>
+							<?php  $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha']));  echo $fechaHoraFormateada ; ?>
+						
 							</td>
 							<td>
 								<?php echo "$".ucwords( number_format((int)$row['valor'],0,',','.')); ?>
