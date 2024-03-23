@@ -134,16 +134,17 @@ var ventanaImpresion = window.open('', '_self');
 ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
 ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
 ventanaImpresion.document.write('</head><body>');
-
 ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
 ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
 ventanaImpresion.document.write('<center><label> Nit: '+nit+'</label><center>');
 ventanaImpresion.document.write('<center><label> Celular: '+celular+'</label><center>');
+ventanaImpresion.document.write(' <br/>');
 ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************</label><center>');
 ventanaImpresion.document.write('<center><label>'+fecha+'</label><center>');
 ventanaImpresion.document.write('<center><label> Cascos: '+cascos+'</label><center>');
 ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
 ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
+ventanaImpresion.document.write(' <br/>');
 ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
 ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
 
@@ -378,6 +379,7 @@ function cambiarTabla(id,tabla) {
    ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
    ventanaImpresion.document.write('<center><label> Nit: '+nit+'</label><center>');
    ventanaImpresion.document.write('<center><label> Celular: '+celular+'</label><center>');
+   ventanaImpresion.document.write(' <br/>');
    ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<label><center>');
    ventanaImpresion.document.write('<center><label> Fecha Ingreso <br/>'+fecha_ingreso+'</label><center>');
    ventanaImpresion.document.write('<center><label> Valor Cobrado <br/>'+valor+'</label><center>');
@@ -385,6 +387,7 @@ function cambiarTabla(id,tabla) {
    ventanaImpresion.document.write('<center><label> Cascos: '+cascos+'</label><center>');
    ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
    ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
+   ventanaImpresion.document.write(' <br/>');
    ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
    ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
    
