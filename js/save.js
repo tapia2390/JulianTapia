@@ -135,17 +135,17 @@ ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</
 ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
 ventanaImpresion.document.write('</head><body>');
 
-ventanaImpresion.document.write('<center><p>Parqueadero <br/> Liborio Lopera</p><center>');
-ventanaImpresion.document.write('<center><p>'+direccion+'</p><center>');
-ventanaImpresion.document.write('<center><p> NIT: '+nit+'</p><center>');
-ventanaImpresion.document.write('<center><p> CELULAR: '+celular+'</p><center>');
-ventanaImpresion.document.write('<center><p style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<p><center>');
-ventanaImpresion.document.write('<center><p>'+fecha+'</p><center>');
-ventanaImpresion.document.write('<center><p> CASCOS: '+cascos+'</p><center>');
-ventanaImpresion.document.write('<center><p> UBICACIÓN: <br/>'+ubicacion+'</p><center>');
-ventanaImpresion.document.write('<center><p> DESCRIPCIÓN: <br/> '+descripcion+'</p><center>');
-ventanaImpresion.document.write('<center><p>'+horario+'</p><center>');
-ventanaImpresion.document.write('<center><p>'+politicas+'</p><center>');
+ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
+ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
+ventanaImpresion.document.write('<center><label> NIT: '+nit+'</label><center>');
+ventanaImpresion.document.write('<center><label> CELULAR: '+celular+'</label><center>');
+ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************</label><center>');
+ventanaImpresion.document.write('<center><label>'+fecha+'</label><center>');
+ventanaImpresion.document.write('<center><label> CASCOS: '+cascos+'</label><center>');
+ventanaImpresion.document.write('<center><label> UBICACIÓN: <br/>'+ubicacion+'</label><center>');
+ventanaImpresion.document.write('<center><label> DESCRIPCIÓN: <br/> '+descripcion+'</label><center>');
+ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
+ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
 
 ventanaImpresion.document.write('</body></html>');
 ventanaImpresion.document.close();
@@ -370,23 +370,23 @@ function cambiarTabla(id,tabla) {
      
       
    var ventanaImpresion = window.open('', '_self');
-   ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
+   ventanaImpresion.document.write('<html><head><title>PARQUEADERO LIBORIO LOPERA</title>');
    ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
    ventanaImpresion.document.write('</head><body>');
    
-   ventanaImpresion.document.write('<center><p>Parqueadero <br/> Liborio Lopera</p><center>');
-   ventanaImpresion.document.write('<center><p>'+direccion+'</p><center>');
-   ventanaImpresion.document.write('<center><p> NIT: '+nit+'</p><center>');
-   ventanaImpresion.document.write('<center><p> CELULAR: '+celular+'</p><center>');
-   ventanaImpresion.document.write('<center><p style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<p><center>');
-   ventanaImpresion.document.write('<center><p> FECHA INGRESO <br/>'+fecha_ingreso+'</p><center>');   
-   ventanaImpresion.document.write('<center><p> VALOR COBRADO <br/>'+valor+'</p><center>');
-   ventanaImpresion.document.write('<center><p> FECHA SALIDA <br/>'+fechasalida+'</p><center>');
-   ventanaImpresion.document.write('<center><p> CASCOS: '+cascos+'</p><center>');
-   ventanaImpresion.document.write('<center><p> UBICACIÓN: <br/>'+ubicacion+'</p><center>');
-   ventanaImpresion.document.write('<center><p> DESCRIPCIÓN: <br/> '+descripcion+'</p><center>');
-   ventanaImpresion.document.write('<center><p>'+horario+'</p><center>');
-   ventanaImpresion.document.write('<center><p>'+politicas+'</p><center>');
+   ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
+   ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
+   ventanaImpresion.document.write('<center><label> NIT: '+nit+'</label><center>');
+   ventanaImpresion.document.write('<center><label> CELULAR: '+celular+'</label><center>');
+   ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<label><center>');
+   ventanaImpresion.document.write('<center><label> FECHA INGRESO <br/>'+fecha_ingreso+'</label><center>');   
+   ventanaImpresion.document.write('<center><label> VALOR COBRADO <br/>'+valor+'</label><center>');
+   ventanaImpresion.document.write('<center><label> FECHA SALIDA <br/>'+fechasalida+'</label><center>');
+   ventanaImpresion.document.write('<center><label> CASCOS: '+cascos+'</label><center>');
+   ventanaImpresion.document.write('<center><label> UBICACIÓN: <br/>'+ubicacion+'</label><center>');
+   ventanaImpresion.document.write('<center><label> DESCRIPCIÓN: <br/> '+descripcion+'</label><center>');
+   ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
+   ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
    
    ventanaImpresion.document.write('</body></html>');
    ventanaImpresion.document.close();
