@@ -88,7 +88,9 @@ function guardarDatosLavadas() {
         //alert("response"+response);
         // Response is the output of action file
         if(response == 1){
-          imprimirRecibo(placa,descripcion,cascos);
+          
+        var horaActual = obtenerHoraConFormato();
+          imprimirRecibo(placa,descripcion,cascos,horaActual,ubicacion);
         }
         
         else{
@@ -108,6 +110,14 @@ function btnimprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion){
 
 function imprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion) {
 
+ var fecha ="";
+  if(typeof fecha_ingreso === 'undefined'){
+    var horaActual = obtenerHoraConFormato();
+    fecha = horaActual;
+  }else{
+    fecha =fecha_ingreso;
+  }
+
 
   var politicas ="NOTA: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
   var horario ="HORARIO: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
@@ -126,8 +136,8 @@ ventanaImpresion.document.write('<center><p>Parqueadero <br/> Liborio Lopera</p>
 ventanaImpresion.document.write('<center><p>'+direccion+'</p><center>');
 ventanaImpresion.document.write('<center><p> NIT: '+nit+'</p><center>');
 ventanaImpresion.document.write('<center><p> CELULAR: '+celular+'</p><center>');
-ventanaImpresion.document.write('<center><p> *************** <br/> PLACA:  '+placa+'<br/>        ***************<p><center>');
-ventanaImpresion.document.write('<center><p>'+fecha_ingreso+'</p><center>');
+ventanaImpresion.document.write('<center><p style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<p><center>');
+ventanaImpresion.document.write('<center><p>'+fecha+'</p><center>');
 ventanaImpresion.document.write('<center><p> CASCOS: '+cascos+'</p><center>');
 ventanaImpresion.document.write('<center><p> UBICACIÓN: <br/>'+ubicacion+'</p><center>');
 ventanaImpresion.document.write('<center><p> DESCRIPCIÓN: <br/> '+descripcion+'</p><center>');
@@ -145,6 +155,37 @@ ventanaImpresion.print();
 
 }
 
+function obtenerHoraConFormato() {
+    // Obtener la fecha y hora actual en el huso horario de Colombia (GMT-5)
+    var fechaHoraActual = new Date().toLocaleString("en-US", {timeZone: "America/Bogota"});
+    fechaHoraActual = new Date(fechaHoraActual);
+
+    // Obtener las partes de la fecha y hora
+    var ano = fechaHoraActual.getFullYear();
+    var mes = fechaHoraActual.getMonth() + 1; // Se suma 1 porque en JavaScript los meses van de 0 a 11
+    var dia = fechaHoraActual.getDate();
+    var hora = fechaHoraActual.getHours();
+    var minutos = fechaHoraActual.getMinutes();
+    var segundos = fechaHoraActual.getSeconds();
+    var ampm = hora >= 12 ? 'PM' : 'AM';
+
+    // Convertir la hora al formato de 12 horas
+    hora = hora % 12;
+    hora = hora ? hora : 12; // '0' debería mostrarse como '12'
+
+    // Agregar un cero delante de la hora si es menor que 10
+    hora = hora < 10 ? '0' + hora : hora;
+
+    // Agregar un cero delante de los minutos si son menores que 10
+    minutos = minutos < 10 ? '0' + minutos : minutos;
+    // Agregar un cero delante de los segundos si son menores que 10
+    segundos = segundos < 10 ? '0' + segundos : segundos;
+
+    // Construir la cadena de fecha y hora con el formato deseado
+    var fechaHoraConFormato = ano + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos + ' ' + ampm;
+
+    return fechaHoraConFormato;
+}
 
 
 function saveingresos(){

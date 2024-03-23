@@ -119,25 +119,30 @@
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
 
+							<a href="salidalavdas.php">
+							<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
+							Salida lavadas de  motos</button></a>
+
 					</div>
 				</form>
 
 				<?php
 
 				include('conn.php');
-
-
 				
 				$contaor = 0;
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
-
 					$query = mysqli_query($conn, "select * from `lavadas` where estado=1 and placa LIKE '%$placa%'  ");
+					
 				} else {
-					$query = mysqli_query($conn, "select * from `lavadas` where estado=1 ");
+					$sql2 = "select * from `lavadas` where estado=1 ";
+					$query = mysqli_query($conn, $sql2 );
+			
 
 				}
 
+				
 				?>
 
 
@@ -182,7 +187,7 @@
 										class="glyphicon glyphicon-pencil"></span></a> 
 								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
 									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
-								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
+								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-print"></span> </a> 
 								<a  onclick="cambiarTabla('<?php echo $row['id'];?>','lavadas')"  class="btn btn-primary" style="margin:5px;"><span
 										class="glyphicon glyphicon-road"></span> </a> 
