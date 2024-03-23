@@ -53,7 +53,7 @@
 					<h3><center>Cascos: <strong><?php echo ucwords($drow['cascos']); ?></strong></center></h3>
 					<h3><center>Ubicación: <strong><?php echo ucwords($drow['ubicacion']); ?></strong></center></h3>
 					
-					<h3><center>Descripción: <strong><?php echo ucwords($drow['descripcion']); ?></strong></center></h3>
+					<h3><center>Descripción: <strong><br/><?php echo ucwords($drow['descripcion']); ?></strong></center></h3>
 					
 					
 					<h5><center>Fecha Ingreso: <strong><?php echo ucwords($drow['fecha_ingreso']); ?></strong></center></h5>
