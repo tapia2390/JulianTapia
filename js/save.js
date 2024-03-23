@@ -136,14 +136,21 @@ ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</s
 ventanaImpresion.document.write('</head><body>');
 
 ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
 ventanaImpresion.document.write('<center><label> NIT: '+nit+'</label><center>');
 ventanaImpresion.document.write('<center><label> CELULAR: '+celular+'</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label>'+fecha+'</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label> CASCOS: '+cascos+'</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label> UBICACIÓN: <br/>'+ubicacion+'</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label> DESCRIPCIÓN: <br/> '+descripcion+'</label><center>');
+ventanaImpresion.document.write('<br/>');
 ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
 ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
 
@@ -375,16 +382,25 @@ function cambiarTabla(id,tabla) {
    ventanaImpresion.document.write('</head><body>');
    
    ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
    ventanaImpresion.document.write('<center><label> NIT: '+nit+'</label><center>');
    ventanaImpresion.document.write('<center><label> CELULAR: '+celular+'</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************<label><center>');
-   ventanaImpresion.document.write('<center><label> FECHA INGRESO <br/>'+fecha_ingreso+'</label><center>');   
+   ventanaImpresion.document.write('<br/>');
+   ventanaImpresion.document.write('<center><label> FECHA INGRESO <br/>'+fecha_ingreso+'</label><center>'); 
+   ventanaImpresion.document.write('<br/>'); 
    ventanaImpresion.document.write('<center><label> VALOR COBRADO <br/>'+valor+'</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label> FECHA SALIDA <br/>'+fechasalida+'</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label> CASCOS: '+cascos+'</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label> UBICACIÓN: <br/>'+ubicacion+'</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label> DESCRIPCIÓN: <br/> '+descripcion+'</label><center>');
+   ventanaImpresion.document.write('<br/>');
    ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
    ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
    
