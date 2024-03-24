@@ -123,7 +123,7 @@ function imprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion) {
 
 
   var politicas ="Nota: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
-  var horario ="Horario: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
+  var horario ="Horario: Lunes a Sábado  "+"\n"+" de 7:30 AM a 8:30 PM ";
   var direccion ="Cra 20 # 17-35 Centro";
   var nit ="75104251";
   var celular ="3172519808";
@@ -364,7 +364,7 @@ function cambiarTabla(id,tabla) {
    // alert(placa+descripcion+cascos+fecha_ingreso+ubicacion+fechasalida+valor)
    
      var politicas ="Nota: No se responde por objetos dejados en la moto, ni se responde por cascos que estén sin marcar.";
-     var horario ="Horario: Lunes a Sábado  "+"\n"+" de 7:00 AM a 9:00 PM ";
+     var horario ="Horario: Lunes a Sábado  "+"\n"+" de 7:30 AM a 8:30 PM ";
      var direccion ="Cra 20 # 17-35 Centro";
      var nit ="75104251";
      var celular ="3172519808";
