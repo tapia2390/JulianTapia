@@ -196,6 +196,9 @@ function obtenerHoraConFormato() {
 
 
 function saveingresos(){
+
+
+  document.getElementById("saveingresos").disabled = true;
   
   var valor = document.getElementById('valor').value.trim();
   var descripcion = document.getElementById('descripcion').value.trim();
@@ -224,7 +227,7 @@ function saveingresos(){
         descripcion: $("input[name=descripcion]").val()
       },
       success:function(response){
-        
+ 
         // Response is the output of action file
         if(response == 1){
           location.reload();
@@ -241,6 +244,9 @@ function saveingresos(){
 
 
 function saveegresos(){
+
+  document.getElementById("saveegresos").disabled = true;
+ 
   
   var valor = document.getElementById('valor').value.trim();
   var descripcion = document.getElementById('descripcion').value.trim();
@@ -269,7 +275,6 @@ function saveegresos(){
         descripcion: $("input[name=descripcion]").val()
       },
       success:function(response){
-        
         // Response is the output of action file
         if(response == 1){
           location.reload();

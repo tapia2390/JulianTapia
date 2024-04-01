@@ -75,7 +75,7 @@
 
 					<td>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" onclick="saveingresos()">
+							<button type="button" id="saveingresos" class="btn btn-primary" onclick="saveingresos()">
 								<span class="glyphicon glyphicon-floppy-disk">Guardar</span> </button>
 						</div>
 					</td>

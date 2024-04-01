@@ -80,7 +80,7 @@
 						
 
                             <input type="hidden"  id="_id" name="_id" class="form-control" value="<?php echo $id; ?>">
-					<input type="hidden"  id="_fecha_salida" name="_fecha_salida" class="form-control" value="<?php echo $fecha_salida->format('Y-m-d H:i:s'); ?>">
+					<input type="hidden"  id="_fecha_salida" maxlength="7" name="_fecha_salida" class="form-control" value="<?php echo $fecha_salida->format('Y-m-d H:i:s'); ?>">
 							<?php
 						
 							$fechasalida2 = $fecha_salida->format('Y-m-d H:i:s');

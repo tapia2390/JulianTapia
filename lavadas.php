@@ -139,8 +139,6 @@
 				} else {
 					$sql2 = "select * from `lavadas` where estado=1 ";
 					$query = mysqli_query($conn, $sql2 );
-			
-
 				}
 
 				
