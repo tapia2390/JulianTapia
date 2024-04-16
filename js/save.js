@@ -7,8 +7,8 @@ function guardarDatos() {
     var cascos = document.getElementById('cascos').value.trim();
     var ubicacion =  document.getElementById('ubicacion').value.trim();
 
-    if (placa === "" || cascos === "") {
-        alert("la placa o los cascos no estan registrados...");
+    if (placa === "") {
+        alert("la placa  no estan registrada...");
     } else {
 
         // Crear objeto con datos a enviar
@@ -202,7 +202,7 @@ function saveingresos(){
   
   var valor = document.getElementById('valor').value.trim();
   var descripcion = document.getElementById('descripcion').value.trim();
-  alert(valor)
+
 
   if (valor === "" || descripcion === "") {
       alert("la descripcion o el valor no estan digitados");
@@ -321,12 +321,40 @@ function integerFormatIndistinto(e) {
   }
 }
 
+//funcion formato de miles
+function integerFormatIndistinto(e) {
+   
+  // Obtener el valor del input
+  var numeroInput = document.getElementById('valor').value;
+
+  // Remover cualquier caracter que no sea un dígito
+  var numero = parseFloat(numeroInput.replace(/[^\d]/g, ''));
+
+  // Verificar si es un número válido
+  if (!isNaN(numero)) {
+      // Formatear el número con separador de miles a partir del cuarto dígito
+      var numeroFormateado = numero.toLocaleString(undefined, {
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 20,
+          useGrouping: true
+      });
+
+      document.getElementById('valor').textContent = numeroFormateado;
+
+      // Actualizar el valor del input con el formato
+      document.getElementById('valor').value = numeroFormateado;
+  } else {
+      // Si no es un número válido, mostrar un mensaje de error
+      document.getElementById('valor').textContent = 'Ingrese un número válido';
+  }
+}
+
 
 
 window.onload = function() {
   //SE EJECUTA DESPUES CARGAR EL CODIGO CSS y HTML
   // Creamos el evento keyup
-  document.querySelectorAll(".valor").forEach(el => el.addEventListener("keyup", integerFormatIndistinto));
+  document.querySelectorAll(".valor").forEach(el => el.addEventListener("keyup", integerFormatIndistinto));;
   };
 
 

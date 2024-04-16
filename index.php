@@ -4,6 +4,8 @@
 <head>
 	<title>Parqueadero JT</title>
 	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="30">
+
 	<script src="libs/jquery.min.js"></script>
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />
 	<script src="libs/bootstrap.min.js"></script>
@@ -67,7 +69,7 @@
 								<label class="control-label" style="position:relative; top:7px;">Cascos:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="cascos" name="cascos" require>
+								<input type="text" style="text-transform:uppercase" class="form-control" id="cascos" name="cascos" >
 							</div>
 						</div>
 					</td>
@@ -78,7 +80,7 @@
 								<label class="control-label" style="position:relative; top:7px;">Ubicación:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="ubicacion" name="ubicacion" require>
+								<input type="text" style="text-transform:uppercase" class="form-control" id="ubicacion" name="ubicacion" >
 							</div>
 						</div>
 					</td>
@@ -89,7 +91,7 @@
 								<label class="control-label" style="position:relative; top:7px;">Descripción:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion" require placeholder="INGRESO DE MOTOS	">
+								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion"  placeholder="INGRESO DE MOTOS	">
 							</div>
 						</div>
 					</td>
