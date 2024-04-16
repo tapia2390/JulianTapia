@@ -109,7 +109,7 @@
 
 						}
 
-						 if( $horas > 0 &&  $horas < 6 && $minutos  > 9 ){		
+						 if( $horas > 0 &&  $horas < 5 && $minutos  > 9 ){		
 							$sumahoras = $horas * $valorHora;
 							$sumahoraconminutos = $sumahoras +$valorHora;
 
@@ -118,7 +118,7 @@
 						}
 
 
-						 if($horas >=6  && $horas  < 14){
+						 if($horas >=5  && $horas  < 14){
 								$valoracobrar  += $horamayorque6;
 
 						}
