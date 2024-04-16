@@ -94,22 +94,22 @@
 						$valoracobrar = 0;
 
 
-						if($horas == 0 && $minutos <= 10 ){								
+						if($horas == 0 && $minutos <= 3 ){								
 							$valoracobrar  = $valorcero;
 						}
 
-						 if($horas == 0 && $minutos > 10 ){								
+						 if($horas == 0 && $minutos > 4 ){								
 							$valoracobrar  = $valorHora;
 						}
 						
 						
-						 if( $horas > 0 &&  $horas < 6 && $minutos <= 10 ){		
+						 if( $horas > 0 &&  $horas < 6 && $minutos <= 3 ){		
 							$sumahoras = $horas * $valorHora;
 							$valoracobrar  += $sumahoras;
 
 						}
 
-						 if( $horas > 0 &&  $horas < 6 && $minutos  > 10 ){		
+						 if( $horas > 0 &&  $horas < 6 && $minutos  > 9 ){		
 							$sumahoras = $horas * $valorHora;
 							$sumahoraconminutos = $sumahoras +$valorHora;
 
