@@ -98,12 +98,12 @@
 							$valoracobrar  = $valorcero;
 						}
 
-						 if($horas == 0 && $minutos > 4 ){								
+						 if($horas == 0 && $minutos > 3 ){								
 							$valoracobrar  = $valorHora;
 						}
 						
 						
-						 if( $horas > 0 &&  $horas < 6 && $minutos <= 3 ){		
+						 if( $horas > 0 &&  $horas < 6 && $minutos < 9 ){		
 							$sumahoras = $horas * $valorHora;
 							$valoracobrar  += $sumahoras;
 
