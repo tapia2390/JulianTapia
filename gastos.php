@@ -91,11 +91,14 @@
 			<div class="row">
 
 				<form method="POST" action="#">
-					<div class="col-lg-6">
-						<input type="text" class="form-control" id="descripcion" name="descripcion" require
-							placeholder="Descripción ingreso">
+				<div class="col-lg-4">
+					<label>Seleccione la fecha:</label>
+						<input type="date"   class="form-control" id="fechaf" name="fechaf"  require
+							placeholder="Fecha fin" value="<?php if (isset($_POST['fechaf'])) {
+								echo $_POST['fechaf'];
+							} ?>" >
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
 
@@ -118,9 +121,14 @@
 
 				include('conn.php');
 				$contaor = 0;
-				if (isset($_POST['descripcion'])) {
-					$descripcion = $_POST['descripcion'];
-					$query = mysqli_query($conn, "select * from egresos where  descripcion LIKE '%$descripcion%' and  DATE(fecha) = '$fecha'");
+				if (isset($_POST['fechaf'])) {
+					$ff = $_POST['fechaf'];
+					
+					$formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
+					
+					 $fechaf = preg_match($formatoValido,$ff);
+			
+				$query = mysqli_query($conn, "select * from egresos where  fecha >= '$ff' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
 				} else {
 					$query = mysqli_query($conn, "select * from egresos where DATE(fecha) = '$fecha' ");
 
