@@ -115,7 +115,7 @@
 
 				<form method="POST" action="#">
 					<div class="col-lg-3">
-						<input type="text"  maxlength="7"  style="text-transform:uppercase" class="form-control" name="placa2" require placeholder="Placa">
+						<input type="text"  maxlength="7"  style="text-transform:uppercase" class="form-control" name="placa2" require placeholder="BUSCAR POR PLACA">
 					</div>
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>

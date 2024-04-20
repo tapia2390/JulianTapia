@@ -20,8 +20,6 @@
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
 
-		
-
 			<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>
