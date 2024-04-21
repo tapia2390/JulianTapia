@@ -392,6 +392,59 @@ function cambiarTabla(id,tabla) {
   }
 
 
+
+  function savecaja(){
+    
+    var inicio_monedas = document.getElementById('inicio_monedas').value.trim();
+    var fin_monedas = document.getElementById('fin_monedas').value.trim();
+    var fin_billetes = document.getElementById('fin_billetes').value.trim();
+    var observaciones = document.getElementById('observaciones').value.trim();
+  
+    
+    if (inicio_monedas === "") {
+        alert("ingrese el inicio de monedas");
+    } else {
+     
+        // Crear objeto con datos a enviar
+        var datos = {
+          inicio_monedas: inicio_monedas,
+          fin_monedas: fin_monedas,
+          fin_billetes:fin_billetes,
+          observaciones:observaciones
+        };
+  
+        
+      $.ajax({
+        // Action
+        url: 'php/addCaja.php',
+        // Method
+        type: 'POST',
+        data: {
+          
+          inicio_monedas: $("input[name=inicio_monedas]").val(),
+          fin_monedas: $("input[name=fin_monedas]").val(),
+          fin_billetes: $("input[name=fin_billetes]").val(),
+          observaciones:$("input[name=observaciones]").val(),
+
+        },
+        success:function(response){
+          // Response is the output of action file
+          if(response == 1){
+            location.reload();
+          }
+          
+          else{
+            alert("error");
+            location.reload();
+          }
+        }
+      });
+  
+    }
+  }
+  
+
+
   function imprimirRecibo2(placa,descripcion,cascos,fecha_ingreso,ubicacion,fechasalida,valor) {
 
    // alert(placa+descripcion+cascos+fecha_ingreso+ubicacion+fechasalida+valor)

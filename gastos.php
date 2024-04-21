@@ -45,6 +45,10 @@
 									class="glyphicon glyphicon-repeat"></span> Historial</a>
 
 						</td>
+						<td>
+							<a href="caja.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-piggy-bank"></span>
+								Caja</a>
+						</td>
 					</tr>
 				</table>
 
