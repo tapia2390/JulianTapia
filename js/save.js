@@ -487,3 +487,54 @@ function cambiarTabla(id,tabla) {
    
    
    }
+
+
+   $(document).ready(function() {
+    $('#editModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var userId = button.data('user-id');
+      alert(userId);
+  
+      // Fetch user data based on userId (replace with your actual data fetching logic)
+      var userData = getUserData(userId);
+  
+      // Fill modal form with user data
+      $('#userId').val(userData.id);
+      $('#nombre').val(userData.nombre);
+      $('#apellido').val(userData.apellido);
+      $('#correo').val(userData.correo);
+    });
+  
+    $('#editForm').on('submit', function (event) {
+      event.preventDefault(); // Prevent default form submission
+  
+      var userId = $('#userId').val();
+      var nombre = $('#nombre').val();
+      var apellido = $('#apellido').val();
+      var correo = $('#correo').val();
+  
+      // Update user data (replace with your actual data updating logic)
+      updateUserData(userId, nombre, apellido, correo);
+  
+      // Close the modal after successful update
+      $('#editModal').modal('hide');
+    });
+  });
+  
+  // Placeholder functions for user data fetching and updating
+  function getUserData(userId) {
+    // Fetch user data from an API or database
+    // Replace this with your actual data fetching logic
+    return {
+      id: 1,
+      nombre: "Juan",
+      apellido: "Perez",
+      correo: "juanp@example.com"
+    };
+  }
+  
+  function updateUserData(userId, nombre, apellido, correo) {
+    // Update user data in an API or database
+    // Replace this with your actual data updating logic
+    console.log("Updating user data:", userId, nombre, apellido, correo);
+  }

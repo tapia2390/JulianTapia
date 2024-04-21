@@ -210,8 +210,9 @@
 							</td>
 
 							<td>
-								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning"
-									style="margin:5px;"><span class="glyphicon glyphicon-pencil"></span></a>
+
+							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-user-id="<?php echo $row['inicio_monedas']; ?>">Editar</button>
+     
 							</td>
 
 
@@ -227,6 +228,46 @@
 
 
 	</div>
+
+
+
+	<!-- Modal -->
+	
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Editar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm">
+          <input type="hidden" id="userId" name="userId">
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="apellido">Apellido:</label>
+            <input type="text" class="form-control" id="apellido" name="apellido" required>
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo:</label>
+            <input type="email" class="form-control" id="correo" name="correo" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" form="editForm" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 
 </html>
