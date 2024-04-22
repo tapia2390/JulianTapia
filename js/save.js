@@ -444,6 +444,60 @@ function cambiarTabla(id,tabla) {
   }
   
 
+  
+  function editcaja(){
+    
+    var inicio_monedas = document.getElementById('inicio_monedas2').value.trim();
+    var fin_monedas = document.getElementById('fin_monedas2').value.trim();
+    var fin_billetes = document.getElementById('fin_billetes2').value.trim();
+    var observaciones = document.getElementById('observaciones2').value.trim();
+    var id_caja = document.getElementById('idcaja').value.trim();
+  
+    
+    if (inicio_monedas === "") {
+        alert("ingrese el inicio de monedas");
+    } else {
+     
+        // Crear objeto con datos a enviar
+        var datos = {
+          inicio_monedas: inicio_monedas,
+          fin_monedas: fin_monedas,
+          fin_billetes:fin_billetes,
+          observaciones:observaciones,          
+          id_caja:id_caja
+        };
+  
+        
+      $.ajax({
+        // Action
+        url: 'php/editCaja.php',
+        // Method
+        type: 'POST',
+        data: {
+          
+          inicio_monedas: $("input[name=inicio_monedas2]").val(),
+          fin_monedas: $("input[name=fin_monedas2]").val(),
+          fin_billetes: $("input[name=fin_billetes2]").val(),
+          observaciones:$("input[name=observaciones2]").val(),          
+          id_caja:$("input[name=idcaja]").val(),
+
+        },
+        success:function(response){
+          // Response is the output of action file
+          if(response == 1){
+            location.reload();
+          }
+          
+          else{
+            alert("error");
+           location.reload();
+          }
+        }
+      });
+  
+    }
+  }
+
 
   function imprimirRecibo2(placa,descripcion,cascos,fecha_ingreso,ubicacion,fechasalida,valor) {
 
@@ -492,49 +546,21 @@ function cambiarTabla(id,tabla) {
    $(document).ready(function() {
     $('#editModal').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget); // Button that triggered the modal
-      var userId = button.data('user-id');
-      alert(userId);
-  
-      // Fetch user data based on userId (replace with your actual data fetching logic)
-      var userData = getUserData(userId);
-  
+      var cajaId = button.data('caja-id');
+      var inicioMonedas = button.data('caja-inicio-monedas');      
+      var fin_monedas2 = button.data('caja-fin-monedas');
+      var fin_billetes2 = button.data('caja-fin-billetes');
+      var observaciones2 = button.data('caja-observaciones');
+
+     
       // Fill modal form with user data
-      $('#userId').val(userData.id);
-      $('#nombre').val(userData.nombre);
-      $('#apellido').val(userData.apellido);
-      $('#correo').val(userData.correo);
+      $('#idcaja').val(cajaId);
+      $('#inicio_monedas2').val(inicioMonedas);
+      $('#fin_monedas2').val(fin_monedas2);
+      $('#fin_billetes2').val(fin_billetes2);
+      $('#observaciones2').val(observaciones2);
     });
   
-    $('#editForm').on('submit', function (event) {
-      event.preventDefault(); // Prevent default form submission
-  
-      var userId = $('#userId').val();
-      var nombre = $('#nombre').val();
-      var apellido = $('#apellido').val();
-      var correo = $('#correo').val();
-  
-      // Update user data (replace with your actual data updating logic)
-      updateUserData(userId, nombre, apellido, correo);
-  
-      // Close the modal after successful update
-      $('#editModal').modal('hide');
-    });
   });
   
-  // Placeholder functions for user data fetching and updating
-  function getUserData(userId) {
-    // Fetch user data from an API or database
-    // Replace this with your actual data fetching logic
-    return {
-      id: 1,
-      nombre: "Juan",
-      apellido: "Perez",
-      correo: "juanp@example.com"
-    };
-  }
   
-  function updateUserData(userId, nombre, apellido, correo) {
-    // Update user data in an API or database
-    // Replace this with your actual data updating logic
-    console.log("Updating user data:", userId, nombre, apellido, correo);
-  }

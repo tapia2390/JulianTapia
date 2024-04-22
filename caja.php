@@ -15,7 +15,7 @@
 		<div style="height:50px;"></div>
 		<div class="well" style="margin:auto; padding:auto; width:100%;">
 			<span style="font-size:25px; color:blue">
-				<center><strong>Gastos</strong></center>
+				<center><strong>Caja</strong></center>
 			</span>
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
@@ -56,62 +56,9 @@
 					</tr>
 				</table>
 
-				<table class="table table-striped table-bordered table-hover">
-					</tr>
-					<td>
-						<div class="row">
-							<div class="col-lg-6">
-								<label class="control-label" style="position:relative; top:7px;">Incio de
-									monedas:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="number" class="form-control " id="inicio_monedas" name="inicio_monedas"
-									require>
-							</div>
-						</div>
-					</td>
+				<button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+					data-target="#addModal">Registro Caja</button>
 
-					<td>
-						<div class="row">
-							<div class="col-lg-6">
-								<label class="control-label" style="position:relative; top:7px;">Fin monedas:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="number" class="form-control" id="fin_monedas" name="fin_monedas" require>
-							</div>
-						</div>
-					</td>
-					<td>
-						<div class="row">
-							<div class="col-lg-6">
-								<label class="control-label" style="position:relative; top:7px;">Fin billetes:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="number" class="form-control" id="fin_billetes" name="fin_billetes" require>
-							</div>
-						</div>
-					</td>
-
-
-					<td>
-						<div class="row">
-							<div class="col-lg-6">
-								<label class="control-label" style="position:relative; top:7px;">observaciones:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="observaciones" name="observaciones" require>
-							</div>
-						</div>
-					</td>
-
-					<td>
-						<div class="modal-footer">
-							<button type="button" id="saveegresos" class="btn btn-primary" onclick="savecaja()">
-								<span class="glyphicon glyphicon-floppy-disk">Guardar</span> </button>
-						</div>
-					</td>
-					</tr>
-				</table>
 			</div>
 
 
@@ -210,13 +157,13 @@
 							</td>
 
 							<td>
-
-							<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal" data-user-id="<?php echo $row['inicio_monedas']; ?>">Editar</button>
-     
+								<button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+									data-target="#editModal" data-caja-id="<?php echo $row['id']; ?>"
+									data-caja-inicio-monedas="<?php echo $row['inicio_monedas']; ?>"
+									data-caja-fin-monedas="<?php echo $row['fin_mondesa']; ?>"
+									data-caja-fin-billetes="<?php echo $row['fin_billetes']; ?>"
+									data-caja-observaciones="<?php echo $row['observaciones']; ?>">Editar</button>
 							</td>
-
-
-
 						</tr>
 						<?php
 					}
@@ -230,42 +177,96 @@
 	</div>
 
 
-
 	<!-- Modal -->
-	
-	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">Editar Usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="editForm">
-          <input type="hidden" id="userId" name="userId">
-          <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-          </div>
-          <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" class="form-control" id="apellido" name="apellido" required>
-          </div>
-          <div class="form-group">
-            <label for="correo">Correo:</label>
-            <input type="email" class="form-control" id="correo" name="correo" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" form="editForm" class="btn btn-primary">Guardar</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">Caja</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="editForm">
+						<div class="form-group">
+							<label for="inicio_monedas">Inicio Monedas:</label>
+							<input type="number" class="form-control" id="inicio_monedas" name="inicio_monedas"
+								required>
+						</div>
+						<div class="form-group">
+							<label for="fin_monedas">Fin Monedas:</label>
+							<input type="number" class="form-control" id="fin_monedas" name="fin_monedas">
+						</div>
+						<div class="form-group">
+							<label for="fin_billetes">Fin Billetes:</label>
+							<input type="number" class="form-control" id="fin_billetes" name="fin_billetes">
+						</div>
+
+
+						<div class="form-group">
+							<label for="observaciones">Observaciones:</label>
+							<input type="text" class="form-control" id="observaciones" name="observaciones">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" form="editForm" class="btn btn-primary" onclick="savecaja()">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Modal edit -->
+
+	<div class=" modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">Editar Caja</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="editForm">
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="idcaja" name="idcaja">
+
+							<label for="inicio_monedas2">Inicio Monedas:</label>
+							<input type="number" class="form-control" id="inicio_monedas2" name="inicio_monedas2"
+								required>
+						</div>
+						<div class="form-group">
+							<label for="fin_monedas2">Fin Monedas:</label>
+							<input type="number" class="form-control" id="fin_monedas2" name="fin_monedas2">
+						</div>
+						<div class="form-group">
+							<label for="fin_billetes2">Fin Billetes:</label>
+							<input type="number" class="form-control" id="fin_billetes2" name="fin_billetes2">
+						</div>
+
+
+						<div class="form-group">
+							<label for="observaciones2">Observaciones:</label>
+							<input type="text" class="form-control" id="observaciones2" name="observaciones2">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" form="editForm" class="btn btn-primary" onclick="editcaja()">Actualizar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 </body>
