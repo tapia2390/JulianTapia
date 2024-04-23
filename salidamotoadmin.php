@@ -25,19 +25,20 @@
 				<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>
-							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-road"></span>
+							<a href="index.php" class="btn btn-warning" style="width: 100%;"><span
+									class="glyphicon glyphicon-road"></span>
 								Parqueadero</a>
 						</td>
 						<td>
-							<a href="lavadas.php"  class="btn btn-primary" style="width: 100%;"><span
-									class="	glyphicon glyphicon-tint"></span> Lavadas</a> 
+							<a href="lavadas.php" class="btn btn-primary" style="width: 100%;"><span
+									class="	glyphicon glyphicon-tint"></span> Lavadas</a>
 						</td>
 						<td>
-							<a href="ingresos.php"  class="btn btn-warning" style="width: 100%;"><span
-									class="	glyphicon glyphicon-usd"></span> Ingresos</a> 
+							<a href="ingresos.php" class="btn btn-warning" style="width: 100%;"><span
+									class="	glyphicon glyphicon-usd"></span> Ingresos</a>
 						</td>
 						<td>
-							<a href="gastos.php"  class="btn btn-primary" style="width: 100%;"><span
+							<a href="gastos.php" class="btn btn-primary" style="width: 100%;"><span
 									class="	glyphicon glyphicon-tags"></span> Gastos</a>
 
 						</td>
@@ -49,7 +50,8 @@
 						</td>
 
 						<td>
-							<a href="caja.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-piggy-bank"></span>
+							<a href="caja.php" class="btn btn-warning" style="width: 100%;"><span
+									class="glyphicon glyphicon-piggy-bank"></span>
 								Caja</a>
 						</td>
 					</tr>
@@ -60,10 +62,11 @@
 					<td>
 						<div class="row">
 							<div class="col-lg-12">
-								<label class="control-label"   style="position:relative; top:7px;">Placa:</label>
+								<label class="control-label" style="position:relative; top:7px;">Placa:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" maxlength="7"  style="text-transform:uppercase" class="form-control" id="placa" name="placa" require>
+								<input type="text" maxlength="7" style="text-transform:uppercase" class="form-control"
+									id="placa" name="placa" require>
 							</div>
 						</div>
 					</td>
@@ -74,7 +77,8 @@
 								<label class="control-label" style="position:relative; top:7px;">Cascos:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="cascos" name="cascos" >
+								<input type="text" style="text-transform:uppercase" class="form-control" id="cascos"
+									name="cascos">
 							</div>
 						</div>
 					</td>
@@ -85,7 +89,8 @@
 								<label class="control-label" style="position:relative; top:7px;">Ubicación:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="ubicacion" name="ubicacion" >
+								<input type="text" style="text-transform:uppercase" class="form-control" id="ubicacion"
+									name="ubicacion">
 							</div>
 						</div>
 					</td>
@@ -96,7 +101,8 @@
 								<label class="control-label" style="position:relative; top:7px;">Descripción:</label>
 							</div>
 							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="descripcion" name="descripcion"  placeholder="INGRESO DE MOTOS	">
+								<input type="text" style="text-transform:uppercase" class="form-control"
+									id="descripcion" name="descripcion" placeholder="INGRESO DE MOTOS	">
 							</div>
 						</div>
 					</td>
@@ -120,24 +126,26 @@
 
 				<form method="POST" action="#">
 					<div class="col-lg-3">
-						<input type="text"  maxlength="7"  style="text-transform:uppercase" class="form-control" name="placa2" require placeholder="BUSCAR POR PLACA">
+						<input type="text" maxlength="7" style="text-transform:uppercase" class="form-control"
+							name="placa2" require placeholder="BUSCAR POR PLACA">
 					</div>
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
-							<a href="salidamoto.php">
-							<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
-							Salida de motos</button></a>
+						<a href="salidamoto.php">
+							<button type="button" class="btn btn-primary"><span
+									class="glyphicon glyphicon-check"></span>
+								Salida de motos</button></a>
 
 					</div>
 				</form>
 
 				<?php
 
-				include('conn.php');
+				include ('conn.php');
 
 
-				
+
 				$contaor = 0;
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
@@ -185,25 +193,39 @@
 								<?php echo ucwords($row['descripcion']); ?>
 							</td>
 							<td>
-								<?php  $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_ingreso']));  echo $fechaHoraFormateada ; ?>
+								<?php $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_ingreso']));
+								echo $fechaHoraFormateada; ?>
 							</td>
 							<td>
-								<a href="#edit<?php echo $row['id'];  ?>" data-toggle="modal" class="btn btn-success" style="margin:5px;"><span
-										class="glyphicon glyphicon-pencil"></span></a> 
-								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
-									class="btn btn-info" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
-								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
-										class="glyphicon glyphicon-print"></span> </a> 
-								<a  onclick="cambiarTabla('<?php echo $row['id'];?>','moto')"  class="btn btn-primary" style="margin:5px;"><span
-										class="glyphicon glyphicon-tint"></span> </a> 
+								<a href="#" class="btn btn-success" style="margin:5px;" data-toggle="modal"
+									data-target="#editModalMoto" data-moto-id="<?php echo $row['id']; ?>"
+									data-moto-placa="<?php echo $row['placa']; ?>"								
+									data-moto-descripcion="<?php echo $row['descripcion']; ?>"									
+									data-moto-valor-cobrado="<?php echo $row['valor_cobrado']; ?>"								
+									data-moto-fecha-salida="<?php echo $row['fecha_salida']; ?>"																	
+									data-moto-estado="<?php echo $row['estado']; ?>"
+									data-moto-casco="<?php echo $row['cascos']; ?>"
+									data-moto-ubicacion="<?php echo $row['ubicacion']; ?>"
+									><span
+										class="glyphicon glyphicon-pencil"></span></a>
+
+								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-info"
+									style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a>
+
+								<a onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"
+									class="btn btn-warning" style="margin:5px;"><span
+										class="glyphicon glyphicon-print"></span> </a>
+
+								<a onclick="cambiarTabla('<?php echo $row['id']; ?>','moto')" class="btn btn-primary"
+									style="margin:5px;"><span class="glyphicon glyphicon-tint"></span> </a>
+
+								<a onclick="eliminarMoto('<?php echo $row['id']; ?>','<?php echo $row['placa']; ?>')"
+									class="btn btn-danger" style="margin:5px;"><span
+										class="glyphicon glyphicon-trash"></span> </a>
 
 
-										<a   onclick="eliminarMoto('<?php echo $row['id']; ?>','<?php echo $row['placa']; ?>')" class="btn btn-danger" style="margin:5px;"><span
-										class="glyphicon glyphicon-trash"></span> </a> 
 
-									
-
-								<?php include('button.php'); ?>
+								<?php include ('button.php'); ?>
 							</td>
 						</tr>
 						<?php
@@ -213,13 +235,75 @@
 				</tbody>
 			</table>
 		</div>
+		
 
-		<div id="container-fluid2">
-			<div class="container-fluid" id="container-fluid">
+		
+	<!-- Modal edit -->
+
+	<div class=" modal fade" id="editModalMoto" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">Actualizar Datos de la Moto</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="editForm">
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="idMoto" name="idMoto">
+
+							<label for="placa">Placa:</label>
+							<input type="text" class="form-control" id="placa2" name="placa2"
+								required>
+						</div>
+						<div class="form-group">
+							<label for="descripcion">Descripcion:</label>
+							<input type="text" class="form-control" id="descripcion2" name="descripcion2">
+						</div>
+						<div class="form-group">
+							<label for="valor_cobrado">Valor Cobrado:</label>
+							<input type="number" class="form-control" id="valor_cobrado2" name="valor_cobrado2">
+						</div>
+						<div class="form-group">
+							<label for="fecha_salida">Fecha Salida:</label>
+							<input type="datetime-local" class="form-control" id="fecha_salida2" name="fecha_salida2">
+						</div>
+						
+						<div class="form-group">
+							<label for="estado">Estado:</label>
+							<select class="form-control" id="estado2" name="estado2">
+								<option value="1">Ingreso</option>
+								<option value="0">Salida</option>
+								
+							</select>
+						</div>
+
+						
+						<div class="form-group">
+							<label for="cascos">Cascos:</label>
+							<input type="text" class="form-control" id="cascos2" name="cascos2">
+						</div>
+
+						
+						<div class="form-group">
+							<label for="ubicacion">Ubicacion:</label>
+							<input type="text" class="form-control" id="ubicacion2" name="ubicacion2">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" form="editForm" class="btn btn-primary" onclick="actualizarDatosMoto()">Actualizar</button>
+				</div>
 			</div>
-
 		</div>
-		<?php include('add_modal.php'); ?>
+	</div>
+
+
+		<?php include ('add_modal.php'); ?>
 	</div>
 </body>
 

@@ -52,6 +52,59 @@ function guardarDatos() {
 }
 
 
+function actualizarDatosMoto() {
+
+  
+  var idMoto2 = document.getElementById('idMoto').value.trim();
+  var placa2 = document.getElementById('placa2').value.trim();
+  var descripcion2 = document.getElementById('descripcion2').value.trim();
+  var valor_cobrado2 =  document.getElementById('valor_cobrado2').value.trim();
+  var fecha_salida2 =  document.getElementById('fecha_salida2').value.trim();
+  var estado2 =  document.getElementById('estado2').value.trim();
+  var cascos2 = document.getElementById('cascos2').value.trim();  
+  var ubicacion2 =  document.getElementById('ubicacion2').value.trim();
+
+  
+
+  if (placa2 === "") {
+      alert("la placa  no estan registrada...");
+  } else {
+     
+    $.ajax({
+      // Action
+      url: 'php/updateMoto.php',
+      // Method
+      type: 'POST',
+      data: {
+        // Get value
+        idMoto: $("input[name=idMoto]").val(),
+        placa: $("input[name=placa2]").val(),
+        descripcion: $("input[name=descripcion2]").val(),
+        valor_cobrado: $("input[name=valor_cobrado2]").val(),
+        fecha_salida: $("input[name=fecha_salida2]").val(),
+        estado: $("input[name=estado2]").val(),
+        cascos: $("input[name=cascos2]").val(),
+        ubicacion: $("input[name=ubicacion2]").val(),
+      },
+      success:function(response){
+        
+        //alert("response"+response);
+        // Response is the output of action file
+        if(response == 1){
+          
+          location.reload();
+        
+        }        
+        else{
+          location.reload();
+        }
+      }
+    });
+
+  }
+}
+
+
 
 
 function eliminarMoto(id,placa){
@@ -599,6 +652,35 @@ function cambiarTabla(id,tabla) {
       $('#fin_monedas2').val(fin_monedas2);
       $('#fin_billetes2').val(fin_billetes2);
       $('#observaciones2').val(observaciones2);
+    });
+  
+  });
+  
+
+  
+  $(document).ready(function() {
+    $('#editModalMoto').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var idMoto = button.data('moto-id');
+      var placa = button.data('moto-placa');
+      var descripcion = button.data('moto-descripcion');
+      var valor_cobrado = button.data('moto-valor-cobrado');
+      var fecha_salida = button.data('moto-fecha-salida');
+      var estado = button.data('moto-estado');
+      var cascos = button.data('moto-casco');
+      var ubicacion = button.data('moto-ubicacion');
+
+
+     
+      // Fill modal form with user data
+      $('#idMoto').val(idMoto);
+      $('#placa2').val(placa);
+      $('#descripcion2').val(descripcion);
+      $('#valor_cobrado2').val(valor_cobrado);
+      $('#fecha_salida2').val(fecha_salida);      
+      $('#estado2').val(estado);      
+      $('#cascos2').val(cascos);      
+      $('#ubicacion2').val(ubicacion);
     });
   
   });
