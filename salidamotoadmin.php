@@ -209,16 +209,7 @@
 									><span
 										class="glyphicon glyphicon-pencil"></span></a>
 
-								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-info"
-									style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a>
-
-								<a onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"
-									class="btn btn-warning" style="margin:5px;"><span
-										class="glyphicon glyphicon-print"></span> </a>
-
-								<a onclick="cambiarTabla('<?php echo $row['id']; ?>','moto')" class="btn btn-primary"
-									style="margin:5px;"><span class="glyphicon glyphicon-tint"></span> </a>
-
+								
 								<a onclick="eliminarMoto('<?php echo $row['id']; ?>','<?php echo $row['placa']; ?>')"
 									class="btn btn-danger" style="margin:5px;"><span
 										class="glyphicon glyphicon-trash"></span> </a>

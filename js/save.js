@@ -64,6 +64,7 @@ function actualizarDatosMoto() {
   var cascos2 = document.getElementById('cascos2').value.trim();  
   var ubicacion2 =  document.getElementById('ubicacion2').value.trim();
 
+  alert(placa2);
   
 
   if (placa2 === "") {
@@ -78,25 +79,25 @@ function actualizarDatosMoto() {
       data: {
         // Get value
         idMoto: $("input[name=idMoto]").val(),
-        placa: $("input[name=placa2]").val(),
+        placa2: placa2,
         descripcion: $("input[name=descripcion2]").val(),
         valor_cobrado: $("input[name=valor_cobrado2]").val(),
         fecha_salida: $("input[name=fecha_salida2]").val(),
-        estado: $("input[name=estado2]").val(),
+        estado2: estado2,
         cascos: $("input[name=cascos2]").val(),
         ubicacion: $("input[name=ubicacion2]").val(),
       },
       success:function(response){
-        
+        alert(response);
         //alert("response"+response);
         // Response is the output of action file
         if(response == 1){
           
-          location.reload();
+        //  location.reload();
         
         }        
         else{
-          location.reload();
+          //location.reload();
         }
       }
     });
