@@ -4,7 +4,6 @@
 <head>
 	<title>Parqueadero JT</title>
 	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="30">
 
 	<script src="libs/jquery.min.js"></script>
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />
@@ -144,19 +143,30 @@
 
 				include ('conn.php');
 
+					// Configura la zona horaria a la de tu ubicación (opcional)
+					date_default_timezone_set('America/Bogota');
+
+					// Obtiene la fecha actual
+					$fecha_ingreso = date('Y-m-d');
 
 
 				$contaor = 0;
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
 
-					$query = mysqli_query($conn, "select * from `moto` where estado=1 and placa LIKE '%$placa%'  ");
+						$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso < DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY) and  placa LIKE '%$placa%' ";
+											$query = mysqli_query($conn,$sql);
+			
 				} else {
-					$query = mysqli_query($conn, "select * from `moto` where estado=1 ");
+					$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso < DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY);";
+					
+					$query = mysqli_query($conn, $sql);
 
+					
 				}
 
 				?>
+
 
 
 			</div>
@@ -247,12 +257,8 @@
 							<input type="hidden" class="form-control" id="idMoto" name="idMoto">
 
 							<label for="placa">Placa:</label>
-							<input type="text" class="form-control" id="placa2" name="placa2"
+							<input type="text" readonly class="form-control" id="placa2" name="placa2"
 								required>
-						</div>
-						<div class="form-group">
-							<label for="descripcion">Descripcion:</label>
-							<input type="text" class="form-control" id="descripcion2" name="descripcion2">
 						</div>
 						<div class="form-group">
 							<label for="valor_cobrado">Valor Cobrado:</label>
@@ -273,16 +279,6 @@
 						</div>
 
 						
-						<div class="form-group">
-							<label for="cascos">Cascos:</label>
-							<input type="text" class="form-control" id="cascos2" name="cascos2">
-						</div>
-
-						
-						<div class="form-group">
-							<label for="ubicacion">Ubicacion:</label>
-							<input type="text" class="form-control" id="ubicacion2" name="ubicacion2">
-						</div>
 					</form>
 				</div>
 				<div class="modal-footer">

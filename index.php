@@ -4,7 +4,7 @@
 <head>
 	<title>Parqueadero JT</title>
 	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="30">
+	<meta http-equiv="refresh" content="120">
 
 	<script src="libs/jquery.min.js"></script>
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />

@@ -14,15 +14,25 @@
 	$ubicacion =$_POST['ubicacion'];
 
 
-
-	$sql = "UPDATE moto 
+	$sql="";
+	if($estado == 0){
+		$sql = "UPDATE moto 
         SET 
             valor_cobrado = '$valor_cobrado',
             fecha_salida = '$fecha_salida',
             estado = '$estado'
         WHERE id = $id ";
+	}else{
+		$sql = "UPDATE moto 
+        SET 
+            valor_cobrado = '0',
+            fecha_salida = '',
+            estado = '$estado'
+        WHERE id = $id ";
+	}
 
-		echo $sql;
+	
+
 
 			$result =mysqli_query($conn,$sql);
 	

@@ -57,13 +57,10 @@ function actualizarDatosMoto() {
   
   var idMoto2 = document.getElementById('idMoto').value.trim();
   var placa2 = document.getElementById('placa2').value.trim();
-  var descripcion2 = document.getElementById('descripcion2').value.trim();
   var valor_cobrado2 =  document.getElementById('valor_cobrado2').value.trim();
   var fecha_salida2 =  document.getElementById('fecha_salida2').value.trim();
   var estado2 =  document.getElementById('estado2').value.trim();
-  var cascos2 = document.getElementById('cascos2').value.trim();  
-  var ubicacion2 =  document.getElementById('ubicacion2').value.trim();
-
+ 
   alert(placa2);
   
 
@@ -80,13 +77,10 @@ function actualizarDatosMoto() {
         // Get value
         idMoto: $("input[name=idMoto]").val(),
         placa2: placa2,
-        descripcion: $("input[name=descripcion2]").val(),
         valor_cobrado: $("input[name=valor_cobrado2]").val(),
         fecha_salida: $("input[name=fecha_salida2]").val(),
         estado2: estado2,
-        cascos: $("input[name=cascos2]").val(),
-        ubicacion: $("input[name=ubicacion2]").val(),
-      },
+       },
       success:function(response){
         alert(response);
         //alert("response"+response);
