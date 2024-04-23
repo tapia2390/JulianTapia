@@ -141,14 +141,13 @@
 
 				<?php
 
-				include ('conn.php');
+				include 'conn.php';
 
 				// Configura la zona horaria a la de tu ubicación (opcional)
 				date_default_timezone_set('America/Bogota');
 
 				// Obtiene la fecha actual
 				$fecha_ingreso = date('Y-m-d');
-
 
 				$contaor = 0;
 				if (isset($_POST['placa2'])) {
@@ -161,7 +160,6 @@
 					$sql = "select * from `moto` order by id desc";
 
 					$query = mysqli_query($conn, $sql);
-
 
 				}
 
@@ -240,25 +238,30 @@
 								?>
 							</td>
 							<td>
-							<?php
-								$fechaInicio = new DateTime($row['fecha_ingreso']);
-								$fechaSalida = new DateTime($row['fecha_salida']);
-								$diferencia = $fechaInicio->diff($fechaSalida);
+								<?php
 
-								// Obtiene la diferencia en horas y minutos
-								$diferenciaEnHoras = $diferencia->h + ($diferencia->days * 24);
-								$diferenciaEnMinutos = $diferencia->i;
-								$horas = 00;
-								$minutos = 00;
-								if ($diferenciaEnHoras != 0) {
-									$horas = $diferenciaEnHoras;
+								if ($row['fecha_salida'] == "0000-00-00 00:00:00") {
+									echo "No ha salido...";
+								} else {
+									$fechaInicio = new DateTime($row['fecha_ingreso']);
+									$fechaSalida = new DateTime($row['fecha_salida']);
+									$diferencia = $fechaInicio->diff($fechaSalida);
+
+									// Obtiene la diferencia en horas y minutos
+									$diferenciaEnHoras = $diferencia->h + ($diferencia->days * 24);
+									$diferenciaEnMinutos = $diferencia->i;
+									$horas = 00;
+									$minutos = 00;
+									if ($diferenciaEnHoras != 0) {
+										$horas = $diferenciaEnHoras;
+									}
+
+									if ($diferenciaEnMinutos != 0) {
+										$minutos = $diferenciaEnMinutos;
+									}
+
+									echo $horas . ":" . $minutos;
 								}
-
-								if ($diferenciaEnMinutos != 0) {
-									$minutos = $diferenciaEnMinutos;
-								}
-
-								echo $horas . ":" . $minutos;
 								?>
 
 							</td>
@@ -282,7 +285,7 @@
 
 
 
-								<?php include ('button.php'); ?>
+								<?php include 'button.php'; ?>
 							</td>
 						</tr>
 						<?php
@@ -347,7 +350,7 @@
 		</div>
 
 
-		<?php include ('add_modal.php'); ?>
+		<?php include 'add_modal.php'; ?>
 	</div>
 </body>
 
