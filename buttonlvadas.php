@@ -126,7 +126,7 @@
 		//var valorlavada = $("input[id=valor]").val();
 		  var valor = document.getElementById('valor').value;
 
-		  alert("?¿¿-"+id +"fecha salida"+fecha);
+		//  alert("?¿¿-"+id +"fecha salida"+fecha);
 		var valorSinPunto = valor.replace(/\./g, "");
 		alert("?¿¿-"+id);
 		if (valor === null || valor === "") {

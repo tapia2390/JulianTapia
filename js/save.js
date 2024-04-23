@@ -52,6 +52,46 @@ function guardarDatos() {
 }
 
 
+
+
+function eliminarMoto(id,placa){
+ 
+ if (confirm("¿Estás seguro de que deseas eliminar moto "+placa+",continuar?")) {
+  // Si el usuario hace clic en "Aceptar", realizamos la acción deseada
+
+
+  $.ajax({
+    // Action
+    url: 'php/eliminarMoto.php',
+    // Method
+    type: 'POST',
+    data: {
+      // Get value
+      id: id,
+    },
+    success:function(response){
+      
+      //alert("response"+response);
+      // Response is the output of action file
+      if(response == 1){
+        location.reload();
+      }
+      
+      else{
+        alert(response);
+        location.reload();
+      }
+    }
+  });
+
+  alert("¡Acción confirmada!");
+} else {
+  // Si el usuario hace clic en "Cancelar", podemos realizar alguna otra acción o simplemente no hacer nada
+  //alert("Acción cancelada");
+} 
+}
+
+
 function guardarDatosLavadas() {
 
   
