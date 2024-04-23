@@ -61,7 +61,6 @@ function actualizarDatosMoto() {
   var fecha_salida2 =  document.getElementById('fecha_salida2').value.trim();
   var estado2 =  document.getElementById('estado2').value.trim();
  
-  alert(placa2);
   
 
   if (placa2 === "") {
@@ -82,16 +81,13 @@ function actualizarDatosMoto() {
         estado2: estado2,
        },
       success:function(response){
-        alert(response);
-        //alert("response"+response);
-        // Response is the output of action file
         if(response == 1){
           
-        //  location.reload();
+        location.reload();
         
         }        
         else{
-          //location.reload();
+          location.reload();
         }
       }
     });

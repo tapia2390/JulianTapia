@@ -16,7 +16,7 @@
 		<div style="height:50px;"></div>
 		<div class="well" style="margin:auto; padding:auto; width:100%;">
 			<span style="font-size:25px; color:blue">
-				<center><strong>Ingreso Parqueadero</strong></center>
+				<center><strong>Administrador Moto</strong></center>
 			</span>
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
@@ -143,26 +143,26 @@
 
 				include ('conn.php');
 
-					// Configura la zona horaria a la de tu ubicación (opcional)
-					date_default_timezone_set('America/Bogota');
+				// Configura la zona horaria a la de tu ubicación (opcional)
+				date_default_timezone_set('America/Bogota');
 
-					// Obtiene la fecha actual
-					$fecha_ingreso = date('Y-m-d');
+				// Obtiene la fecha actual
+				$fecha_ingreso = date('Y-m-d');
 
 
 				$contaor = 0;
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
 
-						$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso < DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY) and  placa LIKE '%$placa%' ";
-											$query = mysqli_query($conn,$sql);
-			
-				} else {
-					$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso < DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY);";
-					
+					$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso < DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY) and  placa LIKE '%$placa%' ";
 					$query = mysqli_query($conn, $sql);
 
-					
+				} else {
+					$sql = "select * from `moto` order by id desc";
+
+					$query = mysqli_query($conn, $sql);
+
+
 				}
 
 				?>
@@ -179,7 +179,12 @@
 					<th>Cascos</th>
 					<th>Ubicación</th>
 					<th>Descripcion</th>
-					<th>Fecha y Hora</th>
+					<th>Fecha Ingreso</th>
+					<th>Fecha Salida</th>
+					<th>Valor</th>
+					<th>Estado</th>
+					<th>Tiempo</th>
+
 					<th>Accion</th>
 				</thead>
 				<tbody>
@@ -206,20 +211,71 @@
 								<?php $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_ingreso']));
 								echo $fechaHoraFormateada; ?>
 							</td>
+
+							<td>
+
+								<?php
+								if ($row['fecha_salida'] == "0000-00-00 00:00:00") {
+									echo "No ha salido...";
+								} else {
+
+									$fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_salida']));
+									echo $fechaHoraFormateada;
+								}
+								?>
+							</td>
+
+							<td>
+								<?php echo ucwords($row['valor_cobrado']); ?>
+							</td>
+							<td>
+								<?php
+								if ($row['estado'] == 1) {
+									echo "Ingreso";
+								} else {
+
+									echo "Salida";
+								}
+
+								?>
+							</td>
+							<td>
+							<?php
+								$fechaInicio = new DateTime($row['fecha_ingreso']);
+								$fechaSalida = new DateTime($row['fecha_salida']);
+								$diferencia = $fechaInicio->diff($fechaSalida);
+
+								// Obtiene la diferencia en horas y minutos
+								$diferenciaEnHoras = $diferencia->h + ($diferencia->days * 24);
+								$diferenciaEnMinutos = $diferencia->i;
+								$horas = 00;
+								$minutos = 00;
+								if ($diferenciaEnHoras != 0) {
+									$horas = $diferenciaEnHoras;
+								}
+
+								if ($diferenciaEnMinutos != 0) {
+									$minutos = $diferenciaEnMinutos;
+								}
+
+								echo $horas . ":" . $minutos;
+								?>
+
+							</td>
+
 							<td>
 								<a href="#" class="btn btn-success" style="margin:5px;" data-toggle="modal"
 									data-target="#editModalMoto" data-moto-id="<?php echo $row['id']; ?>"
-									data-moto-placa="<?php echo $row['placa']; ?>"								
-									data-moto-descripcion="<?php echo $row['descripcion']; ?>"									
-									data-moto-valor-cobrado="<?php echo $row['valor_cobrado']; ?>"								
-									data-moto-fecha-salida="<?php echo $row['fecha_salida']; ?>"																	
+									data-moto-placa="<?php echo $row['placa']; ?>"
+									data-moto-descripcion="<?php echo $row['descripcion']; ?>"
+									data-moto-valor-cobrado="<?php echo $row['valor_cobrado']; ?>"
+									data-moto-fecha-salida="<?php echo $row['fecha_salida']; ?>"
 									data-moto-estado="<?php echo $row['estado']; ?>"
 									data-moto-casco="<?php echo $row['cascos']; ?>"
-									data-moto-ubicacion="<?php echo $row['ubicacion']; ?>"
-									><span
+									data-moto-ubicacion="<?php echo $row['ubicacion']; ?>"><span
 										class="glyphicon glyphicon-pencil"></span></a>
 
-								
+
 								<a onclick="eliminarMoto('<?php echo $row['id']; ?>','<?php echo $row['placa']; ?>')"
 									class="btn btn-danger" style="margin:5px;"><span
 										class="glyphicon glyphicon-trash"></span> </a>
@@ -236,58 +292,59 @@
 				</tbody>
 			</table>
 		</div>
-		
 
-		
-	<!-- Modal edit -->
 
-	<div class=" modal fade" id="editModalMoto" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="editModalLabel">Actualizar Datos de la Moto</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form id="editForm">
-						<div class="form-group">
-							<input type="hidden" class="form-control" id="idMoto" name="idMoto">
 
-							<label for="placa">Placa:</label>
-							<input type="text" readonly class="form-control" id="placa2" name="placa2"
-								required>
-						</div>
-						<div class="form-group">
-							<label for="valor_cobrado">Valor Cobrado:</label>
-							<input type="number" class="form-control" id="valor_cobrado2" name="valor_cobrado2">
-						</div>
-						<div class="form-group">
-							<label for="fecha_salida">Fecha Salida:</label>
-							<input type="datetime-local" class="form-control" id="fecha_salida2" name="fecha_salida2">
-						</div>
-						
-						<div class="form-group">
-							<label for="estado">Estado:</label>
-							<select class="form-control" id="estado2" name="estado2">
-								<option value="1">Ingreso</option>
-								<option value="0">Salida</option>
-								
-							</select>
-						</div>
+		<!-- Modal edit -->
 
-						
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-					<button type="button" form="editForm" class="btn btn-primary" onclick="actualizarDatosMoto()">Actualizar</button>
+		<div class=" modal fade" id="editModalMoto" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="editModalLabel">Actualizar Datos de la Moto</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form id="editForm">
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="idMoto" name="idMoto">
+
+								<label for="placa">Placa:</label>
+								<input type="text" readonly class="form-control" id="placa2" name="placa2" required>
+							</div>
+							<div class="form-group">
+								<label for="valor_cobrado">Valor Cobrado:</label>
+								<input type="number" class="form-control" id="valor_cobrado2" name="valor_cobrado2">
+							</div>
+							<div class="form-group">
+								<label for="fecha_salida">Fecha Salida:</label>
+								<input type="datetime-local" class="form-control" id="fecha_salida2"
+									name="fecha_salida2">
+							</div>
+
+							<div class="form-group">
+								<label for="estado">Estado:</label>
+								<select class="form-control" id="estado2" name="estado2">
+									<option value="1">Ingreso</option>
+									<option value="0">Salida</option>
+
+								</select>
+							</div>
+
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+						<button type="button" form="editForm" class="btn btn-primary"
+							onclick="actualizarDatosMoto()">Actualizar</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
 		<?php include ('add_modal.php'); ?>
