@@ -56,64 +56,6 @@
 					</tr>
 				</table>
 
-				<table class="table table-striped table-bordered table-hover">
-					</tr>
-					<td>
-						<div class="row">
-							<div class="col-lg-12">
-								<label class="control-label" style="position:relative; top:7px;">Placa:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="text" maxlength="7" style="text-transform:uppercase" class="form-control"
-									id="placa" name="placa" require>
-							</div>
-						</div>
-					</td>
-
-					<td>
-						<div class="row">
-							<div class="col-lg-12">
-								<label class="control-label" style="position:relative; top:7px;">Cascos:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="cascos"
-									name="cascos">
-							</div>
-						</div>
-					</td>
-
-					<td>
-						<div class="row">
-							<div class="col-lg-12">
-								<label class="control-label" style="position:relative; top:7px;">Ubicación:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control" id="ubicacion"
-									name="ubicacion">
-							</div>
-						</div>
-					</td>
-
-					<td>
-						<div class="row">
-							<div class="col-lg-12">
-								<label class="control-label" style="position:relative; top:7px;">Descripción:</label>
-							</div>
-							<div class="col-lg-10">
-								<input type="text" style="text-transform:uppercase" class="form-control"
-									id="descripcion" name="descripcion" placeholder="INGRESO DE MOTOS	">
-							</div>
-						</div>
-					</td>
-
-					<td>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" onclick="guardarDatos()"><span
-									class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
-						</div>
-					</td>
-					</tr>
-				</table>
 			</div>
 
 
@@ -131,10 +73,6 @@
 					<div class="col-lg-6">
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
-						<a href="salidamoto.php">
-							<button type="button" class="btn btn-primary"><span
-									class="glyphicon glyphicon-check"></span>
-								Salida de motos</button></a>
 
 					</div>
 				</form>
@@ -153,12 +91,11 @@
 				if (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
 
-					$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso < DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY) and  placa LIKE '%$placa%' ";
+					$sql = "select * from `moto` where   placa LIKE '%$placa%' ";
 					$query = mysqli_query($conn, $sql);
 
 				} else {
-					$sql = "select * from `moto` order by id desc";
-
+					$sql = "select * from `moto` where  fecha_ingreso >= '$fecha_ingreso' AND fecha_ingreso <= DATE_ADD('$fecha_ingreso', INTERVAL 1 DAY) ";
 					$query = mysqli_query($conn, $sql);
 
 				}
