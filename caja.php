@@ -77,6 +77,7 @@
 							} ?>">
 					</div>
 					<div class="col-lg-4">
+						<br/>
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
 
