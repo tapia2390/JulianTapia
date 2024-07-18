@@ -20,8 +20,6 @@
 			<div style="height:50px;"></div>
 			<div class="container-fluid">
 
-		
-
 			<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>
@@ -47,6 +45,10 @@
 									class="glyphicon glyphicon-repeat"></span> Historial</a>
 
 						</td>
+						<td>
+							<a href="caja.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-piggy-bank"></span>
+								Caja</a>
+						</td>
 					</tr>
 				</table>
 
@@ -58,21 +60,25 @@
 
 
 			<form method="POST" action="#">
-					<div class="col-lg-4">
+					<!--div class="col-lg-4">
 						<input type="date" class="form-control" id="fechai" name="fechai"  require 
 							placeholder="Fecha incio" >
-					</div>
+					</div -->
 					<div class="col-lg-4">
+					<label>Seleccione la fecha:</label>
 						<input type="date"   class="form-control" id="fechaf" name="fechaf"  require
-							placeholder="Fecha fin" >
+							placeholder="Fecha fin" value="<?php if (isset($_POST['fechaf'])) {
+								echo $_POST['fechaf'];
+							} ?>" >
 					</div>
 					<div class="col-lg-4">
+					<br/>					
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
 
 					</div>
 				</form>
-				<br>
+				<br><br>
 
 			<div style="height:30px;"></div>
 			<?php 
@@ -90,41 +96,39 @@
                 //echo $fecha;
                 
 				$contaor = 0;
-				if (isset($_POST['fechai'])   && isset($_POST['fechaf'])) {
+				if (isset($_POST['fechaf'])) {
 					
 
-					$fi = $_POST['fechai'];
 					$ff = $_POST['fechaf'];
 					
 					$formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
-					 $fechai = preg_match($formatoValido, $fi);
-
+					
 					 $fechaf = preg_match($formatoValido,$ff);
 			
 			       // $sql =  "SELECT SUM(valor_cobrado) AS total FROM moto WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'";
-			        $sql ="SELECT SUM(valor_cobrado) AS total FROM moto WHERE fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);";
-			        //echo $sql;
-					$totalParqueadero = mysqli_query($conn,	$sql);
-					$filapar = mysqli_fetch_assoc($totalParqueadero);
-					$totalParqueadero2 = $filapar['total'];
-
-
-					$totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS  totallavadas FROM lavadas WHERE  fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
-					$filalav= mysqli_fetch_assoc($totalLavadas);
-					$totalLavadas = $filalav['totallavadas'];
-
-					
-					$sqlingresos = "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= '$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);";
-					//echo $sqlingresos;
-					$totalIngresos = mysqli_query($conn,$sqlingresos );
-					$filain = mysqli_fetch_assoc($totalIngresos);
-					$totalIngresos2 = $filain['total'];
-
-
-					 $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE fecha >='$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
-					 $filae = mysqli_fetch_assoc($totalEgresos);
-					 $totalEgresos2 = $filae['total'];
-
+			         $sql ="SELECT SUM(valor_cobrado) AS total FROM moto WHERE fecha_salida >= '$ff' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);";
+					 //echo $sql;
+					 $totalParqueadero = mysqli_query($conn,	$sql);
+					 $filapar = mysqli_fetch_assoc($totalParqueadero);
+					 $totalParqueadero2 = $filapar['total'];
+ 
+ 
+					 $totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS  totallavadas FROM lavadas WHERE  fecha_salida >= '$ff' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
+					 $filalav= mysqli_fetch_assoc($totalLavadas);
+					 $totalLavadas = $filalav['totallavadas'];
+ 
+					 
+					 $sqlingresos = "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= '$ff' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);";
+					 //echo $sqlingresos;
+					 $totalIngresos = mysqli_query($conn,$sqlingresos );
+					 $filain = mysqli_fetch_assoc($totalIngresos);
+					 $totalIngresos2 = $filain['total'];
+ 
+ 
+					  $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE fecha >='$ff' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
+					  $filae = mysqli_fetch_assoc($totalEgresos);
+					  $totalEgresos2 = $filae['total'];
+ 
 					} else {
 
 					$totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE DATE(fecha_salida)= '$fecha';");
@@ -154,6 +158,7 @@
 
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
+					<th>Fecha</th>
 					<th>Parqueadero</th>
 					<th>Lavadas</th>
 					<th>Ingresos</th>
@@ -163,6 +168,16 @@
 				</thead>
 				<tbody>
 					<tr>
+						<td>
+							<?php
+							if (isset($_POST['fechaf'])) {
+								echo $_POST['fechaf'];
+							}else{
+								echo $fecha;
+							}
+
+							?>
+						</td>
 						<td> <?php echo "$".number_format((int)$totalParqueadero2,0,',','.');?> </td>
 						<td> <?php echo "$".number_format((int)$totalLavadas,0,',','.');?> </td>
 						<td> <?php echo "$".number_format((int)$totalIngresos2,0,',','.'); ?> </td>

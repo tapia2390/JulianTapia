@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="libs/bootstrap.min.css" />
 	<script src="libs/bootstrap.min.js"></script>
 	<script src="js/save.js"></script>
+
 </head>
 
 <body>
@@ -44,6 +45,11 @@
 							<a href="historial.php" class="btn btn-danger" style="width: 100%;"><span
 									class="glyphicon glyphicon-repeat"></span> Historial</a>
 
+						</td>
+
+						<td>
+							<a href="caja.php" class="btn btn-warning" style="width: 100%;"><span class="glyphicon glyphicon-piggy-bank"></span>
+								Caja</a>
 						</td>
 					</tr>
 				</table>
@@ -138,8 +144,6 @@
 				} else {
 					$sql2 = "select * from `lavadas` where estado=1 ";
 					$query = mysqli_query($conn, $sql2 );
-			
-
 				}
 
 				
@@ -187,7 +191,7 @@
 							<td>
 								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-pencil"></span></a> 
-								<a href="#imprimir<?php echo $row['id']; ?>" data-toggle="modal"
+								<a href="imprimir.php?id=<?php echo $row['id']; ?>" 
 									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
 								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-print"></span> </a> 

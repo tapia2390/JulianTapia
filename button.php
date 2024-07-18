@@ -51,11 +51,12 @@
 					<h4><center>*** PARQUEADERO LIBORIO LOPERA ***</h4>
 					<h2><center>Placa: <strong style="color:blue;text-transform:uppercase;"><?php echo ucwords($drow['placa']); ?></strong></center></h2>
 					<h3><center>Cascos: <strong><?php echo ucwords($drow['cascos']); ?></strong></center></h3>
+					<h3><center>Ubicación: <strong><?php echo ucwords($drow['ubicacion']); ?></strong></center></h3>
 					
-					<h3><center>Descripción: <strong><?php echo ucwords($drow['descripcion']); ?></strong></center></h3>
+					<h3><center>Descripción: <strong> <br/> <?php echo ucwords($drow['descripcion']); ?></strong></center></h3>
 					
 					
-					<h5><center>Fecha Ingreso: <strong><?php echo ucwords($drow['fecha_ingreso']); ?></strong></center></h5>
+					<h5><center>Fecha Ingreso: <strong><?php   $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_ingreso'])); echo $fechaHoraFormateada; ?></strong></center></h5>
 					
 					<h5><center>Tiempo: <strong>
 					<?php
@@ -88,35 +89,77 @@
 					<h5><center>Valor cobrado: <strong><?php
 						$valorHora = 900;
 						$valorcero=0;
-
+						$horamayorque6=5000;
+						$dias = 10000;
 						$valoracobrar = 0;
-							if($horas > 0){
-								$sumahoras = $horas * $valorHora;
-								$valoracobrar  += $sumahoras;
 
-							}
 
-							if( $horas > 0 && $minutos > 0 && $minutos <= 10 ){								
-								$valoracobrar  += $valorcero;
-							}
+						if($horas == 0 && $minutos <= 3 ){								
+							$valoracobrar  = $valorcero;
+						}
 
-							if( $horas > 0 && $minutos > 0 && $minutos > 10 ){								
-								$valoracobrar  += $valorHora;
-							}
-											
-							
-							if($horas == 0 && $minutos > 2 ){								
-								$valoracobrar  += $valorHora;
-							}
-					// Formatear el número con un punto como separador de miles
+						 if($horas == 0 && $minutos > 3 ){								
+							$valoracobrar  = $valorHora;
+						}
+						
+						
+						 if( $horas > 0 &&  $horas < 5 && $minutos <= 9 ){		
+							$sumahoras = $horas * $valorHora;
+							$valoracobrar  += $sumahoras;
+
+						}
+						if( $horas > 0 &&  $horas < 5 && $minutos > 9 ){		
+							$sumahoras = $horas * $valorHora;
+							$valoracobrar  = $sumahoras +$valorHora;
+
+						}
+						
+                        if($horas ==5  &&  $minutos  < 10 ){
+                            $sumahoras = $horas * $valorHora;
+							$valoracobrar  += $sumahoras;
+
+                        }
+                        
+
+						 if( $horas == 5 && $minutos  > 9 ){	
+							$valoracobrar  += $horamayorque6;
+
+						}
+
+						 if($horas >=5  && $horas  < 14  && $minutos  > 9 ){
+								$valoracobrar  = $horamayorque6;
+
+						}
+    
+                        if($horas >=6  && $horas  < 14  ){
+							$valoracobrar  = $horamayorque6;
+
+						}
+						if($horas >=14){
+							$valoracobrar  = $dias;
+
+					}
+					
+
+					if($valoracobrar >= $dias){
+						$numeroFormateado ="Calcula el valor a cobrar deja la observacion o el valor en el recibo.";
+					
+					}else{
 						$numeroFormateado = number_format($valoracobrar, 0, ',', '.');
 
+						}
+						
+							echo "<h2 style='color:red;'> $".$numeroFormateado."</h2>";
+						
+					// Formatear el número con un punto como separador de miles
+						
 
-					echo "<h2 style='color:red;'> $".$numeroFormateado."</h2>";
+
+				
 				
 					$fechasalida2 = $fecha_salida->format('Y-m-d H:i:s');
 					
-					?></strong></center></h5> 
+					?></strong></center></h5> 	
 					<!--h5><center>Hora de salida: <strong><?php echo $fechasalida2?></strong></center></h5--!> 
 					<!--h5><center>
 						Al estacionar en nuestro parqueadero, reconoces <br>que no nos hacemos responsables por daños o robos<br>
@@ -127,6 +170,7 @@
 					<input type="hidden"  id="id" name="id" class="form-control" value="<?php echo $id; ?>">
 					<input type="hidden"  id="valor_cobrado" name="valor_cobrado" class="form-control" value="<?php echo $valoracobrar; ?>">
 					<input type="hidden"  id="fecha_salida" name="fecha_salida" class="form-control" value="<?php echo $fecha_salida->format('Y-m-d H:i:s'); ?>">
+					<input type="hidden"  id="tiempo" name="tiempo" class="form-control" value="<?php echo $horas; ?>">
 
 
 
@@ -144,8 +188,47 @@
 
 					?>
 				
-				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>">Generar pago</a>
+				
+				<a href="edit2.php?<?php echo $_id ?>&<?php echo $_valor_cobrado ?>&<?php echo $_fecha_salida ?>" style="cursor: pointer;">Generar pago</a>
                 </div>
+			 
+				<!--button type="button" class="btn btn-success"   onclick="generarPago2()"><span class="glyphicon "></span> Generar pago</button-->
+                   
+
+				<script>
+
+
+				function generarPago2(){
+
+						var id = document.getElementById('id').value;
+						var valor = document.getElementById('valor').value;
+						var fecha_salida = document.getElementById('fecha_salida').value;
+						var tiempo = document.getElementById('tiempo').value;
+						var valor_cobrado = document.getElementById('valor_cobrado').value;
+						var valorregistro = 0;
+
+						alert(id + "####"+valor_cobrado);
+
+						if(tiempo > 12){
+
+							var valorregistro0 =valor;
+							var valorSinPunto = valor.replace(/\./g, "");
+							valorregistro =valorSinPunto;
+
+					
+						}else{
+							valorregistro =valor_cobrado;
+						}
+						
+						if (valor === null || valor === "") {
+							alert("Valor no ingresado");
+						}else{
+							location.href ="edit2.php?id="+id+'&valor_cobrado='+valorregistro+'&fecha_salida='+fecha_salida;
+						}
+					}
+				</script>
+			
+			</div>
 				
             </div>
         </div>
