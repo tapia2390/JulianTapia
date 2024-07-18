@@ -194,7 +194,7 @@ if (empty($resultadosPorDia)) {
                 <td><?php echo "$" . number_format((int) $resultados['totalEgresos'], 0, ',', '.'); ?></td>
                 <td><?php
 
-$sumatoria = $resultados['totalMoto'] + $resultados['totalLavadas'] + $resultados['totalIngresos'] + $resultados['totalEgresos'];
+$sumatoria = $resultados['totalMoto'] + $resultados['totalLavadas'] + $resultados['totalIngresos'] - $resultados['totalEgresos'];
 
 echo "$" . number_format((int) $sumatoria, 0, ',', '.');
 ?></td>
