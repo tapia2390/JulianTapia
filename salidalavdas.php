@@ -61,12 +61,29 @@
 
 
 			<div class="row">
+			
+		
+				<form method="POST" action="#">
+                    <div class="col-lg-3">
+                        <input type="text" maxlength="7" style="text-transform:uppercase" class="form-control"
+                            name="placa2" require placeholder="BUSCAR POR PLACA">
+                    </div>
+                    <div class="col-lg-6">
+                        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
+                            Consultar</button>
+                        
+
+                    </div>
+                </form>
+
+               
+		</div>
+
+		<br/>
+
+			<div class="row">
 
 			<form method="POST" action="#">
-					<div class="col-lg-4">
-						<input type="date" class="form-control" id="fechai" name="fechai"  require 
-							placeholder="Fecha incio" >
-					</div>
 					<div class="col-lg-4">
 						<input type="date"   class="form-control" id="fechaf" name="fechaf"  require
 							placeholder="Fecha fin" >
@@ -94,22 +111,27 @@
 
 				
 				$contaor = 0;
-				if (isset($_POST['fechai'])   && isset($_POST['fechaf'])) {
+				if (isset($_POST['fechaf'])) {
 					
 
-					$fi = $_POST['fechai'];
 					$ff = $_POST['fechaf'];
 					
 					$formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
-					 $fechai = preg_match($formatoValido, $fi);
 
 					 $fechaf = preg_match($formatoValido,$ff);
 
-					$query = mysqli_query($conn, "select * from `lavadas` where estado=0 and fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
-				} else {
-					$query = mysqli_query($conn, "select * from `lavadas` where estado=0 and  DATE(fecha_salida)= '$fecha';" );
-
+					$query = mysqli_query($conn, "select * from `lavadas` where estado=0 and fecha_salida >= '$ff' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
 				}
+				
+				elseif (isset($_POST['placa2'])) {
+					$placa = $_POST['placa2'];
+
+					$sqlplaca = "select * from `lavadas` where estado=0 and placa LIKE '%$placa%'  ";
+					$query = mysqli_query($conn, $sqlplaca);
+				} else {
+					$query = mysqli_query($conn, "select * from `lavadas` where estado=0 and  DATE(fecha_salida)= '$fecha';");
+					}
+
 
 				?>
 

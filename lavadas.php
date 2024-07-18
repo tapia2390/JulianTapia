@@ -12,6 +12,12 @@
 </head>
 
 <body>
+	<style>
+
+.well {
+    background-color: #ffffff !important;
+}
+	</style>
 	<div class="container">
 		<div style="height:50px;"></div>
 		<div class="well" style="margin:auto; padding:auto; width:100%;">
@@ -102,7 +108,7 @@
 
 					<td>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" onclick="guardarDatosLavadas()"><span
+							<button type="button" class="btn btn-success" onclick="guardarDatosLavadas()"><span
 									class="glyphicon glyphicon-floppy-disk"></span> Guardar</button>
 						</div>
 					</td>
