@@ -124,16 +124,14 @@
 					
 					$query = mysqli_query($conn, "select * from `moto` where estado=0 and fecha_salida >= '$ff' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
 				}
-					$query = mysqli_query($conn, "select * from `moto` where estado=0 and  DATE(fecha_salida)= '$fecha';");
-
+					
 				elseif (isset($_POST['placa2'])) {
 					$placa = $_POST['placa2'];
 
 					$sqlplaca = "select * from `moto` where estado=0 and placa LIKE '%$placa%'  ";
 					$query = mysqli_query($conn, $sqlplaca);
 				} else {
-					$sqlplaca2 = "select * from `moto` where estado=0 ";
-					$query = mysqli_query($conn, "select * from `moto` where estado=0 ");
+					$query = mysqli_query($conn, "select * from `moto` where estado=0 and  DATE(fecha_salida)= '$fecha';");
 					}
 
 
