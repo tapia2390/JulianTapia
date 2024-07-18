@@ -70,7 +70,7 @@
 }?>">
 					</div>
 					<div class="col-lg-4">
-						
+
 			<label>Seleccione la fecha Fin:</label>
 						<input type="date"   class="form-control" id="fechaf" name="fechaf"  require
 							placeholder="Fecha fin" value="<?php if (isset($_POST['fechaf'])) {
@@ -81,6 +81,7 @@
 					<br/>
 						<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
 							Consultar</button>
+							<a href="historialIndividual.php">Individual</a>
 
 					</div>
 				</form>
@@ -104,97 +105,103 @@ $contaor = 0;
 if (isset($_POST['fechai']) && isset($_POST['fechaf'])) {
 
     $ff = $_POST['fechaf'];
-	
+
     $fi = $_POST['fechai'];
 
-    $formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
+    $fechaInicio = new DateTime($fi);
+    $fechaFin = new DateTime($ff);
 
-    $fechaf = preg_match($formatoValido, $ff);
-	
-    $fechafi = preg_match($formatoValido, $fi);
+// Array para almacenar los resultados por día
+    $resultadosPorDia = array();
 
-    // $sql =  "SELECT SUM(valor_cobrado) AS total FROM moto WHERE   fecha_salida >= "."'$fi'"." AND fecha_salida <=  "."'$ff'";
-    $sql = "SELECT SUM(valor_cobrado) AS total FROM moto WHERE fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);";
-    //echo $sql;
-    $totalParqueadero = mysqli_query($conn, $sql);
-    $filapar = mysqli_fetch_assoc($totalParqueadero);
-    $totalParqueadero2 = $filapar['total'];
+// Iterar día por día desde $fi hasta $ff
+    $intervalo = new DateInterval('P1D');
+    $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFin);
 
-    $totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS  totallavadas FROM lavadas WHERE  fecha_salida >= '$fi' AND fecha_salida < DATE_ADD('$ff', INTERVAL 1 DAY);");
-    $filalav = mysqli_fetch_assoc($totalLavadas);
-    $totalLavadas = $filalav['totallavadas'];
+    foreach ($periodo as $fecha) {
+        $fechaActual = $fecha->format('Y-m-d');
 
-    $sqlingresos = "SELECT SUM(valor) AS total FROM ingresos WHERE fecha >= '$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);";
-    //echo $sqlingresos;
-    $totalIngresos = mysqli_query($conn, $sqlingresos);
-    $filain = mysqli_fetch_assoc($totalIngresos);
-    $totalIngresos2 = $filain['total'];
+        // Consulta para obtener el total de moto
+        $sqlMoto = "SELECT COALESCE(SUM(valor_cobrado), 0) AS total FROM moto WHERE fecha_salida >= '$fechaActual' AND fecha_salida < DATE_ADD('$fechaActual', INTERVAL 1 DAY)";
+        $totalMoto = mysqli_query($conn, $sqlMoto);
+        $filaMoto = mysqli_fetch_assoc($totalMoto);
+        $totalMoto2 = $filaMoto['total'];
 
-    $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE fecha >='$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
-    $filae = mysqli_fetch_assoc($totalEgresos);
-    $totalEgresos2 = $filae['total'];
+        // Consulta para obtener el total de lavadas
+        $sqlLavadas = "SELECT COALESCE(SUM(valor_cobrado), 0) AS totallavadas FROM lavadas WHERE fecha_salida >= '$fechaActual' AND fecha_salida < DATE_ADD('$fechaActual', INTERVAL 1 DAY)";
+        $totalLavadas = mysqli_query($conn, $sqlLavadas);
+        $filaLavadas = mysqli_fetch_assoc($totalLavadas);
+        $totalLavadas2 = $filaLavadas['totallavadas'];
+
+        // Consulta para obtener el total de ingresos
+        $sqlIngresos = "SELECT COALESCE(SUM(valor), 0) AS total FROM ingresos WHERE fecha >= '$fechaActual' AND fecha < DATE_ADD('$fechaActual', INTERVAL 1 DAY)";
+        $totalIngresos = mysqli_query($conn, $sqlIngresos);
+        $filaIngresos = mysqli_fetch_assoc($totalIngresos);
+        $totalIngresos2 = $filaIngresos['total'];
+
+        // Consulta para obtener el total de egresos
+        $sqlEgresos = "SELECT COALESCE(SUM(valor), 0) AS total FROM egresos WHERE fecha >= '$fechaActual' AND fecha < DATE_ADD('$fechaActual', INTERVAL 1 DAY)";
+        $totalEgresos = mysqli_query($conn, $sqlEgresos);
+        $filaEgresos = mysqli_fetch_assoc($totalEgresos);
+        $totalEgresos2 = $filaEgresos['total'];
+
+        // Guardar los resultados en un array asociativo por fecha
+        $resultadosPorDia[$fechaActual] = array(
+            'totalMoto' => $totalMoto2,
+            'totalLavadas' => $totalLavadas2,
+            'totalIngresos' => $totalIngresos2,
+            'totalEgresos' => $totalEgresos2,
+        );
+    }
 
 } else {
 
-    $totalParqueadero = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS total FROM moto WHERE DATE(fecha_salida)= '$fecha';");
-    $filapar = mysqli_fetch_assoc($totalParqueadero);
-    $totalParqueadero2 = $filapar['total'];
-
-    $totalLavadas = mysqli_query($conn, "SELECT SUM(valor_cobrado) AS totallavadas FROM lavadas WHERE DATE(fecha_salida)=  '$fecha';");
-    $filalav = mysqli_fetch_assoc($totalLavadas);
-    $totalLavadas = $filalav['totallavadas'];
-
-    $totalIngresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM ingresos WHERE DATE(fecha) =  '$fecha';");
-    $filain = mysqli_fetch_assoc($totalIngresos);
-    $totalIngresos2 = $filain['total'];
-
-    $totalEgresos = mysqli_query($conn, "SELECT SUM(valor) AS total FROM egresos WHERE DATE(fecha) =  '$fecha';");
-    $filae = mysqli_fetch_assoc($totalEgresos);
-    $totalEgresos2 = $filae['total'];
+  // Si $resultadosPorDia está vacío, agregar una entrada con la fecha actual
+if (empty($resultadosPorDia)) {
+    $fechaActual = date('Y-m-d');
+    $resultadosPorDia[$fechaActual] = array(
+        'totalMoto' => 0,
+        'totalLavadas' => 0,
+        'totalIngresos' => 0,
+        'totalEgresos' => 0,
+        'totalDia' => 0
+    );
+}
 
 }
 
 //egresos
 
 ?>
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Parqueadero</th>
+            <th>Lavadas</th>
+            <th>Ingresos</th>
+            <th>Gastos</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($resultadosPorDia as $fecha => $resultados): ?>
+            <tr>
+                <td><?php echo $fecha; ?></td>
+                <td><?php echo "$" . number_format((int) $resultados['totalMoto'], 0, ',', '.'); ?></td>
+                <td><?php echo "$" . number_format((int) $resultados['totalLavadas'], 0, ',', '.'); ?></td>
+                <td><?php echo "$" . number_format((int) $resultados['totalIngresos'], 0, ',', '.'); ?></td>
+                <td><?php echo "$" . number_format((int) $resultados['totalEgresos'], 0, ',', '.'); ?></td>
+                <td><?php
 
-			<table class="table table-striped table-bordered table-hover">
-				<thead>
-					<th>Fecha</th>
-					<th>Parqueadero</th>
-					<th>Lavadas</th>
-					<th>Ingresos</th>
-					<th>Gastos</th>
-					<th>Total</th>
+$sumatoria = $resultados['totalMoto'] + $resultados['totalLavadas'] + $resultados['totalIngresos'] + $resultados['totalEgresos'];
 
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<?php
-if (isset($_POST['fechai']) && isset($_POST['fechaf'])) {
-    echo $_POST['fechai']." / ". $_POST['fechaf'];
-} else {
-    echo $fecha;
-}
-
-?>
-						</td>
-						<td> <?php echo "$" . number_format((int) $totalParqueadero2, 0, ',', '.'); ?> </td>
-						<td> <?php echo "$" . number_format((int) $totalLavadas, 0, ',', '.'); ?> </td>
-						<td> <?php echo "$" . number_format((int) $totalIngresos2, 0, ',', '.'); ?> </td>
-						<td> <?php echo "$" . number_format((int) $totalEgresos2, 0, ',', '.'); ?> </td>
-
-						<td>
-							<?php
-$totaldia = (($totalParqueadero2 + $totalLavadas + $totalIngresos2) - $totalEgresos2);
-
-echo "$" . number_format((int) $totaldia, 0, ',', '.');
-?>
-						</td>
-						</tr>
-				</tbody>
-			</table>
+echo "$" . number_format((int) $sumatoria, 0, ',', '.');
+?></td>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
 
 		</div>
 
