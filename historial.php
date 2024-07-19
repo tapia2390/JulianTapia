@@ -209,7 +209,7 @@ $sumatriaTotal  += $sumatoria
 </table>
 <table  style="border: 0px solid white; width:100%;">
     <tr>
-        <td style="float: inline-end; padding-right: 1%;"> <p>Total : <?php echo "$". $sumatriaTotal ?></p> </td>
+        <td style="float: inline-end; padding-right: 1%;"> <p>Total : <?php  echo "$" . number_format((int) $sumatriaTotal, 0, ',', '.'); ?></p> </td>
     </tr>
 </table>
 
