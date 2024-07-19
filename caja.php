@@ -123,6 +123,7 @@
 					<th>Incio Monedas</th>
 					<th>Fin Monedas</th>
 					<th>Fin Billetes</th>
+					<th>Total</th>
 					<th>Fecha y Hora</th>
 					<th>Observaciones</th>
 					<th>Acciones</th>
@@ -147,6 +148,13 @@
 
 							<td>
 								<?php echo "$" . ucwords(number_format((int) $row['fin_billetes'], 0, ',', '.')); ?>
+							</td>
+
+							<td>
+								<?php 
+								$totalPlata = $row['fin_billetes'] + $row['fin_mondesa']; 
+								echo "$" . ucwords(number_format((int) $totalPlata, 0, ',', '.'));
+								?>
 							</td>
 							<td>
 								<?php $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha']));

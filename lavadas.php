@@ -15,7 +15,9 @@
 	<style>
 
 .well {
-    background-color: #ffffff !important;
+	background-image: url("img/lavada_moto.jpeg") !important;
+
+	
 }
 	</style>
 	<div class="container">
@@ -159,7 +161,10 @@
 			</div>
 			<div style="height:10px;"></div>
 
-			<table class="table table-striped table-bordered table-hover">
+			<div style="background: white;">
+
+			
+			<table class="table table-striped table-bordered table-hover" >
 				<thead>
 					<th>#</th>
 					<th>Placa</th>
@@ -213,6 +218,7 @@
 					?>
 				</tbody>
 			</table>
+			</div>
 		</div>
 
 		<div id="container-fluid2">
