@@ -102,6 +102,7 @@ $fecha = $ano . "-" . $mes . "-" . $dia;
 //echo $fecha;
 
 $contaor = 0;
+$sumatriaTotal  =0;
 if (isset($_POST['fechai']) && isset($_POST['fechaf'])) {
 
     $ff = $_POST['fechaf'];
@@ -197,11 +198,22 @@ if (empty($resultadosPorDia)) {
 $sumatoria = $resultados['totalMoto'] + $resultados['totalLavadas'] + $resultados['totalIngresos'] - $resultados['totalEgresos'];
 
 echo "$" . number_format((int) $sumatoria, 0, ',', '.');
+
+$sumatriaTotal  += $sumatoria
 ?></td>
             </tr>
         <?php endforeach;?>
+
+        
     </tbody>
 </table>
+<table  style="border: 0px solid white; width:100%;">
+    <tr>
+        <td style="float: inline-end; padding-right: 1%;"> <p>Total : <?php echo "$". $sumatriaTotal ?></p> </td>
+    </tr>
+</table>
+
+
 
 		</div>
 
