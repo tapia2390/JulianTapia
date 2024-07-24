@@ -123,6 +123,7 @@
 					<th>Incio Monedas</th>
 					<th>Fin Monedas</th>
 					<th>Fin Billetes</th>
+					<th>Total Monedas / Billetas</th>
 					<th>Total</th>
 					<th>Fecha y Hora</th>
 					<th>Observaciones</th>
@@ -155,6 +156,13 @@
 								$totalPlata = $row['fin_billetes'] + $row['fin_mondesa']; 
 								echo "$" . ucwords(number_format((int) $totalPlata, 0, ',', '.'));
 								?>
+								
+								<td>
+								<?php 
+								$totalPlataReal = $row['fin_billetes'] + $row['fin_mondesa']-$row['inicio_monedas']; 
+								echo "$" . ucwords(number_format((int) $totalPlataReal, 0, ',', '.'));
+								?>
+							</td>
 							</td>
 							<td>
 								<?php $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha']));
