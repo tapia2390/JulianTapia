@@ -71,7 +71,7 @@ botonesCategorias.forEach(boton => {
            // console.log(JSON.stringify(productos));
             const productoCategoria = productos.find(producto => producto.categoria === e.currentTarget.id);
             
-            tituloPrincipal.innerText = productoCategoria.categoria.nombre;
+            tituloPrincipal.innerText = productoCategoria.categoria;
             const productosBoton = productos.filter(producto => producto.categoria === e.currentTarget.id);
             cargarProductos(productosBoton);
         } else {
