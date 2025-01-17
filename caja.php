@@ -70,7 +70,15 @@
 
 				<form method="POST" action="#">
 					<div class="col-lg-4">
-						<label>Seleccione la fecha:</label>
+						<label>Fecha Incion:</label>
+						<input type="date" class="form-control" id="fechai" name="fechai" require
+							placeholder="Fecha Incio" value="<?php if (isset($_POST['fechai'])) {
+								echo $_POST['fechai'];
+							} ?>">
+					</div>
+
+					<div class="col-lg-4">
+						<label>Fecha Fin:</label>
 						<input type="date" class="form-control" id="fechaf" name="fechaf" require
 							placeholder="Fecha fin" value="<?php if (isset($_POST['fechaf'])) {
 								echo $_POST['fechaf'];
@@ -98,16 +106,22 @@
 				
 				include 'conn.php';
 				$contaor = 0;
-				if (isset($_POST['fechaf'])) {
+
+				$inicio_monedas =0;
+				$fin_mondesa =0;				
+				$fin_billetes =0;
+
+				if (isset($_POST['fechai']) && isset($_POST['fechaf']) ) {
+					$fi = $_POST['fechai'];
 					$ff = $_POST['fechaf'];
 
 					$formatoValido = '/^\d{4}-\d{2}-\d{2}$/';
 
 					$fechaf = preg_match($formatoValido, $ff);
 
-					$query = mysqli_query($conn, "select * from caja where  fecha >= '$ff' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
+					$query = mysqli_query($conn, "select * from caja where  fecha >= '$fi' AND fecha < DATE_ADD('$ff', INTERVAL 1 DAY);");
 				} else {
-					$query = mysqli_query($conn, "select * from caja order by fecha desc limit 7;");
+					$query = mysqli_query($conn, "select * from caja order by fecha desc limit 10;");
 
 				}
 
@@ -123,6 +137,7 @@
 					<th>Incio Monedas</th>
 					<th>Fin Monedas</th>
 					<th>Fin Billetes</th>
+					<th>Total Monedas / Billetas</th>
 					<th>Total</th>
 					<th>Fecha y Hora</th>
 					<th>Observaciones</th>
@@ -139,15 +154,16 @@
 								<?php echo $contaor += 1 ?>
 							</td>
 							<td>
-								<?php echo "$" . ucwords(number_format((int) $row['inicio_monedas'], 0, ',', '.')); ?>
+								
+								<?php $inicio_monedas  += $row['inicio_monedas']; echo "$" . ucwords(number_format((int) $row['inicio_monedas'], 0, ',', '.')); ?>
 
 							</td>
 							<td>
-								<?php echo "$" . ucwords(number_format((int) $row['fin_mondesa'], 0, ',', '.')); ?>
+								<?php $fin_mondesa  += $row['fin_mondesa'];  echo "$" . ucwords(number_format((int) $row['fin_mondesa'], 0, ',', '.')); ?>
 							</td>
 
 							<td>
-								<?php echo "$" . ucwords(number_format((int) $row['fin_billetes'], 0, ',', '.')); ?>
+								<?php  $fin_billetes  += $row['fin_billetes'];  echo "$" . ucwords(number_format((int) $row['fin_billetes'], 0, ',', '.')); ?>
 							</td>
 
 							<td>
@@ -155,6 +171,13 @@
 								$totalPlata = $row['fin_billetes'] + $row['fin_mondesa']; 
 								echo "$" . ucwords(number_format((int) $totalPlata, 0, ',', '.'));
 								?>
+								
+								<td>
+								<?php 
+								$totalPlataReal = $row['fin_billetes'] + $row['fin_mondesa']-$row['inicio_monedas']; 
+								echo "$" . ucwords(number_format((int) $totalPlataReal, 0, ',', '.'));
+								?>
+							</td>
 							</td>
 							<td>
 								<?php $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha']));
@@ -178,6 +201,32 @@
 					}
 
 					?>
+				</tbody>
+			</table>
+
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+					<th>#</th>
+					<th>Incio Monedas</th>
+					<th>Fin Monedas</th>
+					<th>Fin Billetes</th>
+					<th>Total Monedas / Billetas</th>
+					<th>Total</th>
+					<th>Fecha y Hora</th>
+					<th>Observaciones</th>
+					<th>Acciones</th>
+
+				</thead>
+				<tbody>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>Total : <?php  echo "$" . ucwords(number_format((int) $fin_billetes, 0, ',', '.'));?></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
 				</tbody>
 			</table>
 		</div>

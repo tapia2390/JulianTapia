@@ -202,12 +202,13 @@
 							<td>
 								<a href="#edit<?php echo $row['id']; ?>" data-toggle="modal" class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-pencil"></span></a> 
-								<a href="imprimir.php?id=<?php echo $row['id']; ?>" 
-									class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
-								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
-										class="glyphicon glyphicon-print"></span> </a> 
-								<a  onclick="cambiarTabla('<?php echo $row['id'];?>','lavadas')"  class="btn btn-primary" style="margin:5px;"><span
-										class="glyphicon glyphicon-road"></span> </a> 
+										
+								<a href="imprimir.php?id=<?php echo $row['id']; ?>" class="btn btn-danger" style="margin:5px;"><span class="glyphicon glyphicon-time"></span> </a> 
+								
+								<a  onclick="btnimprimirRecibo('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>')"  class="btn btn-warning" style="margin:5px;"><span class="glyphicon glyphicon-print"></span> </a> 
+							
+								<a  onclick="cambiarTabla('<?php echo $row['id'];?>','lavadas')"  class="btn btn-primary" style="margin:5px;">
+								    <span class="glyphicon glyphicon-road"></span> </a> 
 
 								<?php include('buttonlvadas.php'); ?>
 							</td>

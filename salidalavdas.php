@@ -149,6 +149,7 @@
 					<th>Fecha y Hora Ingreso</th>
 					<th>Valor Cobrado</th>
 					<th>Fecha y Hora Salida</th>
+					<th>Tiempo</th>
 					<th>Accion</th>
 				</thead>
 				<tbody>
@@ -184,6 +185,32 @@
 							<?php  $fechaHoraFormateada = date('Y-m-d h:i:s A', strtotime($row['fecha_salida']));  echo $fechaHoraFormateada ; ?>
 						
 							</td>
+							
+								<td>
+								<?php
+								$fechaInicio = new DateTime($row['fecha_ingreso']);
+								$fechaSalida = new DateTime($row['fecha_salida']);
+								$diferencia = $fechaInicio->diff($fechaSalida);
+
+								// Obtiene la diferencia en horas y minutos
+								$diferenciaEnHoras = $diferencia->h + ($diferencia->days * 24);
+								$diferenciaEnMinutos = $diferencia->i;
+								$horas = 00;
+								$minutos = 00;
+								if ($diferenciaEnHoras != 0) {
+									$horas = $diferenciaEnHoras;
+								}
+
+								if ($diferenciaEnMinutos != 0) {
+									$minutos = $diferenciaEnMinutos;
+								}
+
+								echo $horas . ":" . $minutos;
+								?>
+
+							</td>
+
+						
 							<td>
 								<a  onclick="imprimirRecibo2('<?php echo $row['placa']; ?>','<?php echo $row['descripcion']; ?>','<?php echo $row['cascos']; ?>','<?php echo $row['fecha_ingreso']; ?>','<?php echo $row['ubicacion']; ?>','<?php echo $row['fecha_salida']; ?>','<?php echo $row['valor_cobrado']; ?>')"  class="btn btn-warning" style="margin:5px;"><span
 										class="glyphicon glyphicon-print"></span> </a> 

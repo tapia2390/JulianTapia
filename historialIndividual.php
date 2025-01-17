@@ -164,8 +164,8 @@ if (isset($_POST['fechaf'])) {
 					<tr>
 						<td>
 							<?php
-if (isset($_POST['fechai']) && isset($_POST['fechaf'])) {
-    echo $_POST['fechai']." / ". $_POST['fechaf'];
+if (isset($_POST['fechaf'])) {
+    echo  $_POST['fechaf'];
 } else {
     echo $fecha;
 }

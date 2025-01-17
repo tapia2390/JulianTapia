@@ -87,9 +87,9 @@
 
 
 					<h5><center>Valor cobrado: <strong><?php
-						$valorHora = 900;
+						$valorHora = 1000;
 						$valorcero=0;
-						$horamayorque6=5000;
+						$horamayorque6=6000;
 						$dias = 10000;
 						$valoracobrar = 0;
 

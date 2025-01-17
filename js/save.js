@@ -212,34 +212,36 @@ function imprimirRecibo(placa,descripcion,cascos,fecha_ingreso,ubicacion) {
   var nit ="75104251";
   var celular ="3172519808";
  
- 
-   
-var ventanaImpresion = window.open('', '_self');
-ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
-ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
-ventanaImpresion.document.write('</head><body>');
-ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
-ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
-ventanaImpresion.document.write('<center><label> Nit: '+nit+'</label><center>');
-ventanaImpresion.document.write('<center><label> Celular: '+celular+'</label><center>');
-ventanaImpresion.document.write(' <br/>');
-ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************</label><center>');
-ventanaImpresion.document.write('<center><label>'+fecha+'</label><center>');
-ventanaImpresion.document.write('<center><label> Cascos: '+cascos+'</label><center>');
-ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
-ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
-ventanaImpresion.document.write(' <br/>');
-ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
-ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
-
-ventanaImpresion.document.write('</body></html>');
-ventanaImpresion.document.close();
-
-ventanaImpresion.onafterprint = function () {
-    window.location.reload(); // Recargar la página después de imprimir
-};
-ventanaImpresion.print();
-
+     
+       
+    var ventanaImpresion = window.open('', '_self');
+    ventanaImpresion.document.write('<html><head><title>Parqueadero liborio lopera</title>');
+    ventanaImpresion.document.write('<style>@page { size: 60mm 120m; margin: 0; }</style>'); // Configurar el tamaño de la página para una impresora térmica de 80mm de ancho
+    ventanaImpresion.document.write('</head><body>');
+    ventanaImpresion.document.write('<center><label>PARQUEADERO <br/> LIBORIO LOPERA</label><center>');
+    ventanaImpresion.document.write('<center><label>'+direccion+'</label><center>');
+    ventanaImpresion.document.write('<center><label> Nit: '+nit+'</label><center>');
+    ventanaImpresion.document.write('<center><label> Celular: '+celular+'</label><center>');
+    ventanaImpresion.document.write(' <br/>');
+    ventanaImpresion.document.write('<center><label style="text-transform:uppercase"> *************** <br/> PLACA:  '+placa+'<br/>        ***************</label><center>');
+    ventanaImpresion.document.write('<center><label>'+fecha+'</label><center>');
+    ventanaImpresion.document.write('<center><label> Cascos: '+cascos+'</label><center>');
+    ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
+    ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
+    ventanaImpresion.document.write(' <br/>');
+    
+    ventanaImpresion.document.write('<center><label>Hora ó Fracción : $1.000 </label></center>');
+    ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
+    ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
+    
+    ventanaImpresion.document.write('</body></html>');
+    ventanaImpresion.document.close();
+    
+    ventanaImpresion.onafterprint = function () {
+        window.location.reload(); // Recargar la página después de imprimir
+    };
+    ventanaImpresion.print();
+    
 
 }
 
@@ -488,6 +490,8 @@ function cambiarTabla(id,tabla) {
     if (inicio_monedas === "") {
         alert("ingrese el inicio de monedas");
     } else {
+        
+        
      
         // Crear objeto con datos a enviar
         var datos = {
@@ -496,11 +500,12 @@ function cambiarTabla(id,tabla) {
           fin_billetes:fin_billetes,
           observaciones:observaciones
         };
+        
   
         
       $.ajax({
         // Action
-        url: 'php/addCaja.php',
+        url: 'php/addcaja.php',
         // Method
         type: 'POST',
         data: {
@@ -612,6 +617,8 @@ function cambiarTabla(id,tabla) {
    ventanaImpresion.document.write('<center><label> Ubicación: <br/>'+ubicacion+'</label><center>');
    ventanaImpresion.document.write('<center><label> Descripción: <br/> '+descripcion+'</label><center>');
    ventanaImpresion.document.write(' <br/>');
+   
+   ventanaImpresion.document.write('<center><label>Hora ó Fracción : $1.000 </label></center>');
    ventanaImpresion.document.write('<center><label>'+horario+'</label><center>');
    ventanaImpresion.document.write('<center><label>'+politicas+'</label><center>');
    
