@@ -70,6 +70,7 @@
 
 				<form method="POST" action="#">
 					<div class="col-lg-4">
+						<label>Seleccione la fecha:</label>
 						<label>Fecha Incion:</label>
 						<input type="date" class="form-control" id="fechai" name="fechai" require
 							placeholder="Fecha Incio" value="<?php if (isset($_POST['fechai'])) {
