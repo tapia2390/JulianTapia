@@ -32,6 +32,8 @@ if ($result && mysqli_num_rows($result) > 0) {
                 'nombre' => $row['menu_item_id'], // Nombre de la categoría
             ],
             'categoria' => $row['categoria'],
+            'descripcion' => $row['descripcion'],
+            'referencia' => $row['referencia'],
         ];
     }
 }
