@@ -32,12 +32,23 @@ const precioFormateado = new Intl.NumberFormat('es-ES').format(producto.precio);
         const div = document.createElement("div");
         div.classList.add("producto");
         div.innerHTML = `
-            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
-            <div class="producto-detalles">
-                <h3 class="producto-titulo">${producto.titulo}</h3>
+        <div>
+           <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+        <div class="producto-detalles">
+            <h3 class="producto-titulo">${producto.titulo}</h3>
+
+            <div class="fila">
                <p class="producto-precio">$${precioFormateado}</p>
-                <button class="producto-agregar" id="${producto.id}">Agregar</button>
+               <p> Cantidad: ${producto.cantidad}</p>
+              
             </div>
+            
+           
+            <button class="producto-agregar" id="${producto.id}">Detalle</button>
+        </div>
+        
+        </div>
+       
         `;
 
         contenedorProductos.append(div);

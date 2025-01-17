@@ -394,3 +394,19 @@ main {
         grid-template-columns: 1fr;
     }
 }
+
+
+.fila {
+    display: flex;
+    /* Flexbox para colocar elementos en fila */
+    justify-content: space-between;
+    /* Espaciado entre los elementos */
+    align-items: center;
+    /* Centrar verticalmente */
+}
+
+.texto-izquierda,
+.texto-derecha {
+    margin: 0;
+    /* Elimina márgenes predeterminados */
+}
