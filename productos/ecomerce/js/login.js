@@ -49,7 +49,7 @@ form.addEventListener('submit', function (e) {
                 showSuccess("¡Bienvenido de nuevo!");
                 // Redirigir o hacer algo más en caso de éxito
                 setTimeout(() => {
-                    window.location.href = 'dashboard.html'; // Cambiar a la página principal o dashboard
+                    window.location.href = 'ecomerce/dashboard.php'; // Cambiar a la página principal o dashboard
                 }, 1500); // Espera de 1.5 segundos para redirigir
             } else {
                 showError(response.message || "Hubo un problema con el login.");

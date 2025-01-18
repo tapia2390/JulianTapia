@@ -1,6 +1,14 @@
 <?php
 ini_set('session.cookie_httponly', 1);
 session_start();
+
+
+// Verificar si el usuario ya está autenticado
+if (isset($_SESSION['user_id'])) {
+    // Si está autenticado, redirigir al dashboard
+    header("Location: ecomerce/dashboard.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Verificar si la sesión está iniciada
+if (!isset($_SESSION['user_id'])) {
+    // Si no está autenticado, redirigir al login
+    header("Location: menu.php");
+    exit;
+}
+
+// Aquí va el contenido del dashboard para usuarios autenticados
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +21,7 @@
     <title>CarpiShop</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="ecomerce/css/main.css">
+    <link rel="stylesheet" href="../ecomerce/css/main.css">
 </head>
 
 <body>
@@ -61,6 +74,6 @@
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="./js/menu.js"></script>
-    <script src="ecomerce/js/login.js"></script>
+    <script src="./ecomerce/js/menu.js"></script>
+    <script src="../ecomerce/js/login.js"></script>
 </body>
