@@ -98,9 +98,7 @@ if (productoDetalle) {
                     }
                 }).showToast();
 
-                  productoDetalle.cantidad -= cantidadSolicitada;
-                localStorage.setItem("producto-detalle", JSON.stringify(productoDetalle));
-
+                
 
                 // Actualizar UI
                 inputCantidad.value = "1";
