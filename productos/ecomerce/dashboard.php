@@ -55,9 +55,7 @@ if (!isset($_SESSION['user_id'])) {
                         <button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
                     </li>
                     <li>
-                        <a class="boton-menu boton-carrito" href="./carrito.html">
-                            <i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">0</span>
-                        </a>
+                        <button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> <a href="php/logout.php">Cerrar Sesión</a></button>
                     </li>
                 </ul>
             </nav>
@@ -74,6 +72,5 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="./ecomerce/js/menu.js"></script>
-    <script src="../ecomerce/js/login.js"></script>
+    <script src="../ecomerce/js/menu.js"></script>
 </body>
