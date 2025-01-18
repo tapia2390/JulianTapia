@@ -70,7 +70,7 @@ include('../../conn.php');
             ?>
             <footer>
                 <a href="../login.php">
-                    <p class="texto-footer "><b class="boton-menu "> Iniciar Session</p>
+                    <p class="texto-footer "><b class="boton-menu"> Iniciar Session </b></p>
                 </a>
             </footer>
         </aside>
