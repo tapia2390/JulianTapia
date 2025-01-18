@@ -69,7 +69,9 @@ include('../../conn.php');
             mysqli_close($conn); // Cerrar conexión
             ?>
             <footer>
-                <p class="texto-footer "><b class="boton-menu "> Iniciar Session</p>
+                <a href="../login.php">
+                    <p class="texto-footer "><b class="boton-menu "> Iniciar Session</p>
+                </a>
             </footer>
         </aside>
         <main>

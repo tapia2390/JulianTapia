@@ -29,8 +29,9 @@
                 <h1 class="logo" id="volver">Parqueadero J.J</h1>
             </header>
 
-            <footer>
-                <p class="texto-footer "><b class="boton-menu"> Iniciar Session </b></p>
+            <footer> <a href="../login.php">
+                    <p class="texto-footer "><b class="boton-menu"> Iniciar Session </b></p>
+                </a>
             </footer>
         </aside>
         <main>
