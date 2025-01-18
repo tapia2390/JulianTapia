@@ -8,6 +8,8 @@
     $observaciones = $_POST['observaciones'];
     $fecha = date("Y-m-d H:i:s");
 
+
+
     // Comprobar la existencia de stock
     $sql = "SELECT cantidad FROM productos WHERE id = ?";
     $stmt = $conn->prepare($sql);
@@ -15,6 +17,22 @@
     $stmt->execute();
     $result = $stmt->get_result();
     $product = $result->fetch_assoc();
+
+    if (!$product) {
+        // Producto no encontrado
+        echo json_encode(['success' => false, 'message' => 'Producto no encontrado.']);
+        exit;
+    }
+
+
+    // Validar si hay suficiente stock
+    if ($product['cantidad'] < $cantidad_vendida) {
+        echo json_encode(['success' => false, 'message' => 'Stock insuficiente. Disponibles: ' . $product['cantidad']]);
+        exit;
+    }
+
+
+
 
     if ($product && $product['cantidad'] >= $cantidad_vendida) {
         // Actualizar stock en la base de datos
