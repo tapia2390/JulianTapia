@@ -22,6 +22,7 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="../ecomerce/css/main.css">
+    <link rel="stylesheet" href="admin/css/main.css">
 </head>
 
 <body>
@@ -43,7 +44,7 @@ if (!isset($_SESSION['user_id'])) {
             <nav>
                 <ul class="menu">
                     <li>
-                        <button id="todos" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i> Todos los productos</button>
+                        <button id="menu_items" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i>Indices del Menú</button>
                     </li>
                     <li>
                         <button id="abrigos" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Abrigos</button>
@@ -55,7 +56,7 @@ if (!isset($_SESSION['user_id'])) {
                         <button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
                     </li>
                     <li>
-                        <button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> <a href="php/logout.php">Cerrar Sesión</a></button>
+                        <a href="php/logout.php"><button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Cerrar Sesión</button></a>
                     </li>
                 </ul>
             </nav>
@@ -64,8 +65,8 @@ if (!isset($_SESSION['user_id'])) {
             </footer>
         </aside>
         <main>
-            <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
-            <div id="contenedor-productos" class="contenedor-productos">
+            <h2 class="titulo-principal" id="titulo-principal">Indices del Menú</h2>
+            <div id="contenedor-form" class="contenedor-productos">
                 <!-- Esto se va a rellenar con JS -->
             </div>
         </main>
@@ -73,4 +74,5 @@ if (!isset($_SESSION['user_id'])) {
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="../ecomerce/js/menu.js"></script>
+    <script src="admin/js/form.js"></script>
 </body>
