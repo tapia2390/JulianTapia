@@ -48,16 +48,16 @@ if (!isset($_SESSION['user_id'])) {
                         <a href="../ecomerce/menu.php"><button class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Todos los productos</button></a>
                     </li>
                     <li>
-                        <button id="menu_items" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i>Indices del Menú</button>
+                        <button id="menu_items" class="boton-menu boton-categoria "><i class="bi bi-hand-index-thumb-fill"></i>Indices del Menú</button>
                     </li>
                     <li>
-                        <button id="abrigos" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Abrigos</button>
+                        <button id="productos" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb"></i> Productos</button>
                     </li>
                     <li>
-                        <button id="camisetas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Camisetas</button>
+                        <button id="ventas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Ventas</button>
                     </li>
                     <li>
-                        <button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
+                        <button id="adminparqueadero" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Admin Parqueadero</button>
                     </li>
                     <li>
                         <a href="php/logout.php"><button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Cerrar Sesión</button></a>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['user_id'])) {
             </footer>
         </aside>
         <main>
-            <h2 class="titulo-principal" id="titulo-principal">Indices del Menú</h2>
+            <h2 class="titulo-principal" id="titulo-principal">Administrador</h2>
             <div id="contenedor-form" class="contenedor-productos2">
                 <!-- Esto se va a rellenar con JS -->
             </div>
@@ -79,4 +79,5 @@ if (!isset($_SESSION['user_id'])) {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="../ecomerce/js/menu.js"></script>
     <script src="admin/js/form.js"></script>
+    <script src="admin/js/productos.js"></script>
 </body>

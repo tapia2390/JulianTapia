@@ -1,3 +1,14 @@
+const botonesCategorias = document.querySelectorAll(".boton-categoria");
+botonesCategorias.forEach(boton => {
+    boton.addEventListener("click", (e) => {
+
+        botonesCategorias.forEach(boton => boton.classList.remove("active"));
+        e.currentTarget.classList.add("active");
+
+    })
+});
+
+
 // Cargar lista de formulario
 document.addEventListener("DOMContentLoaded", () => {
     const contenedorForm = document.getElementById("contenedor-form");
@@ -23,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
             
     }
 
-    cargarFormulario("menu_items"); 
-    listarItems();
+    cargarFormulario("productos"); 
+    
     
     // CRUD: Guardar ítem
     async function guardarItem() {
