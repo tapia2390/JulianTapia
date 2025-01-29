@@ -139,3 +139,60 @@ function eliminarProducto(id) {
 function cerrarModal() {
     document.getElementById('modal-editar-producto').style.display = 'none';
 }
+
+
+/****listadop de menu item */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Consultar los items del menú a través de PHP
+    fetch('php/crud_item_menu.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ action: 'read' }) // Enviar la acción al PHP
+    })
+    .then(response => response.json()) // Convertir la respuesta JSON
+    .then(data => {
+        // Verificar si los datos se recibieron correctamente
+       
+
+        if (data.success && data.data && data.data.length > 0) {
+            // Crear el <select> dinámicamente
+            const selectMenu = document.createElement('select');
+            selectMenu.id = "menu_item_id";
+            selectMenu.name = "menu_item_id";
+            selectMenu.required = true;
+
+            // Crear la opción por defecto
+            const optionDefault = document.createElement('option');
+            optionDefault.value = "";
+            optionDefault.textContent = "Seleccione una categoría";
+            selectMenu.appendChild(optionDefault);
+
+            // Agregar las opciones de los ítems del menú
+            data.data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.categoria;
+                selectMenu.appendChild(option);
+            });
+
+            // Agregar el <select> al contenedor
+            const menuItemsSelectContainer = document.getElementById('menu-items-select');
+            if (menuItemsSelectContainer) {
+                menuItemsSelectContainer.appendChild(selectMenu);
+            } else {
+                console.error("Contenedor de ítems no encontrado.");
+            }
+        } else {
+            alert('No se encontraron ítems en el menú.');
+        }
+    })
+    .catch(error => {
+        console.error('Error al obtener los items:', error);
+        alert('Error al cargar las categorías.');
+    });
+});
+
+
