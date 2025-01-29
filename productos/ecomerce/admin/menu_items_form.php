@@ -1,12 +1,28 @@
-<form id="form-menu-items" class="formulario-bonito">
-    <h3>Agregar items al menú.</h3>
+<!--div id="form-menu-items" class="formulario-bonito">
+    <h3>Agregar ítems al menú</h3>
 
     <div class="form-group">
-        <label for="categoria">Categoría:</label>
-        <input type="text" id="categoria" name="categoria" placeholder="Ingrese la categoría" required>
+        <label for="nombre">Categoría:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingrese la categoría" required>
     </div>
 
     <div class="form-group">
-        <button type="submit" class="btn">Guardar Ítem</button>
+        <button onclick="guardarItem()" class="btn">Guardar Ítem</button>
     </div>
-</form>
+</div-->
+<div id="form-menu-items" class="formulario-bonito">
+    <button onclick="guardarItem()" class="btn"> + </button>
+
+    <h3>Lista de ítems</h3>
+    <table id="tabla-menu-items">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los ítems serán cargados dinámicamente aquí -->
+        </tbody>
+    </table>
+</div>

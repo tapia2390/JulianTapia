@@ -18,8 +18,9 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarpiShop</title>
+    <title>Parqueadero JJ</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="../ecomerce/css/main.css">
     <link rel="stylesheet" href="admin/css/main.css">
@@ -44,6 +45,9 @@ if (!isset($_SESSION['user_id'])) {
             <nav>
                 <ul class="menu">
                     <li>
+                        <a href="../ecomerce/menu.php"><button class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb-fill"></i>Todos los productos</button></a>
+                    </li>
+                    <li>
                         <button id="menu_items" class="boton-menu boton-categoria active"><i class="bi bi-hand-index-thumb-fill"></i>Indices del Menú</button>
                     </li>
                     <li>
@@ -66,7 +70,7 @@ if (!isset($_SESSION['user_id'])) {
         </aside>
         <main>
             <h2 class="titulo-principal" id="titulo-principal">Indices del Menú</h2>
-            <div id="contenedor-form" class="contenedor-productos">
+            <div id="contenedor-form" class="contenedor-productos2">
                 <!-- Esto se va a rellenar con JS -->
             </div>
         </main>

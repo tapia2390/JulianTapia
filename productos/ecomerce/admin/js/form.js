@@ -1,112 +1,114 @@
-
-
-//cargar lista de formaulario
-
+// Cargar lista de formulario
 document.addEventListener("DOMContentLoaded", () => {
     const contenedorForm = document.getElementById("contenedor-form");
     const botonesMenu = document.querySelectorAll(".boton-categoria");
 
-    botonesMenu.forEach(boton => {
+    botonesMenu.forEach((boton) => {
         boton.addEventListener("click", () => {
-           
             const categoria = boton.id; // El ID del botón coincide con el formulario
             cargarFormulario(categoria);
         });
     });
 
     function cargarFormulario(categoria) {
-         alert("ok"+categoria);
         fetch(`admin/${categoria}_form.php`) // Ruta dinámica al formulario
-            .then(response => response.text())
-            .then(html => {
+            .then((response) => response.text())
+            .then((html) => {
                 contenedorForm.innerHTML = html; // Cargar el formulario
+                if(categoria=="menu_items"){
+                    listarItems();
+                }
             })
-            .catch(err => console.error("Error al cargar el formulario:", err));
+            .catch((err) => console.error("Error al cargar el formulario:", err));
+            
     }
-});
 
+    cargarFormulario("menu_items"); 
+    listarItems();
+    
+    // CRUD: Guardar ítem
+    async function guardarItem() {
+        //const categoria  = document.getElementById("nombre").value.trim();
 
-
-//crud 
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("form-menu-items");
-
-    // Validar y enviar formulario
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const nombre = document.getElementById("nombre").value.trim();
-
-        // Validar campo vacío
-        if (!nombre) {
+        /*if (!categoria ) {
             alert("El campo Nombre es obligatorio.");
             return;
-        }
+        }*/
 
-        // Llamar a la función para guardar el dato
-        await guardarItem(nombre);
-    });
+         const categoria = prompt("Ingrese el nuevo nombre del ítem del menu:");
+        if (!categoria) return alert("El nombre no puede estar vacío.");
 
-    // CRUD: Guardar ítem
-    async function guardarItem(nombre) {
+        
+
         try {
-            const response = await fetch("php/guardar_item.php", {
+            const response = await fetch("php/crud_item_menu.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ nombre }),
+                body: JSON.stringify({ action: "create", categoria  }),
             });
 
             const result = await response.json();
 
             if (result.success) {
                 alert("Ítem guardado con éxito.");
-                form.reset();
                 listarItems(); // Actualizar la lista
             } else {
                 alert(`Error: ${result.message}`);
             }
         } catch (error) {
-            console.error("Error al guardar el ítem:", error);
+           //console.error("Error al guardar el ítem:", error);
             alert("Ocurrió un error al guardar el ítem.");
         }
     }
 
     // CRUD: Listar ítems
     async function listarItems() {
-        try {
-            const response = await fetch("php/listar_items.php");
-            const items = await response.json();
+    try {
+        const response = await fetch('php/crud_item_menu.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'read' }),
+        });
 
-            const contenedorForm = document.getElementById("contenedor-form");
-            contenedorForm.innerHTML = `
-                <ul class="lista-items">
-                    ${items
-                        .map(
-                            (item) => `
-                        <li>
-                            ${item.nombre}
-                            <button class="btn-editar" data-id="${item.id}">Editar</button>
-                            <button class="btn-eliminar" data-id="${item.id}">Eliminar</button>
-                        </li>
-                    `
-                        )
-                        .join("")}
-                </ul>
-            `;
+        const result = await response.json();
+        const items = result.data;
+       
+        const tabla = document.getElementById('tabla-menu-items').getElementsByTagName('tbody')[0];
+        tabla.innerHTML = ''; // Limpiar la tabla antes de agregar los nuevos ítems
 
-            // Asociar eventos a botones
-            document.querySelectorAll(".btn-editar").forEach((btn) =>
-                btn.addEventListener("click", (e) => editarItem(e.target.dataset.id))
-            );
-            document.querySelectorAll(".btn-eliminar").forEach((btn) =>
-                btn.addEventListener("click", (e) => eliminarItem(e.target.dataset.id))
-            );
-        } catch (error) {
-            console.error("Error al listar ítems:", error);
-        }
+        items.forEach(item => {
+            const row = tabla.insertRow();
+            const cellCategoria = row.insertCell(0);
+            const cellAcciones = row.insertCell(1);
+
+            cellCategoria.textContent = item.categoria;
+
+            
+
+
+
+            // Crear botones de editar y eliminar
+            const btnEditar = document.createElement('button');            
+            btnEditar.innerHTML = '<i class="bi bi-pencil"></i>'; 
+            btnEditar.onclick = () => editarItem(item.id);
+
+            const btnEliminar = document.createElement('button');
+            btnEliminar.innerHTML = '<i class="bi bi-trash"></i>'; // Icono de eliminar
+            btnEliminar.onclick = () => eliminarItem(item.id);
+
+            btnEditar.classList.add('btn', 'btn-primary'); // Estilo para el botón de editar
+            btnEliminar.classList.add('btn', 'btn-danger'); // Estilo para el botón de eliminar
+
+            cellAcciones.appendChild(btnEditar);
+            cellAcciones.appendChild(btnEliminar);
+        });
+    } catch (error) {
+        console.error('Error al listar los ítems:', error);
     }
+}
+
 
     // CRUD: Editar ítem
     async function editarItem(id) {
@@ -114,12 +116,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!nuevoNombre) return alert("El nombre no puede estar vacío.");
 
         try {
-            const response = await fetch("php/editar_item.php", {
+            const response = await fetch("php/crud_item_menu.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ id, nombre: nuevoNombre }),
+                body: JSON.stringify({ action: "update", id, nombre: nuevoNombre }),
             });
 
             const result = await response.json();
@@ -140,12 +142,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!confirm("¿Estás seguro de eliminar este ítem?")) return;
 
         try {
-            const response = await fetch("php/eliminar_item.php", {
+            const response = await fetch("php/crud_item_menu.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ id }),
+                body: JSON.stringify({ action: "delete", id }),
             });
 
             const result = await response.json();
@@ -162,5 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Inicializar listado
-    listarItems();
+   // listarItems();
+
+    // Exportar la función para que se pueda usar en el botón Guardar
+    window.guardarItem = guardarItem;
 });

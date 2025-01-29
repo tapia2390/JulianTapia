@@ -1,3 +1,7 @@
+.contenedor-productos2 {
+   width: 80%;
+}
+
 .formulario-bonito {
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -63,5 +67,228 @@
 }
 
 .formulario-bonito .btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilo para la tabla */
+#tabla-menu-items {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#tabla-menu-items th, #tabla-menu-items td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+#tabla-menu-items th {
+    background-color: #f4f4f4;
+}
+
+#tabla-menu-items button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#tabla-menu-items button:hover {
+    background-color: #e1e1e1;
+}
+
+/* Estilo para el Modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1; /* Asegura que el modal esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    padding: 5px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+/* Estilo para la tabla */
+/* Estilo general del formulario */
+#form-menu-items {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 20px auto;
+}
+
+/* Estilo del título */
+#form-menu-items h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+
+
+/* Estilo de la tabla */
+/* Estilo general para el formulario */
+#form-menu-items {
+    width: 80%;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo del título */
+#form-menu-items h3 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Estilo de la tabla */
+#tabla-menu-items {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de las celdas de la tabla */
+#tabla-menu-items th,
+#tabla-menu-items td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo de los encabezados de la tabla */
+#tabla-menu-items th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Estilo para las filas alternadas de la tabla */
+#tabla-menu-items tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#tabla-menu-items tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Efecto hover para las filas */
+#tabla-menu-items tr:hover {
+    background-color: #e2f1d7;
+    cursor: pointer;
+}
+
+/* Estilo de los botones de acción */
+#tabla-menu-items button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px;
+}
+
+/* Efecto de hover para los botones */
+#tabla-menu-items button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Efecto de foco para los botones */
+#tabla-menu-items button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo para las celdas con las acciones */
+#tabla-menu-items td .action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo de la primera columna de la categoría */
+#tabla-menu-items td.categoria-col {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Estilo para el contenedor de ítems */
+#form-menu-items table {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Opcional: Estilo de los bordes de la tabla para bordes más visibles */
+#tabla-menu-items th,
+#tabla-menu-items td {
+    border: 1px solid #ddd;
+}
+
+/* Ajuste en el estilo de los botones */
+button {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Efecto de hover para los botones */
+button:hover {
     background-color: #0056b3;
 }
