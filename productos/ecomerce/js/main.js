@@ -67,7 +67,7 @@ botonesCategorias.forEach(boton => {
         botonesCategorias.forEach(boton => boton.classList.remove("active"));
         e.currentTarget.classList.add("active");
 
-        console.log("---"+e.currentTarget.id);
+        
 
         if (e.currentTarget.id != "todos") {
             console.log(JSON.stringify(productos));
