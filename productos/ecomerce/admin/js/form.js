@@ -201,6 +201,9 @@ function cargarProductos() {
           // Insertar las celdas con los datos del producto
           row.innerHTML = `
            <td>${producto.id}</td>
+           <td>
+            <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen2"  width="100"height="100">
+           </td>
             <td>${producto.nombre}</td>
             <td>${producto.cantidad}</td>
             

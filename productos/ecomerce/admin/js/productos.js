@@ -129,7 +129,21 @@ function eliminarProducto(id) {
   }
 }
 
-// Función para cerrar el modal de edición
-function cerrarModal() {
-  document.getElementById("modal-editar-producto").style.display = "none";
+/*****Modal*** */
+
+function abrirModal() {
+  document.getElementById("modal-producto").style.display = "flex";
 }
+
+// Función para cerrar el modal
+function cerrarModal() {
+  document.getElementById("modal-producto").style.display = "none";
+}
+
+// Cerrar modal si se hace clic fuera de él
+window.onclick = function (event) {
+  let modal = document.getElementById("modal-producto");
+  if (event.target === modal) {
+    cerrarModal();
+  }
+};
