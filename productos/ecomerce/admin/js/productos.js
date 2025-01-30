@@ -150,13 +150,7 @@ function abrirModal(producto = null) {
     document.getElementById("descripcion").value = producto.descripcion;
     alert(producto.menu_item_id);
     // Cargar la opción guardada en el select
-    // document.getElementById("categoria").value = producto.menu_item_id;
-
-    setTimeout(() => {
-      document.getElementById("categoria").value = String(
-        producto.menu_item_id
-      );
-    }, 500);
+    document.getElementById("menu_item_id").value = producto.menu_item_id;
 
     document.querySelector("#modal-producto h3").innerText = "Editar Producto";
   } else {
