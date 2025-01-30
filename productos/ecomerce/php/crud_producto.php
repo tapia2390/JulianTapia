@@ -20,7 +20,7 @@ try {
     switch ($action) {
         case 'create':
             // Crear un nuevo producto
-            if (empty($data['nombre']) || empty($data['cantidad']) || empty($data['referencia']) || empty($data['menu_item_id'])) {
+            if (empty($_POST['nombre']) || empty($_POST['cantidad']) || empty($_POST['referencia']) || empty($_POST['menu_item_id'])) {
                 echo json_encode(['success' => false, 'message' => 'Campos obligatorios no pueden estar vacíos.']);
                 exit;
             }
@@ -31,19 +31,28 @@ try {
             $menu_item_id = $_POST['menu_item_id'];
             $precio = $_POST['precio'];
             $descripcion = $_POST['descripcion'];
-            $categoria_id = $data['categoria_id'];
+            $categoria_id = $_POST['categoria'];
+
+
+            // Configura la zona horaria a la de tu ubicación (opcional)
+            date_default_timezone_set('America/Bogota');
+
+            // Obtiene la fecha actual
+            $fecha_ingreso = date('Y-m-d');
 
             // Subir la imagen
             $imagen = $_FILES['imagen'];
             $imagen_nombre = time() . "_" . $imagen['name'];
             $imagen_ruta = "../uploads/" . $imagen_nombre;
+
+            $imagen_save = "uploads/" . $imagen_nombre;
             move_uploaded_file($imagen['tmp_name'], $imagen_ruta);
 
 
 
 
             $stmt = $conn->prepare("CALL sp_insertar_producto(?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sisssiss", $nombre, $cantidad, $referencia, $menu_item_id, $imagen, $precio, $descripcion, $categoria_id);
+            $stmt->bind_param("sisssiss", $nombre, $cantidad, $referencia, $menu_item_id, $imagen_save, $precio, $descripcion, $categoria_id);
 
             if ($stmt->execute()) {
                 echo json_encode(['success' => true, 'message' => 'Producto guardado correctamente.']);

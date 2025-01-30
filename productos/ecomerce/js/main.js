@@ -67,12 +67,14 @@ botonesCategorias.forEach(boton => {
         botonesCategorias.forEach(boton => boton.classList.remove("active"));
         e.currentTarget.classList.add("active");
 
+        console.log("---"+e.currentTarget.id);
+
         if (e.currentTarget.id != "todos") {
-           // console.log(JSON.stringify(productos));
-            const productoCategoria = productos.find(producto => producto.categoria === e.currentTarget.id);
+            console.log(JSON.stringify(productos));
+            const productoCategoria = productos.find(producto => producto.menu.toLowerCase() === e.currentTarget.id);
             
-            tituloPrincipal.innerText = productoCategoria.categoria;
-            const productosBoton = productos.filter(producto => producto.categoria === e.currentTarget.id);
+            tituloPrincipal.innerText = productoCategoria.menu;
+            const productosBoton = productos.filter(producto => producto.menu.toLowerCase() === e.currentTarget.id);
             cargarProductos(productosBoton);
         } else {
             tituloPrincipal.innerText = "Todos los productos";
