@@ -3,7 +3,7 @@
 
 // Función para guardar el producto
 function guardarProducto() {
-    alert("guardar");
+    
     const nombre = document.getElementById('nombre').value;
     const cantidad = document.getElementById('cantidad').value;
     const referencia = document.getElementById('referencia').value;
@@ -44,11 +44,10 @@ function guardarProducto() {
     formData.append('imagen', imagen);
     formData.append('precio', precio);
     formData.append('descripcion', descripcion);
-    formData.append('action', "create");
+    formData.append('action', 'create');
 
 
 
-    
 
     fetch('php/crud_producto.php', {
         method: 'POST',

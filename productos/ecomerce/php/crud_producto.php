@@ -7,14 +7,14 @@ header('Content-Type: application/json');
 
 // Leer los datos enviados desde el cliente
 $data = json_decode(file_get_contents("php://input"), true);
-
+$action = isset($_POST['action']) ? $_POST['action'] : null;
 // Verificar la operación solicitada
-if (!isset($data['action'])) {
+if (!isset($action)) {
     echo json_encode(['success' => false, 'message' => 'Acción no especificada.']);
     exit;
 }
 
-$action = $data['action'];
+
 
 try {
     switch ($action) {
