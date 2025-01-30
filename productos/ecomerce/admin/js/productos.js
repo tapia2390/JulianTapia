@@ -16,28 +16,22 @@ function guardarProducto() {
         return;
     }
     
-    const selectMenu = document.getElementById('menu-items-select');
+     const selectMenu = document.getElementById('menu_item_id');
 
-    const selectedOption = selectMenu ? selectMenu.options[selectMenu.selectedIndex] : null;
- const selectedValue = "";
- const selectedText ="";
-     // Verificamos que el select exista y que haya una opción seleccionada
-     
-    
-    // Verificamos que el select exista y que haya una opción seleccionada
+    // Verificar si el selectMenu existe en el DOM
+ let selectedValue ="";
+     let selectedText ="";
     if (selectMenu) {
-         selectedValue = selectMenu.value; // Obtiene el ID de la opción seleccionada
-         selectedText = selectMenu.options[selectMenu.selectedIndex]?.textContent || ''; // Obtiene el nombre de la opción seleccionada
+        // Obtener el valor (ID de la opción seleccionada)
+         selectedValue = selectMenu.value;
 
-        // Imprimir los valores seleccionados
-        console.log("ID seleccionado:", selectedValue);
-        console.log("Nombre seleccionado:", selectedText);
+        // Obtener el texto (nombre de la opción seleccionada)
+         selectedText = selectMenu.options[selectMenu.selectedIndex].textContent;
 
-        if (selectedValue === "") {
-            console.log("No se ha seleccionado ninguna opción.");
-        }
+      
     } else {
-        console.error('El <select> no está disponible.');
+        // Si no se encuentra el select con ese ID
+        console.error('El select con ID "menu_item_id" no fue encontrado.');
     }
    
 
@@ -56,7 +50,7 @@ function guardarProducto() {
 
     
 
-    fetch('php/productos.php', {
+    fetch('php/crud_producto.php', {
         method: 'POST',
         body: formData
     })
@@ -170,52 +164,3 @@ function cerrarModal() {
 }
 
 
-//***select menu */
-document.addEventListener('DOMContentLoaded', function() {
-    // Consultar los items del menú a través de PHP
-    fetch('php/crud_item_menu.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ action: 'read' }) // Enviar la acción al PHP
-    })
-    .then(response => response.json()) // Convertir la respuesta JSON
-    .then(data => {
-        // Verificar si los datos se recibieron correctamente
-        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-            // Crear el <select> dinámicamente
-            const selectMenu = document.createElement('select');
-            selectMenu.id = "menu_item_id";
-            selectMenu.name = "menu_item_id";
-            selectMenu.required = true;
-
-            // Crear la opción por defecto
-            const optionDefault = document.createElement('option');
-            optionDefault.value = "";
-            optionDefault.textContent = "Seleccione una categoría";
-            selectMenu.appendChild(optionDefault);
-
-            // Agregar las opciones de los ítems del menú
-            data.data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.id;       // Asignar el ID como value
-                option.textContent = item.categoria; // Asignar el nombre como texto
-                selectMenu.appendChild(option);
-            });
-
-            // Agregar el <select> al contenedor
-            const menuItemsSelectContainer = document.getElementById('menu-items-select');
-            if (menuItemsSelectContainer) {
-                menuItemsSelectContainer.appendChild(selectMenu);
-            } else {
-                console.error("Contenedor de ítems no encontrado.");
-            }
-        } else {
-            console.error('No se encontraron ítems en el menú o el formato de los datos no es correcto.');
-        }
-    })
-    .catch(error => {
-        console.error('Error al obtener los items:', error);
-    });
-});

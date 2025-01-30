@@ -18,7 +18,9 @@
 
     <div class="form-group">
         <label for="categoria">Categoría:</label>
-        <div id="menu-items-select"></div>
+        <div id="menu-items-select">
+            <?php include 'path_to_php_script.php'; ?>
+        </div>
     </div>
 
     <div class="form-group">
