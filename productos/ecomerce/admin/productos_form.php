@@ -53,3 +53,20 @@
         </form>
     </div>
 </div>
+
+<table id="productos-table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Referencia</th>
+            <th>Precio</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Los productos se insertarán aquí dinámicamente -->
+    </tbody>
+</table>

@@ -380,3 +380,162 @@ button:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+/***tabla lista de productos***/
+
+/* Estilos para el formulario */
+.formulario-bonito {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    font-size: 16px;
+}
+
+.formulario-bonito h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group button {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.form-group button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para la tabla */
+#productos-table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#productos-table th,
+#productos-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#productos-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+#productos-table td {
+    background-color: #fff;
+    color: #333;
+}
+
+#productos-table td button {
+    background-color: #FF9800;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+#productos-table td button:hover {
+    background-color: #e68900;
+}
+
+#productos-table td button:first-of-type {
+    margin-right: 8px;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close-btn {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .formulario-bonito {
+        width: 90%;
+    }
+
+    #productos-table {
+        font-size: 14px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+}
