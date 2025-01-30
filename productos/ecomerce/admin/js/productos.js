@@ -113,11 +113,13 @@ function guardarEdicion(id) {
 
 // Función para eliminar un producto
 function eliminarProducto(id) {
+  const formData = new FormData();
+  formData.append("id", id);
+  formData.append("action", "delete");
   if (confirm("¿Está seguro de eliminar este producto?")) {
-    fetch("eliminarProducto.php", {
+    fetch("php/crud_producto.php", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "delete", id: id }),
+      body: formData,
     })
       .then((response) => response.json())
       .then((data) => {

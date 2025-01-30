@@ -107,12 +107,12 @@ try {
 
         case 'delete':
             // Eliminar un producto
-            if (empty($data['id'])) {
+            if (empty($_POST['id'])) {
                 echo json_encode(['success' => false, 'message' => 'ID es obligatorio.']);
                 exit;
             }
 
-            $id = $data['id'];
+            $id = $_POST['id'];
 
             $stmt = $conn->prepare("CALL sp_eliminar_producto(?)");
             $stmt->bind_param("i", $id);
