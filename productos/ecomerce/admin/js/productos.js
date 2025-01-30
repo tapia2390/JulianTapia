@@ -7,25 +7,54 @@ function guardarProducto() {
     const nombre = document.getElementById('nombre').value;
     const cantidad = document.getElementById('cantidad').value;
     const referencia = document.getElementById('referencia').value;
-    const categoria = document.getElementById('categoria').value;
     const imagen = document.getElementById('imagen').files[0];
     const precio = document.getElementById('precio').value;
     const descripcion = document.getElementById('descripcion').value;
 
-    if (!nombre || !cantidad || !referencia || !categoria || !imagen || !precio || !descripcion) {
+    if (!nombre || !cantidad || !referencia  || !imagen || !precio || !descripcion) {
         alert('Todos los campos son obligatorios');
         return;
     }
+    
+    const selectMenu = document.getElementById('menu-items-select');
+
+    const selectedOption = selectMenu ? selectMenu.options[selectMenu.selectedIndex] : null;
+ const selectedValue = "";
+ const selectedText ="";
+     // Verificamos que el select exista y que haya una opción seleccionada
+     
+    
+    // Verificamos que el select exista y que haya una opción seleccionada
+    if (selectMenu) {
+         selectedValue = selectMenu.value; // Obtiene el ID de la opción seleccionada
+         selectedText = selectMenu.options[selectMenu.selectedIndex]?.textContent || ''; // Obtiene el nombre de la opción seleccionada
+
+        // Imprimir los valores seleccionados
+        console.log("ID seleccionado:", selectedValue);
+        console.log("Nombre seleccionado:", selectedText);
+
+        if (selectedValue === "") {
+            console.log("No se ha seleccionado ninguna opción.");
+        }
+    } else {
+        console.error('El <select> no está disponible.');
+    }
+   
 
     const formData = new FormData();
     formData.append('nombre', nombre);
     formData.append('cantidad', cantidad);
     formData.append('referencia', referencia);
-    formData.append('categoria', categoria);
+    formData.append('categoria', selectedText);
+    formData.append('menu_item_id', selectedValue);
     formData.append('imagen', imagen);
     formData.append('precio', precio);
     formData.append('descripcion', descripcion);
     formData.append('action', "create");
+
+
+
+    
 
     fetch('php/productos.php', {
         method: 'POST',
@@ -141,8 +170,7 @@ function cerrarModal() {
 }
 
 
-/****listadop de menu item */
-
+//***select menu */
 document.addEventListener('DOMContentLoaded', function() {
     // Consultar los items del menú a través de PHP
     fetch('php/crud_item_menu.php', {
@@ -155,9 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json()) // Convertir la respuesta JSON
     .then(data => {
         // Verificar si los datos se recibieron correctamente
-       
-
-        if (data.success && data.data && data.data.length > 0) {
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
             // Crear el <select> dinámicamente
             const selectMenu = document.createElement('select');
             selectMenu.id = "menu_item_id";
@@ -173,8 +199,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Agregar las opciones de los ítems del menú
             data.data.forEach(item => {
                 const option = document.createElement('option');
-                option.value = item.id;
-                option.textContent = item.categoria;
+                option.value = item.id;       // Asignar el ID como value
+                option.textContent = item.categoria; // Asignar el nombre como texto
                 selectMenu.appendChild(option);
             });
 
@@ -186,13 +212,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error("Contenedor de ítems no encontrado.");
             }
         } else {
-            alert('No se encontraron ítems en el menú.');
+            console.error('No se encontraron ítems en el menú o el formato de los datos no es correcto.');
         }
     })
     .catch(error => {
         console.error('Error al obtener los items:', error);
-        alert('Error al cargar las categorías.');
     });
 });
-
-
