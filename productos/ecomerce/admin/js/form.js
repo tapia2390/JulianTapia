@@ -202,7 +202,9 @@ function cargarProductos() {
           row.innerHTML = `
            <td>${producto.id}</td>
            <td>
-            <img src="${producto.imagen}" alt="${producto.nombre}" class="producto-imagen2"  width="100"height="100">
+            <img src="${producto.imagen}" alt="${
+            producto.nombre
+          }" class="producto-imagen2"  width="100"height="100">
            </td>
             <td>${producto.nombre}</td>
             <td>${producto.cantidad}</td>
@@ -210,8 +212,12 @@ function cargarProductos() {
             <td>${producto.referencia}</td>
             <td>${producto.precio}</td>
              <td>${producto.categoria_id}</td>
-            <td><button onclick="editarProducto(${producto.id})">Editar</button> <br>
-            <button onclick="eliminarProducto(${producto.id})">Eliminar</button></td>
+            <td> <button class="btn edit-btn" onclick='abrirModal(${JSON.stringify(
+              producto
+            )})'>Editar</button> <br>
+            <button onclick="eliminarProducto(${
+              producto.id
+            })">Eliminar</button></td>
           `;
         });
       } else {
