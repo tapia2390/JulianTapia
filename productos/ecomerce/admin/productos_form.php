@@ -1,5 +1,5 @@
 <!-- Modal para editar un producto -->
-<button onclick="abrirModal()" class="btn">+</button>
+<button onclick='abrirModal(null)' class="btn">+</button>
 
 <!-- Modal -->
 <div id="modal-producto" class="modal">

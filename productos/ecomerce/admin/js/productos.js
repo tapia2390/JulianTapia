@@ -138,23 +138,32 @@ function eliminarProducto(id) {
 }*/
 
 function abrirModal(producto = null) {
+  alert(producto);
   let modal = document.getElementById("modal-producto");
   modal.style.display = "flex";
 
   if (producto) {
+    alert("1");
     console.log("Producto a editar:", producto);
     document.getElementById("nombre").value = producto.nombre;
     document.getElementById("cantidad").value = producto.cantidad;
     document.getElementById("referencia").value = producto.referencia;
     document.getElementById("precio").value = producto.precio;
     document.getElementById("descripcion").value = producto.descripcion;
-    alert(producto.menu_item_id);
+
     // Cargar la opción guardada en el select
     document.getElementById("menu_item_id").value = producto.menu_item_id;
 
     document.querySelector("#modal-producto h3").innerText = "Editar Producto";
   } else {
-    document.getElementById("form-producto").reset();
+    document.getElementById("nombre").value = "";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("referencia").value = "";
+    document.getElementById("precio").value = "";
+    document.getElementById("descripcion").value = "";
+
+    // Cargar la opción guardada en el select
+    document.getElementById("menu_item_id").value = 0;
     document.querySelector("#modal-producto h3").innerText = "Agregar Producto";
   }
 }
