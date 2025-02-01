@@ -64,7 +64,7 @@ function guardarProducto() {
     .then((data) => {
       if (data.success) {
         alert("Producto guardado correctamente" + data.success);
-        //location.reload(); // Recarga la página para mostrar el nuevo producto
+        location.reload(); // Recarga la página para mostrar el nuevo producto
       } else {
         alert("Error al guardar el producto");
       }
