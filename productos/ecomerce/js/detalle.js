@@ -32,6 +32,12 @@ if (productoDetalle) {
                 <button class="producto-agregar2 vender" id="${
                   productoDetalle.id
                 }">Vender</button>
+
+                <!-- Botón de WhatsApp -->
+            <button class="whatsapp-button" id="btn-whatsapp">
+            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp"> Enviar a WhatsApp
+            </button>
+
             </div>
         </div>
     `;
@@ -51,6 +57,34 @@ if (productoDetalle) {
     } else {
       totalProducto.innerHTML = "Total a pagar: $0";
     }
+  });
+
+  document.querySelector(".whatsapp-button").addEventListener("click", () => {
+    const cantidadSolicitada = parseInt(inputCantidad.value) || 1;
+    const totalPagar = cantidadSolicitada * productoDetalle.precio;
+    const observaciones = document.getElementById("observaciones").value;
+
+    // Mensaje de WhatsApp
+    const mensaje = `Hola, estoy interesado en el siguiente producto:
+🔹 *${productoDetalle.titulo}*
+📌 Referencia: ${productoDetalle.referencia}
+📦 Cantidad: ${cantidadSolicitada}
+💰 Precio unitario: $${new Intl.NumberFormat("es-ES").format(
+      productoDetalle.precio
+    )}
+💵 Total a pagar: $${new Intl.NumberFormat("es-ES").format(totalPagar)}
+📝 Observaciones: ${observaciones ? observaciones : "Ninguna"}
+
+¿Está disponible?`;
+
+    // Número de WhatsApp (ejemplo: +573001234567)
+    const numeroWhatsApp = "573146381721";
+    const url = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${encodeURIComponent(
+      mensaje
+    )}`;
+
+    // Abrir WhatsApp en nueva pestaña
+    window.open(url, "_blank");
   });
 
   // Confirmación y registro de venta
