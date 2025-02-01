@@ -196,6 +196,7 @@ function cargarProductos() {
 
         // Recorrer los productos y agregarlos a la tabla
         data.data.forEach((producto) => {
+          // alert(producto.categoria_id);
           const row = tablaProductos.insertRow();
 
           // Insertar las celdas con los datos del producto

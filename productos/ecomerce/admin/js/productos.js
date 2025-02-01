@@ -36,17 +36,14 @@ function guardarProducto() {
 
   const formData = new FormData();
   if (editandoProducto) {
-    alert(editandoProducto);
     rutaImg = editandoProducto.imagen;
     id = editandoProducto.id;
 
     formData.append("id", id);
     formData.append("rutaImg", rutaImg);
-
     action = "update";
   } else {
     action = "create";
-    alert(action);
     formData.append("rutaImg", "");
   }
   formData.append("nombre", nombre);
@@ -187,9 +184,9 @@ function cerrarModal() {
 }
 
 // Cerrar modal si se hace clic fuera de él
-window.onclick = function (event) {
+/*window.onclick = function (event) {
   let modal = document.getElementById("modal-producto");
   if (event.target === modal) {
     cerrarModal();
   }
-};
+};*/

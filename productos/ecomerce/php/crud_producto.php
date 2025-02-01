@@ -68,7 +68,9 @@ try {
                     ]);
                     exit;
                 }
-            } else if (!isset($_POST['rutaImg']) || trim($_POST['rutaImg']) !== '') {
+
+                $rutaDestino = $imagen_save;
+            } else if (!isset($_POST['rutaImg']) && isset($_POST['imagen']) || $_POST['imagen'] == "undefined" || $_POST['imagen'] == "") {
                 $rutaDestino = $_POST['rutaImg'];
             } else {
                 $rutaDestino = "uploads/parqueadero.png";
@@ -88,35 +90,63 @@ try {
 
 
             if ($action == 'create') {
+
+
+
                 $stmt = $conn->prepare("CALL sp_insertar_producto(?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("sisssiss", $nombre, $cantidad, $referencia, $menu_item_id, $rutaDestino, $precio, $descripcion, $categoria_id);
-
 
                 if ($stmt->execute()) {
                     echo json_encode(['success' => true, 'message' => 'Producto guardado correctamente.']);
                 } else {
                     echo json_encode(['success' => false, 'message' => 'Error al guardar el producto.']);
                 }
-            } elseif ($action == 'update') {
 
-                $dataobj =
-                    $nombre . "" .
-                    $cantidad  . "" .
-                    $referencia  . "" .
-                    $menu_item_id  . "" .
-                    $precio  . "" .
-                    $descripcion  . "" .
-                    $categoria_id  . "" .
-                    $imagen_save . "";
+                $stmt->close();
+            } else if ($action == 'update') {
 
-                // Si no hay nueva imagen, mantener la anterior
+                $id = $_POST['id'];
+                // Depuración: Ver los valores antes de ejecutar la consulta
+                // error_log("ID: $id, Nombre: $nombre, Cantidad: $cantidad, Referencia: $referencia, Menu ID: $menu_item_id, Imagen: $rutaDestino, Precio: $precio, Descripción: $descripcion, Categoría: $categoria_id");
+
+
+                /*  $sql = "UPDATE productos 
+                SET nombre = '$nombre', 
+                    cantidad = $cantidad, 
+                    referencia = '$referencia', 
+                    menu_item_id = $menu_item_id, 
+                    imagen = '$rutaDestino', 
+                    precio = $precio, 
+                    descripcion = '$descripcion', 
+                    categoria_id = $categoria_id 
+                WHERE id = $id";
+
+                // Log de la consulta para depuración en consola del navegador
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Consulta SQL Generada: ' . $sql
+                ]);
+                exit(); // Detener ejecución aquí si solo quieres ver la consulta
+*/
+
+
+
+
+
+
+                // Llamar al procedimiento almacenado
                 $stmt = $conn->prepare("CALL sp_actualizar_producto(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("iisssisss", $id, $nombre, $cantidad, $referencia, $menu_item_id, $rutaDestino, $precio, $descripcion, $categoria_id);
+                $stmt->bind_param("isisssiss", $id, $nombre, $cantidad, $referencia, $menu_item_id, $rutaDestino, $precio, $descripcion, $categoria_id);
 
                 if ($stmt->execute()) {
-                    echo json_encode(['success' => true, 'message' => 'Producto actualizado correctamente.' . $dataobj]);
+                    if ($stmt->affected_rows > 0) {
+                        echo json_encode(['success' => true, 'message' => 'Producto actualizado correctamente.' . $categoria_id]);
+                    } else {
+                        echo json_encode(['success' => false, 'message' => 'No se realizaron cambios en el producto (puede que los datos sean los mismos).']);
+                    }
                 } else {
-                    echo json_encode(['success' => false, 'message' => 'Error al actualizar el producto.']);
+                    error_log("Error en la actualización: " . $stmt->error);
+                    echo json_encode(['success' => false, 'message' => 'Error al actualizar el producto: ' . $stmt->error]);
                 }
             }
 
@@ -125,7 +155,7 @@ try {
 
 
 
-            $stmt->close();
+
             break;
 
         case 'read':
