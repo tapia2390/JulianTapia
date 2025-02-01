@@ -47,7 +47,7 @@
             </div>
 
             <div class="form-group">
-                <button onclick="guardarProducto()" class="btn">Guardar Producto</button>
+                <button onclick="guardarProducto(null)" class="btn">Guardar Producto</button>
             </div>
         </div>
 

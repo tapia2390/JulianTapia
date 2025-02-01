@@ -1,5 +1,11 @@
+let editandoProducto = null;
+
 // Función para guardar el producto
 function guardarProducto() {
+  let action = "";
+  let rutaImg = "";
+  let id = "";
+
   const nombre = document.getElementById("nombre").value;
   const cantidad = document.getElementById("cantidad").value;
   const referencia = document.getElementById("referencia").value;
@@ -7,14 +13,7 @@ function guardarProducto() {
   const precio = document.getElementById("precio").value;
   const descripcion = document.getElementById("descripcion").value;
 
-  if (
-    !nombre ||
-    !cantidad ||
-    !referencia ||
-    !imagen ||
-    !precio ||
-    !descripcion
-  ) {
+  if (!nombre || !cantidad || !referencia || !precio || !descripcion) {
     alert("Todos los campos son obligatorios");
     return;
   }
@@ -36,6 +35,20 @@ function guardarProducto() {
   }
 
   const formData = new FormData();
+  if (editandoProducto) {
+    alert(editandoProducto);
+    rutaImg = editandoProducto.imagen;
+    id = editandoProducto.id;
+
+    formData.append("id", id);
+    formData.append("rutaImg", rutaImg);
+
+    action = "update";
+  } else {
+    action = "create";
+    alert(action);
+    formData.append("rutaImg", "");
+  }
   formData.append("nombre", nombre);
   formData.append("cantidad", cantidad);
   formData.append("referencia", referencia);
@@ -44,7 +57,7 @@ function guardarProducto() {
   formData.append("imagen", imagen);
   formData.append("precio", precio);
   formData.append("descripcion", descripcion);
-  formData.append("action", "create");
+  formData.append("action", action);
 
   fetch("php/crud_producto.php", {
     method: "POST",
@@ -53,8 +66,8 @@ function guardarProducto() {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert("Producto guardado correctamente");
-        location.reload(); // Recarga la página para mostrar el nuevo producto
+        alert("Producto guardado correctamente" + data.success);
+        //location.reload(); // Recarga la página para mostrar el nuevo producto
       } else {
         alert("Error al guardar el producto");
       }
@@ -138,13 +151,12 @@ function eliminarProducto(id) {
 }*/
 
 function abrirModal(producto = null) {
-  alert(producto);
+  editandoProducto = producto;
+
   let modal = document.getElementById("modal-producto");
   modal.style.display = "flex";
 
   if (producto) {
-    alert("1");
-    console.log("Producto a editar:", producto);
     document.getElementById("nombre").value = producto.nombre;
     document.getElementById("cantidad").value = producto.cantidad;
     document.getElementById("referencia").value = producto.referencia;
@@ -171,6 +183,7 @@ function abrirModal(producto = null) {
 // Función para cerrar el modal
 function cerrarModal() {
   document.getElementById("modal-producto").style.display = "none";
+  editandoProducto = null;
 }
 
 // Cerrar modal si se hace clic fuera de él

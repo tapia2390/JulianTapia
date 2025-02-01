@@ -218,6 +218,7 @@ function cargarProductos() {
             <button onclick="eliminarProducto(${
               producto.id
             })">Eliminar</button></td>
+          
           `;
         });
       } else {
