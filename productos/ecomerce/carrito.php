@@ -39,6 +39,8 @@
                             <i class="bi bi-cart-fill"></i> Carrito
                         </a>
                     </li>
+
+
                 </ul>
             </nav>
             <footer>

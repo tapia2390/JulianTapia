@@ -29,6 +29,12 @@
                 <h1 class="logo" id="volver">Parqueadero J.J</h1>
             </header>
 
+            <nav>
+                <ul class="menu">
+                    <li><a class="boton-menu boton-carrito" href="./carrito.php"><i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">0</span></a></li>
+                </ul>
+            </nav>
+
             <footer> <a href="../login.php">
                     <p class="texto-footer "><b class="boton-menu"> Iniciar Session </b></p>
                 </a>
@@ -45,6 +51,7 @@
     </div>
 
     <script src="./js/detalle.js"></script>
+    <script src="./js/addCar.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
