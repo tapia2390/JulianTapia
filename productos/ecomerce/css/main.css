@@ -188,7 +188,7 @@ main {
 }
 
 
-.producto-detalle {
+.producto-detalle-btn {
     border: 0;
     background-color: var(--clr-white);
     color: var(--clr-main);
@@ -200,7 +200,7 @@ main {
     transition: background-color .2s, color .2s;
 }
 
-.producto-detalle:hover {
+.producto-detalle-btn:hover {
     background-color: #01e67c;
     color: var(--clr-white);
 }
@@ -557,10 +557,8 @@ main {
 
 .botones-container {
     display: flex;
-    justify-content: center;
-    /* Centra los botones */
-    gap: 15px;
-    /* Espaciado entre botones */
+    justify-content: center; /* Centra los botones */
+    gap: 15px; /* Espaciado entre botones */
     padding: 10px;
 }
 

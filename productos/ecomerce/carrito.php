@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
 
     <div class="wrapper">
@@ -33,7 +35,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="boton-menu boton-carrito active" href="./carrito.html">
+                        <a class="boton-menu boton-carrito active" href="./carrito.php">
                             <i class="bi bi-cart-fill"></i> Carrito
                         </a>
                     </li>
@@ -70,10 +72,11 @@
             </div>
         </main>
     </div>
-    
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/carrito.js"></script>
     <script src="./js/menu.js"></script>
 </body>
+
 </html>
