@@ -60,6 +60,13 @@ include('../../conn.php');
                     echo '</li>';
                 }
 
+                echo '<li>';
+                echo '<a class="boton-menu boton-carrito" href="./carrito.html">';
+                echo '<i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">0</span>';
+                echo '</a>';
+                echo '</li>';
+
+
                 echo '</ul>';
                 echo '</nav>';
             } else {

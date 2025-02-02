@@ -1,15 +1,14 @@
 let productos = [];
 
 fetch("php/getProductos.php")
-    .then(response => response.json())
-    .then(data => {
-        productos = data;
-        cargarProductos(productos);
-    })
-    .catch(error => {
-        console.error("Error al cargar los productos:", error);
-    });
-
+  .then((response) => response.json())
+  .then((data) => {
+    productos = data;
+    cargarProductos(productos);
+  })
+  .catch((error) => {
+    console.error("Error al cargar los productos:", error);
+  });
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
@@ -17,23 +16,24 @@ const tituloPrincipal = document.querySelector("#titulo-principal");
 let botonesAgregar = document.querySelectorAll(".producto-agregar");
 const numerito = document.querySelector("#numerito");
 
-
-botonesCategorias.forEach(boton => boton.addEventListener("click", () => {
+botonesCategorias.forEach((boton) =>
+  boton.addEventListener("click", () => {
     aside.classList.remove("aside-visible");
-}))
-
+  })
+);
 
 function cargarProductos(productosElegidos) {
-    contenedorProductos.innerHTML = "";
+  contenedorProductos.innerHTML = "";
 
-    productosElegidos.forEach(producto => {
+  productosElegidos.forEach((producto) => {
+    console.log(JSON.stringify(producto));
+    const precioFormateado = new Intl.NumberFormat("es-ES").format(
+      producto.precio
+    );
 
-console.log(JSON.stringify(producto));
-const precioFormateado = new Intl.NumberFormat('es-ES').format(producto.precio);
-
-        const div = document.createElement("div");
-        div.classList.add("producto");
-        div.innerHTML = `
+    const div = document.createElement("div");
+    div.classList.add("producto");
+    div.innerHTML = `
         <div>
            <img class="producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
         <div class="producto-detalles">
@@ -47,6 +47,7 @@ const precioFormateado = new Intl.NumberFormat('es-ES').format(producto.precio);
             
            
             <button class="producto-agregar" id="${producto.id}">Detalle</button>
+             <button class="producto-agregar" id="${producto.id}">Agregar</button>
 
         </div>
         
@@ -54,42 +55,41 @@ const precioFormateado = new Intl.NumberFormat('es-ES').format(producto.precio);
        
         `;
 
-        contenedorProductos.append(div);
-    });
+    contenedorProductos.append(div);
+  });
 
-    actualizarBotonesAgregar();
+  actualizarBotonesAgregar();
 }
 
+botonesCategorias.forEach((boton) => {
+  boton.addEventListener("click", (e) => {
+    botonesCategorias.forEach((boton) => boton.classList.remove("active"));
+    e.currentTarget.classList.add("active");
 
-botonesCategorias.forEach(boton => {
-    boton.addEventListener("click", (e) => {
+    if (e.currentTarget.id != "todos") {
+      console.log(JSON.stringify(productos));
+      const productoCategoria = productos.find(
+        (producto) => producto.menu.toLowerCase() === e.currentTarget.id
+      );
 
-        botonesCategorias.forEach(boton => boton.classList.remove("active"));
-        e.currentTarget.classList.add("active");
-
-        
-
-        if (e.currentTarget.id != "todos") {
-            console.log(JSON.stringify(productos));
-            const productoCategoria = productos.find(producto => producto.menu.toLowerCase() === e.currentTarget.id);
-            
-            tituloPrincipal.innerText = productoCategoria.menu;
-            const productosBoton = productos.filter(producto => producto.menu.toLowerCase() === e.currentTarget.id);
-            cargarProductos(productosBoton);
-        } else {
-            tituloPrincipal.innerText = "Todos los productos";
-            cargarProductos(productos);
-        }
-
-    })
+      tituloPrincipal.innerText = productoCategoria.menu;
+      const productosBoton = productos.filter(
+        (producto) => producto.menu.toLowerCase() === e.currentTarget.id
+      );
+      cargarProductos(productosBoton);
+    } else {
+      tituloPrincipal.innerText = "Todos los productos";
+      cargarProductos(productos);
+    }
+  });
 });
 
 function actualizarBotonesAgregar() {
-    botonesAgregar = document.querySelectorAll(".producto-agregar");
+  botonesAgregar = document.querySelectorAll(".producto-agregar");
 
-    botonesAgregar.forEach(boton => {
-        boton.addEventListener("click", agregarAlCarrito);
-    });
+  botonesAgregar.forEach((boton) => {
+    boton.addEventListener("click", agregarAlCarrito);
+  });
 }
 
 let productosEnCarrito;
@@ -97,23 +97,31 @@ let productosEnCarrito;
 let productosEnCarritoLS = localStorage.getItem("productos-en-carrito");
 
 if (productosEnCarritoLS) {
-    productosEnCarrito = JSON.parse(productosEnCarritoLS);
-    actualizarNumerito();
+  productosEnCarrito = JSON.parse(productosEnCarritoLS);
+  actualizarNumerito();
 } else {
-    productosEnCarrito = [];
+  productosEnCarrito = [];
 }
 
 function agregarAlCarrito(e) {
-    const idBoton = e.currentTarget.id;
-    const productoSeleccionado = productos.find(producto => producto.id === idBoton);
+  const idBoton = e.currentTarget.id;
+  const productoSeleccionado = productos.find(
+    (producto) => producto.id === idBoton
+  );
 
-    // Guardar el producto en LocalStorage
-    localStorage.setItem("producto-detalle", JSON.stringify(productoSeleccionado));
+  // Guardar el producto en LocalStorage
+  localStorage.setItem(
+    "producto-detalle",
+    JSON.stringify(productoSeleccionado)
+  );
 
-    // Redirigir a la página de detalles
-    window.location.href = "detalle.php";
+  // Redirigir a la página de detalles
+  window.location.href = "detalle.php";
 }
 function actualizarNumerito() {
-    let nuevoNumerito = productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0);
-    numerito.innerText = nuevoNumerito;
+  let nuevoNumerito = productosEnCarrito.reduce(
+    (acc, producto) => acc + producto.cantidad,
+    0
+  );
+  numerito.innerText = nuevoNumerito;
 }

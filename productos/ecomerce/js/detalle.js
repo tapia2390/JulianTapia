@@ -6,7 +6,7 @@ const detalleContenedor = document.getElementById("contenedor-detalle");
 if (productoDetalle) {
   detalleContenedor.innerHTML = `
           <div class="producto-detalle">
-            <img src="${productoDetalle.imagen}" alt="${
+            <img  class="imgdetalle" src="${productoDetalle.imagen}" alt="${
     productoDetalle.titulo
   }" class="producto-imagen2">
             <div class="producto-detalles2">
@@ -27,7 +27,7 @@ if (productoDetalle) {
                   "es-ES"
                 ).format(productoDetalle.precio)}</p>
                 <div>
-                    <p>Observaciones: </p><textarea id="observaciones" rows="10" cols="50" placeholder="observaciones...."></textarea>     
+                    <p>Observaciones: </p><textarea id="observaciones" rows="10" cols="50" placeholder="observaciones...." style="resize: both;"></textarea>     
                 </div>
                 <button class="producto-agregar2 vender" id="${
                   productoDetalle.id
