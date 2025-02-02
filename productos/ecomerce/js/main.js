@@ -7,7 +7,7 @@ fetch("php/getProductos.php")
     cargarProductos(productos);
   })
   .catch((error) => {
-    console.error("Error al cargar los productos:", error);
+    console.log("Error al cargar los productos:", error);
   });
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
@@ -26,7 +26,7 @@ function cargarProductos(productosElegidos) {
   contenedorProductos.innerHTML = "";
 
   productosElegidos.forEach((producto) => {
-    console.log(JSON.stringify(producto));
+    //console.log(JSON.stringify(producto));
     const precioFormateado = new Intl.NumberFormat("es-ES").format(
       producto.precio
     );
@@ -46,8 +46,16 @@ function cargarProductos(productosElegidos) {
             </div>
             
            
-            <button class="producto-agregar" id="${producto.id}">Detalle</button>
-             <button class="producto-agregar" id="${producto.id}">Agregar</button>
+          
+
+            <div class="botones-container">
+            <button class="producto-detalle producto-detalle-btn" id="${producto.id}">
+               <i class="bi bi-info-circle"></i>
+            </button>
+            <button class="producto-agregar producto-agregar-btn" id="${producto.id}">
+                 <i class="bi bi-cart-plus"></i>
+            </button>
+        </div>
 
         </div>
         
@@ -59,6 +67,7 @@ function cargarProductos(productosElegidos) {
   });
 
   actualizarBotonesAgregar();
+  detalleproducto();
 }
 
 botonesCategorias.forEach((boton) => {
@@ -67,7 +76,7 @@ botonesCategorias.forEach((boton) => {
     e.currentTarget.classList.add("active");
 
     if (e.currentTarget.id != "todos") {
-      console.log(JSON.stringify(productos));
+      //console.log(JSON.stringify(productos));
       const productoCategoria = productos.find(
         (producto) => producto.menu.toLowerCase() === e.currentTarget.id
       );
@@ -83,6 +92,14 @@ botonesCategorias.forEach((boton) => {
     }
   });
 });
+
+function detalleproducto() {
+  botonesAgregar = document.querySelectorAll(".producto-detalle");
+
+  botonesAgregar.forEach((boton) => {
+    boton.addEventListener("click", productodetalle);
+  });
+}
 
 function actualizarBotonesAgregar() {
   botonesAgregar = document.querySelectorAll(".producto-agregar");
@@ -103,7 +120,7 @@ if (productosEnCarritoLS) {
   productosEnCarrito = [];
 }
 
-function agregarAlCarrito(e) {
+function productodetalle(e) {
   const idBoton = e.currentTarget.id;
   const productoSeleccionado = productos.find(
     (producto) => producto.id === idBoton
@@ -118,6 +135,51 @@ function agregarAlCarrito(e) {
   // Redirigir a la página de detalles
   window.location.href = "detalle.php";
 }
+
+function agregarAlCarrito(e) {
+  Toastify({
+    text: "Producto agregado",
+    duration: 3000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #4b33a8, #785ce9)",
+      borderRadius: "2rem",
+      textTransform: "uppercase",
+      fontSize: ".75rem",
+    },
+    offset: {
+      x: "1.5rem", // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+      y: "1.5rem", // vertical axis - can be a number or a string indicating unity. eg: '2em'
+    },
+    onClick: function () {}, // Callback after click
+  }).showToast();
+
+  const idBoton = e.currentTarget.id;
+  const productoAgregado = productos.find(
+    (producto) => producto.id === idBoton
+  );
+
+  if (productosEnCarrito.some((producto) => producto.id === idBoton)) {
+    const index = productosEnCarrito.findIndex(
+      (producto) => producto.id === idBoton
+    );
+    productosEnCarrito[index].cantidad++;
+  } else {
+    productoAgregado.cantidad = 1;
+    productosEnCarrito.push(productoAgregado);
+  }
+
+  actualizarNumerito();
+
+  localStorage.setItem(
+    "productos-en-carrito",
+    JSON.stringify(productosEnCarrito)
+  );
+}
+
 function actualizarNumerito() {
   let nuevoNumerito = productosEnCarrito.reduce(
     (acc, producto) => acc + producto.cantidad,
