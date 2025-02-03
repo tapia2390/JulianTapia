@@ -65,7 +65,10 @@
                             <p>Total:</p>
                             <p id="total">$3000</p>
                         </div>
-                        <button id="carrito-acciones-comprar" class="carrito-acciones-comprar">Comprar ahora</button>
+                        <button id="carrito-acciones-comprar" class="carrito-acciones-comprar">Vender ahora</button>
+                        <button class="whatsapp-btn whatsapp-button producto-agregar-btn" id="whatsapp-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp">
+                        </button>
                     </div>
                 </div>
 

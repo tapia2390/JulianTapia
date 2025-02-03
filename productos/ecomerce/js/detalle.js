@@ -39,9 +39,7 @@ if (productoDetalle) {
                     productoDetalle.id
                   }">  <i class="bi bi-cart-plus"></i></button>
                 <!-- Botón de WhatsApp -->
-                  <button class="whatsapp-button producto-agregar-btn" id="btn-whatsapp">
-                  <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp"> 
-                  </button>
+                 
               </div>
             </div>
         </div>

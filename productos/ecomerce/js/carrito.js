@@ -1,4 +1,5 @@
 let productosEnCarrito = localStorage.getItem("productos-en-carrito");
+console.log(productosEnCarrito);
 productosEnCarrito = JSON.parse(productosEnCarrito);
 
 const contenedorCarritoVacio = document.querySelector("#carrito-vacio");
@@ -10,23 +11,22 @@ const botonVaciar = document.querySelector("#carrito-acciones-vaciar");
 const contenedorTotal = document.querySelector("#total");
 const botonComprar = document.querySelector("#carrito-acciones-comprar");
 
-
 function cargarProductosCarrito() {
-    if (productosEnCarrito && productosEnCarrito.length > 0) {
+  if (productosEnCarrito && productosEnCarrito.length > 0) {
+    contenedorCarritoVacio.classList.add("disabled");
+    contenedorCarritoProductos.classList.remove("disabled");
+    contenedorCarritoAcciones.classList.remove("disabled");
+    contenedorCarritoComprado.classList.add("disabled");
 
-        contenedorCarritoVacio.classList.add("disabled");
-        contenedorCarritoProductos.classList.remove("disabled");
-        contenedorCarritoAcciones.classList.remove("disabled");
-        contenedorCarritoComprado.classList.add("disabled");
-    
-        contenedorCarritoProductos.innerHTML = "";
-    
-        productosEnCarrito.forEach(producto => {
-    
-            const div = document.createElement("div");
-            div.classList.add("carrito-producto");
-            div.innerHTML = `
-                <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.titulo}">
+    contenedorCarritoProductos.innerHTML = "";
+
+    productosEnCarrito.forEach((producto) => {
+      const div = document.createElement("div");
+      div.classList.add("carrito-producto");
+      div.innerHTML = `
+                <img class="carrito-producto-imagen" src="${
+                  producto.imagen
+                }" alt="${producto.titulo}">
                 <div class="carrito-producto-titulo">
                     <small>Título</small>
                     <h3>${producto.titulo}</h3>
@@ -43,100 +43,152 @@ function cargarProductosCarrito() {
                     <small>Subtotal</small>
                     <p>$${producto.precio * producto.cantidad}</p>
                 </div>
-                <button class="carrito-producto-eliminar" id="${producto.id}"><i class="bi bi-trash-fill"></i></button>
+                <button class="carrito-producto-eliminar" id="${
+                  producto.id
+                }"><i class="bi bi-trash-fill"></i></button>
             `;
-    
-            contenedorCarritoProductos.append(div);
-        })
-    
+
+      contenedorCarritoProductos.append(div);
+    });
+
     actualizarBotonesEliminar();
     actualizarTotal();
-	
-    } else {
-        contenedorCarritoVacio.classList.remove("disabled");
-        contenedorCarritoProductos.classList.add("disabled");
-        contenedorCarritoAcciones.classList.add("disabled");
-        contenedorCarritoComprado.classList.add("disabled");
-    }
-
+  } else {
+    contenedorCarritoVacio.classList.remove("disabled");
+    contenedorCarritoProductos.classList.add("disabled");
+    contenedorCarritoAcciones.classList.add("disabled");
+    contenedorCarritoComprado.classList.add("disabled");
+  }
 }
 
 cargarProductosCarrito();
 
 function actualizarBotonesEliminar() {
-    botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
+  botonesEliminar = document.querySelectorAll(".carrito-producto-eliminar");
 
-    botonesEliminar.forEach(boton => {
-        boton.addEventListener("click", eliminarDelCarrito);
-    });
+  botonesEliminar.forEach((boton) => {
+    boton.addEventListener("click", eliminarDelCarrito);
+  });
 }
 
 function eliminarDelCarrito(e) {
-    Toastify({
-        text: "Producto eliminado",
-        duration: 3000,
-        close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, #4b33a8, #785ce9)",
-          borderRadius: "2rem",
-          textTransform: "uppercase",
-          fontSize: ".75rem"
-        },
-        offset: {
-            x: '1.5rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-            y: '1.5rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
-          },
-        onClick: function(){} // Callback after click
-      }).showToast();
+  Toastify({
+    text: "Producto eliminado",
+    duration: 3000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #4b33a8, #785ce9)",
+      borderRadius: "2rem",
+      textTransform: "uppercase",
+      fontSize: ".75rem",
+    },
+    offset: {
+      x: "1.5rem", // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+      y: "1.5rem", // vertical axis - can be a number or a string indicating unity. eg: '2em'
+    },
+    onClick: function () {}, // Callback after click
+  }).showToast();
 
-    const idBoton = e.currentTarget.id;
-    const index = productosEnCarrito.findIndex(producto => producto.id === idBoton);
-    
-    productosEnCarrito.splice(index, 1);
-    cargarProductosCarrito();
+  const idBoton = e.currentTarget.id;
+  const index = productosEnCarrito.findIndex(
+    (producto) => producto.id === idBoton
+  );
 
-    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+  productosEnCarrito.splice(index, 1);
+  cargarProductosCarrito();
 
+  localStorage.setItem(
+    "productos-en-carrito",
+    JSON.stringify(productosEnCarrito)
+  );
 }
 
 botonVaciar.addEventListener("click", vaciarCarrito);
 function vaciarCarrito() {
-
-    Swal.fire({
-        title: '¿Estás seguro?',
-        icon: 'question',
-        html: `Se van a borrar ${productosEnCarrito.reduce((acc, producto) => acc + producto.cantidad, 0)} productos.`,
-        showCancelButton: true,
-        focusConfirm: false,
-        confirmButtonText: 'Sí',
-        cancelButtonText: 'No'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            productosEnCarrito.length = 0;
-            localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-            cargarProductosCarrito();
-        }
-      })
+  Swal.fire({
+    title: "¿Estás seguro?",
+    icon: "question",
+    html: `Se van a borrar ${productosEnCarrito.reduce(
+      (acc, producto) => acc + producto.cantidad,
+      0
+    )} productos.`,
+    showCancelButton: true,
+    focusConfirm: false,
+    confirmButtonText: "Sí",
+    cancelButtonText: "No",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      productosEnCarrito.length = 0;
+      localStorage.setItem(
+        "productos-en-carrito",
+        JSON.stringify(productosEnCarrito)
+      );
+      cargarProductosCarrito();
+    }
+  });
 }
 
-
 function actualizarTotal() {
-    const totalCalculado = productosEnCarrito.reduce((acc, producto) => acc + (producto.precio * producto.cantidad), 0);
-    total.innerText = `$${totalCalculado}`;
+  const totalCalculado = productosEnCarrito.reduce(
+    (acc, producto) => acc + producto.precio * producto.cantidad,
+    0
+  );
+  total.innerText = `$${totalCalculado}`;
 }
 
 botonComprar.addEventListener("click", comprarCarrito);
 function comprarCarrito() {
+  productosEnCarrito.length = 0;
+  localStorage.setItem(
+    "productos-en-carrito",
+    JSON.stringify(productosEnCarrito)
+  );
 
-    productosEnCarrito.length = 0;
-    localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
-    
-    contenedorCarritoVacio.classList.add("disabled");
-    contenedorCarritoProductos.classList.add("disabled");
-    contenedorCarritoAcciones.classList.add("disabled");
-    contenedorCarritoComprado.classList.remove("disabled");
-
+  contenedorCarritoVacio.classList.add("disabled");
+  contenedorCarritoProductos.classList.add("disabled");
+  contenedorCarritoAcciones.classList.add("disabled");
+  contenedorCarritoComprado.classList.remove("disabled");
 }
+
+document.getElementById("whatsapp-btn").addEventListener("click", () => {
+  let productosEnCarrito = JSON.parse(
+    localStorage.getItem("productos-en-carrito")
+  );
+
+  if (!productosEnCarrito || productosEnCarrito.length === 0) {
+    alert("El carrito está vacío.");
+    return;
+  }
+
+  const telefono = "573146381721"; // Reemplaza con el número de WhatsApp
+  let mensaje = `🛒 *Resumen de tu carrito de compras:*\n\n`;
+
+  let total = 0;
+
+  productosEnCarrito.forEach((producto, index) => {
+    let subtotal = producto.precio * producto.cantidad;
+    total += subtotal;
+    mensaje += `🔹 *${producto.titulo}*\n`;
+    mensaje += `📌 *Referencia:* ${producto.referencia}\n`;
+    mensaje += `📦 *Cantidad:* ${producto.cantidad}\n`;
+    mensaje += `💲 *Precio Unitario:* $${new Intl.NumberFormat("es-ES").format(
+      producto.precio
+    )}\n`;
+    mensaje += `🧾 *Subtotal:* $${new Intl.NumberFormat("es-ES").format(
+      subtotal
+    )}\n\n`;
+  });
+
+  mensaje += `🟢 *Total a pagar:* $${new Intl.NumberFormat("es-ES").format(
+    total
+  )}\n\n`;
+  mensaje += `Por favor, confirma tu pedido. ¡Gracias! 😊`;
+
+  const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
+    mensaje
+  )}`;
+  window.open(url, "_blank");
+});
