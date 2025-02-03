@@ -21,7 +21,7 @@
                     </div>
                     <div class="col">
                         <label for="producto">Producto</label>
-                        <input type="text" name="producto" id="producto" class="form-control" placeholder="Buscar por producto">
+                        <input type="text" name="producto_id" id="producto_id" class="form-control" placeholder="Buscar por producto">
                     </div>
 
                     <div class="col">
@@ -55,5 +55,4 @@
         </div>
     </div>
 
-
-    <script src="js/ventas.js"></script>
+    <script src="admin/js/ventas.js"></script>

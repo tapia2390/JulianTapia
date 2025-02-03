@@ -86,5 +86,6 @@ if (!isset($_SESSION['user_id'])) {
     <script src="../ecomerce/js/menu.js"></script>
     <script src="admin/js/form.js"></script>
     <script src="admin/js/productos.js"></script>
+    <script src="admin/js/ventas.js"></script>
 
 </body>

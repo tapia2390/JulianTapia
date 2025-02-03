@@ -1,11 +1,6 @@
 // Función para obtener las ventas por producto
 function obtenerVentas() {
-  const productoId = document.getElementById("producto_id").value;
-
-  if (!productoId) {
-    alert("Por favor, ingresa un ID de producto");
-    return;
-  }
+  let productoId = "1";
 
   fetch(`php/venta.php?producto_id=${productoId}`)
     .then((response) => response.json())
@@ -36,3 +31,7 @@ function obtenerVentas() {
       console.error("Error:", error);
     });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  obtenerVentas();
+});
