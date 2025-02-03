@@ -54,3 +54,6 @@
             </table>
         </div>
     </div>
+
+
+    <script src="js/ventas.js"></script>
