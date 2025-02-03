@@ -69,7 +69,7 @@ if (!isset($_SESSION['user_id'])) {
             </footer>
         </aside>
         <main>
-            <h2 class="titulo-principal" id="titulo-principal">Administrador</h2>
+
             <div id="contenedor-form" class="contenedor-productos2">
                 <!-- Esto se va a rellenar con JS -->
             </div>
