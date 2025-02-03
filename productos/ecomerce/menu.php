@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+
 <?php
+// Inicia la sesión
+session_start();
 include('../../conn.php');
 ?>
+
+
 <html lang="es">
 
 <head>
@@ -77,7 +82,11 @@ include('../../conn.php');
             ?>
             <footer>
                 <a href="../login.php">
-                    <p class="texto-footer "><b class="boton-menu"> Iniciar Session </b></p>
+                    <?php if (isset($_SESSION['user_email'])): ?>
+                        <p class="texto-footer"><b class="boton-menu"><?php echo $_SESSION['user_email']; ?></b></p>
+                    <?php else: ?>
+                        <p class="texto-footer"><b class="boton-menu">Iniciar sesión</b></p>
+                    <?php endif; ?>
                 </a>
             </footer>
         </aside>

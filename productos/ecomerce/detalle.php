@@ -1,3 +1,8 @@
+<?php
+// Inicia la sesión
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,8 +40,13 @@
                 </ul>
             </nav>
 
-            <footer> <a href="../login.php">
-                    <p class="texto-footer "><b class="boton-menu"> Iniciar Session </b></p>
+            <footer>
+                <a href="../login.php">
+                    <?php if (isset($_SESSION['user_email'])): ?>
+                        <p class="texto-footer"><b class="boton-menu"><?php echo $_SESSION['user_email']; ?></b></p>
+                    <?php else: ?>
+                        <p class="texto-footer"><b class="boton-menu">Iniciar sesión</b></p>
+                    <?php endif; ?>
                 </a>
             </footer>
         </aside>

@@ -138,7 +138,10 @@ function actualizarTotal() {
   total.innerText = `$${totalCalculado}`;
 }
 
-botonComprar.addEventListener("click", comprarCarrito);
+if (botonComprar) {
+  botonComprar.addEventListener("click", comprarCarrito);
+}
+
 function comprarCarrito() {
   productosEnCarrito.length = 0;
   localStorage.setItem(
@@ -151,43 +154,45 @@ function comprarCarrito() {
   contenedorCarritoAcciones.classList.add("disabled");
   contenedorCarritoComprado.classList.remove("disabled");
 }
+const whatsappBtn = document.getElementById("whatsapp-btn");
+if (whatsappBtn) {
+  document.getElementById("whatsapp-btn").addEventListener("click", () => {
+    let productosEnCarrito = JSON.parse(
+      localStorage.getItem("productos-en-carrito")
+    );
 
-document.getElementById("whatsapp-btn").addEventListener("click", () => {
-  let productosEnCarrito = JSON.parse(
-    localStorage.getItem("productos-en-carrito")
-  );
+    if (!productosEnCarrito || productosEnCarrito.length === 0) {
+      alert("El carrito está vacío.");
+      return;
+    }
 
-  if (!productosEnCarrito || productosEnCarrito.length === 0) {
-    alert("El carrito está vacío.");
-    return;
-  }
+    const telefono = "573146381721"; // Reemplaza con el número de WhatsApp
+    let mensaje = `🛒 *Resumen de tu carrito de compras:*\n\n`;
 
-  const telefono = "573146381721"; // Reemplaza con el número de WhatsApp
-  let mensaje = `🛒 *Resumen de tu carrito de compras:*\n\n`;
+    let total = 0;
 
-  let total = 0;
+    productosEnCarrito.forEach((producto, index) => {
+      let subtotal = producto.precio * producto.cantidad;
+      total += subtotal;
+      mensaje += `🔹 *${producto.titulo}*\n`;
+      mensaje += `📌 *Referencia:* ${producto.referencia}\n`;
+      mensaje += `📦 *Cantidad:* ${producto.cantidad}\n`;
+      mensaje += `💲 *Precio Unitario:* $${new Intl.NumberFormat(
+        "es-ES"
+      ).format(producto.precio)}\n`;
+      mensaje += `🧾 *Subtotal:* $${new Intl.NumberFormat("es-ES").format(
+        subtotal
+      )}\n\n`;
+    });
 
-  productosEnCarrito.forEach((producto, index) => {
-    let subtotal = producto.precio * producto.cantidad;
-    total += subtotal;
-    mensaje += `🔹 *${producto.titulo}*\n`;
-    mensaje += `📌 *Referencia:* ${producto.referencia}\n`;
-    mensaje += `📦 *Cantidad:* ${producto.cantidad}\n`;
-    mensaje += `💲 *Precio Unitario:* $${new Intl.NumberFormat("es-ES").format(
-      producto.precio
-    )}\n`;
-    mensaje += `🧾 *Subtotal:* $${new Intl.NumberFormat("es-ES").format(
-      subtotal
+    mensaje += `🟢 *Total a pagar:* $${new Intl.NumberFormat("es-ES").format(
+      total
     )}\n\n`;
+    mensaje += `Por favor, confirma tu pedido. ¡Gracias! 😊`;
+
+    const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
+      mensaje
+    )}`;
+    window.open(url, "_blank");
   });
-
-  mensaje += `🟢 *Total a pagar:* $${new Intl.NumberFormat("es-ES").format(
-    total
-  )}\n\n`;
-  mensaje += `Por favor, confirma tu pedido. ¡Gracias! 😊`;
-
-  const url = `https://api.whatsapp.com/send?phone=${telefono}&text=${encodeURIComponent(
-    mensaje
-  )}`;
-  window.open(url, "_blank");
-});
+}

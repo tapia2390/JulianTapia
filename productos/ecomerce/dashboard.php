@@ -65,7 +65,13 @@ if (!isset($_SESSION['user_id'])) {
                 </ul>
             </nav>
             <footer>
-                <p class="texto-footer"></p>
+                <a href="../login.php">
+                    <?php if (isset($_SESSION['user_email'])): ?>
+                        <p class="texto-footer"><b class="boton-menu"><?php echo $_SESSION['user_email']; ?></b></p>
+                    <?php else: ?>
+                        <p class="texto-footer"><b class="boton-menu">Iniciar sesión</b></p>
+                    <?php endif; ?>
+                </a>
             </footer>
         </aside>
         <main>

@@ -1,3 +1,8 @@
+<?php
+// Inicia la sesión
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -44,7 +49,13 @@
                 </ul>
             </nav>
             <footer>
-                <p class="texto-footer">Parqueadero j.j</p>
+                <a href="../login.php">
+                    <?php if (isset($_SESSION['user_email'])): ?>
+                        <p class="texto-footer"><b class="boton-menu"><?php echo $_SESSION['user_email']; ?></b></p>
+                    <?php else: ?>
+                        <p class="texto-footer"><b class="boton-menu">Iniciar sesión</b></p>
+                    <?php endif; ?>
+                </a>
             </footer>
         </aside>
         <main>
@@ -63,12 +74,18 @@
                     <div class="carrito-acciones-derecha">
                         <div class="carrito-acciones-total">
                             <p>Total:</p>
-                            <p id="total">$3000</p>
+                            <p id="total">$0</p>
                         </div>
-                        <button id="carrito-acciones-comprar" class="carrito-acciones-comprar">Vender ahora</button>
-                        <button class="whatsapp-btn whatsapp-button producto-agregar-btn" id="whatsapp-btn">
-                            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp">
-                        </button>
+                        <?php if (isset($_SESSION['user_email'])): ?>
+                            <button id="carrito-acciones-comprar" class="whatsapp-btn carrito-acciones-comprar">Vender ahora</button>
+                        <?php else: ?>
+
+
+                            <button class="whatsapp-btn whatsapp-button producto-agregar-btn" id="whatsapp-btn">
+                                <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp">
+                            </button>
+                        <?php endif; ?>
+
                     </div>
                 </div>
 
