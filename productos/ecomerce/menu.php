@@ -90,9 +90,10 @@ include('../../conn.php');
     </div>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script src="./js/addCar.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/menu.js"></script>
-    <script src="./js/addCar.js"></script>
 </body>
 
 </html>

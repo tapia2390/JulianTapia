@@ -1,3 +1,15 @@
+let productos = [];
+
+fetch("php/getProductos.php")
+  .then((response) => response.json())
+  .then((data) => {
+    productos = data;
+    cargarProductos(productos);
+  })
+  .catch((error) => {
+    console.log("Error al cargar los productos:", error);
+  });
+
 function actualizarBotonesAgregar() {
   botonesAgregar = document.querySelectorAll(".producto-agregar");
 

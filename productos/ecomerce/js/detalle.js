@@ -1,6 +1,11 @@
 // Recuperar el producto seleccionado desde LocalStorage
 const productoDetalle = JSON.parse(localStorage.getItem("producto-detalle"));
 const detalleContenedor = document.getElementById("contenedor-detalle");
+let botonesAgregar = document.querySelectorAll(".producto-agregar");
+
+document.addEventListener("DOMContentLoaded", function () {
+  actualizarBotonesAgregar();
+});
 
 // Verificar si hay datos en LocalStorage
 if (productoDetalle) {
@@ -29,13 +34,15 @@ if (productoDetalle) {
                 <div>
                     <p>Observaciones: </p><textarea id="observaciones" rows="10" cols="50" placeholder="observaciones...." style="resize: both;"></textarea>     
                 </div>
-                <button class="producto-agregar2 vender" id="${
-                  productoDetalle.id
-                }">Vender</button>
+
+                  <button class="producto-agregar producto-agregar-btn" id="${
+                    productoDetalle.id
+                  }">  <i class="bi bi-cart-plus"></i></button>
+              
 
                 <!-- Botón de WhatsApp -->
-            <button class="whatsapp-button" id="btn-whatsapp">
-            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp"> Enviar a WhatsApp
+            <button class="whatsapp-button producto-agregar-btn" id="btn-whatsapp">
+            <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" width="20px" alt="WhatsApp"> 
             </button>
 
             </div>
@@ -88,7 +95,7 @@ if (productoDetalle) {
   });
 
   // Confirmación y registro de venta
-  document.querySelector(".vender").addEventListener("click", () => {
+  /*document.querySelector(".vender").addEventListener("click", () => {
     const cantidadSolicitada = parseInt(inputCantidad.value) || 0;
     const cantidadDisponible = productoDetalle.cantidad;
 
@@ -155,7 +162,7 @@ if (productoDetalle) {
         }
       })
       .catch((error) => console.error("Error:", error));
-  });
+  });*/
 } else {
   detalleContenedor.innerHTML =
     "<p>No hay información del producto para mostrar.</p>";
